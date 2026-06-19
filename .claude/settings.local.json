@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -n '13p;19p' mathe_kombinatorik1.html)",
+      "Bash(awk '/<script>/{f=1} f{print NR\": \"$0} /<\\\\/script>/{if\\(f\\)exit}' mathe_kombinatorik1.html)",
+      "Bash(pdftotext -layout \"Mathe2-04-Skript-Reihen.pdf\" -)"
+    ]
+  }
+}

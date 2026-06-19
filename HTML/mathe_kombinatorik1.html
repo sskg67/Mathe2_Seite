@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kombinatorik – Klausurvorbereitung</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#eef2f7;color:#1a2744;font-size:15px}
+.header{background:linear-gradient(135deg,#0f2051,#1e4ed8);color:#fff;padding:18px 20px;text-align:center}
+.header h1{font-size:1.3rem;font-weight:800}
+.header p{font-size:.8rem;opacity:.8;margin-top:3px}
+.tabs{display:flex;background:#0f2051;overflow-x:auto;padding:0 6px;scrollbar-width:none;gap:2px;position:sticky;top:0;z-index:20}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:10px 13px;color:rgba(255,255,255,.55);border:none;background:none;cursor:pointer;font-size:.75rem;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent;transition:color .2s}
+.tab:hover{color:rgba(255,255,255,.85)}
+.tab.active{color:#60a5fa;border-bottom-color:#60a5fa}
+.page{max-width:800px;margin:0 auto;padding:18px 14px 50px}
+.module{display:block;padding-top:20px;border-top:1px solid #d7deea;margin-top:20px;scroll-margin-top:58px}
+.module:first-of-type{border-top:none;margin-top:0;padding-top:6px}
+.badge{display:inline-block;background:#dbeafe;color:#1d4ed8;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:20px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+h2{font-size:1.3rem;font-weight:800;color:#0f2051}
+.subtitle{color:#64748b;font-size:.85rem;margin:3px 0 16px}
+.card{background:#fff;border-radius:12px;padding:18px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.09)}
+.card-title{font-size:.82rem;font-weight:800;color:#0f2051;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em}
+.formula{background:#eff6ff;border:1.5px solid #bfdbfe;border-radius:8px;padding:12px 16px;margin:10px 0}
+.flabel{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#2563eb;margin-bottom:5px}
+.fmain{font-family:'Courier New',monospace;font-size:1rem;color:#1e3a5f;font-weight:700}
+.fnote{font-size:.78rem;color:#3b82f6;margin-top:4px}
+.ex-block{background:#f0fdf4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:.86rem;line-height:1.65}
+.ex-lbl{font-size:.68rem;font-weight:800;text-transform:uppercase;color:#16a34a;margin-bottom:5px;letter-spacing:.05em}
+.step{color:#166534;margin-left:8px}
+.tip{background:#fffbeb;border:1px dashed #fbbf24;border-radius:8px;padding:10px 14px;font-size:.83rem;margin:10px 0;color:#78350f;line-height:1.6}
+.exercises{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:12px;padding:18px;margin-top:20px}
+.ex-header{font-size:.82rem;font-weight:800;color:#6d28d9;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.ex-intro{font-size:.79rem;color:#7c3aed;margin-bottom:14px}
+.ex-item{background:#fff;border-radius:8px;padding:13px 15px;margin-bottom:10px;border:1px solid #ede9fe}
+.ex-num{font-size:.68rem;font-weight:800;color:#7c3aed;text-transform:uppercase;margin-bottom:4px;letter-spacing:.05em}
+.ex-text{font-size:.86rem;line-height:1.6}
+.sol-btn{margin-top:10px;padding:5px 13px;background:none;border:1.5px solid #8b5cf6;color:#6d28d9;border-radius:20px;cursor:pointer;font-size:.76rem;font-weight:700;transition:all .2s}
+.sol-btn:hover{background:#6d28d9;color:#fff}
+.sol{display:none;margin-top:10px;background:#f5f3ff;border-radius:6px;padding:10px 13px;font-size:.84rem;border-left:3px solid #7c3aed;line-height:1.65}
+.sol.open{display:block}
+.sol .step{display:block;margin:5px 0 5px 4px;color:#4c1d95}
+.table-wrap{overflow-x:auto;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:.81rem}
+th{background:#0f2051;color:#fff;padding:9px 12px;text-align:left;font-weight:700}
+td{padding:9px 12px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:800;text-transform:uppercase}
+.vmw{background:#dcfce7;color:#166534}
+.vow{background:#dbeafe;color:#1d4ed8}
+.pow{background:#ffe4e6;color:#be123c}
+.pmw{background:#fef9c3;color:#854d0e}
+.kow{background:#fce7f3;color:#9d174d}
+.kmw{background:#f3e8ff;color:#6b21a8}
+code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.88em}
+.dtree{font-size:.84rem;line-height:1.7}
+.dq{background:#eff6ff;border:1.5px solid #93c5fd;border-radius:8px;padding:9px 13px;margin:8px 0;font-weight:700;color:#1e40af}
+.dyes{margin-left:16px;border-left:2px solid #22c55e;padding-left:12px;margin-top:4px;margin-bottom:8px}
+.dno{margin-left:16px;border-left:2px solid #ef4444;padding-left:12px;margin-top:4px;margin-bottom:8px}
+.r-vmw{font-weight:800;color:#166534}.r-vow{font-weight:800;color:#1d4ed8}
+.r-pow{font-weight:800;color:#be123c}.r-pmw{font-weight:800;color:#854d0e}
+.r-kow{font-weight:800;color:#9d174d}.r-kmw{font-weight:800;color:#6b21a8}
+.backbar{max-width:800px;margin:0 auto;padding:14px 14px 0}
+.back{display:inline-block;padding:6px 14px;font-size:.76rem;font-weight:700;color:#0f2051;background:#fff;border:1.5px solid #cbd5e1;border-radius:20px;text-decoration:none;transition:all .15s}
+.back:hover{background:#0f2051;color:#fff;border-color:#0f2051}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📐 Kombinatorik – Klausurzusammenfassung</h1>
+  <p>Mathe 2 · Hochschule Offenburg · SS 2026 · Decker, Altenberend, Kreilos</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-m="m1" onclick="show('m1')">M1: Mengenzählen</button>
+  <button class="tab" data-m="m2" onclick="show('m2')">M2: Fakultät &amp; C(n,k)</button>
+  <button class="tab" data-m="m3" onclick="show('m3')">M3: VmW</button>
+  <button class="tab" data-m="m4" onclick="show('m4')">M4: VoW &amp; PoW</button>
+  <button class="tab" data-m="m5" onclick="show('m5')">M5: PmW</button>
+  <button class="tab" data-m="m6" onclick="show('m6')">M6: KoW &amp; KmW</button>
+  <button class="tab" data-m="m7" onclick="show('m7')">M7: Entscheidung ⭐</button>
+</div>
+
+<div class="backbar"><a class="back" href="index.html">← Zur Übersicht</a></div>
+
+<div class="page">
+
+<!-- ====== MODUL 1 ====== -->
+<div class="module active" id="m1">
+  <span class="badge">Modul 1</span>
+  <h2>Mengenzählen</h2>
+  <p class="subtitle">Summen-, Komplement- &amp; Inklusion-Exklusion-Regel</p>
+
+  <div class="card">
+    <div class="card-title">📌 Die drei Grundregeln</div>
+    <div class="formula">
+      <div class="flabel">Summenregel – nur wenn A und B disjunkt (keine Schnittmenge!)</div>
+      <div class="fmain">|A ∪ B| = |A| + |B|</div>
+      <div class="fnote">Gilt NUR wenn A ∩ B = ∅ (keine gemeinsamen Elemente)</div>
+    </div>
+    <div class="formula">
+      <div class="flabel">Inklusion-Exklusion – der Normalfall</div>
+      <div class="fmain">|A ∪ B| = |A| + |B| − |A ∩ B|</div>
+      <div class="fnote">Doppelt Gezähltes (Schnittmenge) wird einmal abgezogen</div>
+    </div>
+    <div class="formula">
+      <div class="flabel">Komplementregel – "nicht A" berechnen</div>
+      <div class="fmain">|Ā| = |G| − |A|</div>
+      <div class="fnote">G = Grundmenge (alle möglichen Elemente), Ā = alles außer A</div>
+    </div>
+    <div class="tip">
+      ⚡ <strong>Trick: "MINDESTENS"</strong> → fast immer Komplementregel!<br>
+      "Mindestens 1 davon" = Alle − "keines davon"<br>
+      "Mindestens ein Sonderzeichen" = Alle Passwörter − Passwörter ohne Sonderzeichen
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Beispiele</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 1 – Inklusion-Exklusion (aus dem Skript)</div>
+      100 Schüler: 60 im Sportverein, 50 im Musikverein, 30 in <strong>beiden</strong>.<br>
+      Wie viele in <strong>mindestens einem</strong> Verein?<br>
+      <span class="step">→ |S ∪ M| = 60 + 50 − 30 = <strong>80</strong></span><br>
+      Wie viele in <strong>keinem</strong> Verein?<br>
+      <span class="step">→ 100 − 80 = <strong>20</strong></span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 2 – Komplementregel "mindestens"</div>
+      8-stelliges Passwort aus 62 Zeichen. Wie viele enthalten <strong>mindestens eine Ziffer</strong>?<br>
+      <span class="step">→ Alle − "keine Ziffer" = 62⁸ − 52⁸</span><br>
+      <em>(52 = nur Buchstaben, 62 = Buchstaben+Ziffern)</em>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 3 – Autohändler (aus dem Skript)</div>
+      15 Autos: 5 Neuwagen / 10 Gebraucht; 8 Diesel / 7 Benziner; 3 Benziner sind Neuwagen.<br>
+      Gebrauchte Diesel?<br>
+      <span class="step">→ Gebrauchte Benziner = 7 − 3 = 4</span><br>
+      <span class="step">→ Gebrauchte Diesel = 10 − 4 = <strong>6</strong></span>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 1</div>
+    <div class="ex-intro">Bearbeite die Aufgaben selbst und schick mir deine Lösungen im Chat!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.1</div>
+      <div class="ex-text">In einem Informatik-Kurs sind 30 Studierende. 18 können Java, 15 können Python, 7 können beide.<br>
+      a) Wie viele können <strong>mindestens eine</strong> der Sprachen?<br>
+      b) Wie viele können <strong>keine</strong> der beiden Sprachen?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        <span class="step"><b>a) Mindestens eine Sprache</b> = Vereinigung. Achtung: nicht einfach 18+15, denn die 7 „Beide-Könner" stecken in beiden Gruppen und würden doppelt zählen. Inklusion-Exklusion zieht die Schnittmenge einmal ab:<br>|J ∪ P| = 18 + 15 − 7 = <strong>26</strong>.</span>
+        <span class="step"><b>b) Keine von beiden</b> = Komplement zur Gesamtzahl: 30 − 26 = <strong>4</strong>.</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.2</div>
+      <div class="ex-text">50 Studierende: 30 haben Führerschein, 20 haben ein Motorrad, 10 haben beides.<br>
+      a) Wie viele haben <strong>mindestens eines</strong> davon?<br>
+      b) Wie viele haben <strong>weder Führerschein noch Motorrad</strong>?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        <span class="step"><b>a)</b> „Führerschein oder Motorrad" = Vereinigung. Die 10 mit beidem einmal abziehen (sonst doppelt gezählt):<br>|F ∪ M| = 30 + 20 − 10 = <strong>40</strong>.</span>
+        <span class="step"><b>b) Weder noch</b> = Komplement: 50 − 40 = <strong>10</strong>.</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.3</div>
+      <div class="ex-text">In einer Schule gibt es 100 Schüler. 60 sind in einem Sportverein, 50 in einem Musikverein, 30 in beiden aktiv. Wie viele Schüler sind in <strong>mindestens einem</strong> der Vereine aktiv?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        „Mindestens einem Verein" = Vereinigung. Die 30, die in <b>beiden</b> sind, würden bei 60+50 doppelt zählen, daher einmal abziehen (Inklusion-Exklusion):<br>
+        |S ∪ M| = 60 + 50 − 30 = <strong>80</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.4 ⭐</div>
+      <div class="ex-text">200 Studierende. 80 bestehen Mathe, 100 bestehen Informatik, 50 bestehen <strong>beide</strong>. Wie viele bestehen <strong>weder Mathe noch Informatik</strong>?<br><em>Tipp: Erst |M ∪ I| berechnen, dann Komplementregel.</em></div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        <span class="step"><b>Schritt 1 – Vereinigung</b> (mindestens ein Fach bestanden): |M ∪ I| = 80 + 100 − 50 = 130.</span>
+        <span class="step"><b>Schritt 2 – Komplement</b> (weder noch): von allen 200 abziehen: 200 − 130 = <strong>70</strong>.</span>
+        Merke: „weder … noch" ⇒ erst Vereinigung, dann Gesamtzahl minus Vereinigung.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODUL 2 ====== -->
+<div class="module" id="m2">
+  <span class="badge">Modul 2</span>
+  <h2>Fakultät &amp; Binomialkoeffizient</h2>
+  <p class="subtitle">n!, C(n,k), Additionseigenschaft &amp; Binomischer Lehrsatz</p>
+
+  <div class="card">
+    <div class="card-title">📌 Fakultät n!</div>
+    <div class="formula">
+      <div class="flabel">Definition</div>
+      <div class="fmain">n! = n · (n−1) · (n−2) · … · 2 · 1</div>
+      <div class="fnote">Sonderfall: 0! = 1 &nbsp;(per Definition!)</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiele</div>
+      5! = 5·4·3·2·1 = <strong>120</strong><br>
+      8! / 6! = (8·7·<s>6!</s>) / <s>6!</s> = 8·7 = <strong>56</strong> &nbsp;← Kürzen!<br>
+      (n+1)! / n! = (n+1)·<s>n!</s> / <s>n!</s> = <strong>n+1</strong> &nbsp;← Allgemein kürzen
+    </div>
+    <div class="tip">Beim Kürzen: n! / m! (wenn n &gt; m) = Produkt der Zahlen von m+1 bis n</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Binomialkoeffizient C(n,k) – „n über k"</div>
+    <div class="formula">
+      <div class="flabel">Definition</div>
+      <div class="fmain">C(n,k) = n! / (k! · (n−k)!)</div>
+      <div class="fnote">Definiert für 0 ≤ k ≤ n. Wenn k &gt; n, dann C(n,k) = 0.</div>
+    </div>
+    <div class="formula">
+      <div class="flabel">Wichtige Regeln</div>
+      <div class="fmain">C(n,0) = C(n,n) = 1</div>
+      <div class="fmain">C(n,k) = C(n, n−k) &nbsp;← Symmetrie!</div>
+      <div class="fmain">C(n,k) + C(n,k+1) = C(n+1, k+1) &nbsp;← Additionseigenschaft (Pascalsches Dreieck)</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – C(8,3) berechnen</div>
+      Zähler: genau k=3 Faktoren von n runter → 8·7·6<br>
+      Nenner: k! = 3! = 6<br>
+      <span class="step">→ C(8,3) = (8·7·6) / (3·2·1) = 336/6 = <strong>56</strong></span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Symmetrie nutzen – C(10,8)</div>
+      C(10,8) = C(10, 10−8) = C(10,2) = (10·9)/2 = <strong>45</strong><br>
+      <em>C(10,8) direkt wäre viel aufwändiger – Symmetrie spart Zeit!</em>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Binomischer Lehrsatz</div>
+    <div class="formula">
+      <div class="flabel">Formel – Entwicklung von (x+y)ⁿ</div>
+      <div class="fmain">(x+y)ⁿ = Σ C(n,k) · x^(n−k) · yᵏ &nbsp;(k von 0 bis n)</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – (x+y)³ Schritt für Schritt</div>
+      k=0: C(3,0)·x³·y⁰ = <strong>x³</strong><br>
+      k=1: C(3,1)·x²·y¹ = <strong>3x²y</strong><br>
+      k=2: C(3,2)·x¹·y² = <strong>3xy²</strong><br>
+      k=3: C(3,3)·x⁰·y³ = <strong>y³</strong><br>
+      <span class="step">→ Ergebnis: x³ + 3x²y + 3xy² + y³</span>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 2</div>
+    <div class="ex-intro">Alle Rechnungen bitte ohne Taschenrechner (Rechenweg zeigen)!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.1</div>
+      <div class="ex-text">Berechne (Schritt für Schritt):<br>
+      a) 6! &nbsp;&nbsp;&nbsp; b) 9!/7! &nbsp;&nbsp;&nbsp; c) (n+2)!/n! &nbsp;&nbsp;&nbsp; d) 8! / (4·6!)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        <span class="step"><b>a)</b> 6! = 6·5·4·3·2·1 = <strong>720</strong>.</span>
+        <span class="step"><b>b)</b> Nicht beide Fakultäten ausrechnen! Kürzen: 9!/7! = (9·8·7!)/7! = 9·8 = <strong>72</strong>.</span>
+        <span class="step"><b>c)</b> Gleiches Kürzen mit Variablen: (n+2)!/n! = (n+2)·(n+1)·n!/n! = (n+2)(n+1) = <strong>n² + 3n + 2</strong>.</span>
+        <span class="step"><b>d)</b> 8!/(4·6!) = (8·7·6!)/(4·6!) = (8·7)/4 = 56/4 = <strong>14</strong>.</span>
+        Trick: bei Brüchen aus Fakultäten <b>immer erst kürzen</b>, dann rechnen.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.2</div>
+      <div class="ex-text">Berechne: &nbsp; a) C(7,3) &nbsp;&nbsp; b) C(10,8) &nbsp;&nbsp; c) C(6,0) &nbsp;&nbsp; d) C(5,2)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Formel: C(n,k) = (k Faktoren absteigend ab n) / k!.
+        <span class="step"><b>a)</b> C(7,3) = (7·6·5)/(3·2·1) = 210/6 = <strong>35</strong>.</span>
+        <span class="step"><b>b)</b> C(10,8): erst <b>Symmetrie</b> C(10,8)=C(10,2) nutzen (spart Arbeit!), dann (10·9)/2 = <strong>45</strong>.</span>
+        <span class="step"><b>c)</b> C(6,0) = <strong>1</strong> — es gibt genau einen Weg, nichts auszuwählen.</span>
+        <span class="step"><b>d)</b> C(5,2) = (5·4)/(2·1) = <strong>10</strong>.</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.3</div>
+      <div class="ex-text">Entwickle (x+y)⁴ mit dem Binomischen Lehrsatz. Zeige alle 5 Terme!</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Binomischer Lehrsatz: (x+y)⁴ = Σ C(4,k)·x⁴⁻ᵏ·yᵏ. Die Koeffizienten sind die Binomialkoeffizienten (Pascal-Zeile 4):
+        <span class="step">C(4,0)=1, C(4,1)=4, C(4,2)=6, C(4,3)=4, C(4,4)=1.</span>
+        <span class="step">→ <strong>x⁴ + 4x³y + 6x²y² + 4xy³ + y⁴</strong></span>
+        Kontrolle: x-Exponent fällt 4→0, y-Exponent steigt 0→4; Koeffizienten symmetrisch (1,4,6,4,1).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.4 ⭐</div>
+      <div class="ex-text">Welcher Ausdruck ist gleich C(n, n−k)?<br>
+      A) C(n,k) &nbsp; B) C(n−k, n) &nbsp; C) C(n−k, k) &nbsp; D) Keiner</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        <strong>A) C(n,k).</strong> Das ist die <b>Symmetrie-Regel</b> C(n,k) = C(n, n−k). Anschaulich: k Objekte <i>auswählen</i> ist dasselbe wie festzulegen, welche n−k man <i>weglässt</i>.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODUL 3 – VmW ====== -->
+<div class="module" id="m3">
+  <span class="badge">Modul 3</span>
+  <h2>VmW – Variation mit Wiederholung</h2>
+  <p class="subtitle">Reihenfolge wichtig · Wiederholung erlaubt · Produktregel</p>
+
+  <div class="card">
+    <div class="card-title">📌 VmW & Produktregel</div>
+    <div class="formula">
+      <div class="flabel">VmW – k Stellen, n Optionen pro Stelle</div>
+      <div class="fmain">nᵏ</div>
+      <div class="fnote">n = Anzahl der Auswahlmöglichkeiten pro Stelle, k = Anzahl der Stellen</div>
+    </div>
+    <div class="formula">
+      <div class="flabel">Produktregel (allgemein) – wenn verschiedene Stellen verschiedene Optionen haben</div>
+      <div class="fmain">n₁ · n₂ · n₃ · … · nₖ</div>
+    </div>
+    <div class="tip">
+      🔑 Erkennungsmerkmal VmW: Passwörter, PIN-Codes, Binärzahlen, Würfeln mit Reihenfolge.<br>
+      Das Gleiche darf an mehreren Stellen vorkommen (z.B. PIN "1111" ist erlaubt).
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 1 – PIN-Code</div>
+      4-stellige PIN, Ziffern 0–9, Wiederholung erlaubt, Reihenfolge wichtig:<br>
+      <span class="step">→ n=10, k=4: 10⁴ = <strong>10.000</strong></span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 2 – Passwort mit Einschränkung (Produktregel)</div>
+      8-stelliges Passwort aus 62 Zeichen, das mit einer Ziffer BEGINNT:<br>
+      <span class="step">→ Stelle 1: nur 10 Optionen (Ziffern)</span><br>
+      <span class="step">→ Stellen 2–8: je 62 Optionen</span><br>
+      <span class="step">→ Gesamt: 10 · 62⁷</span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 3 – "Mindestens"-Aufgabe kombiniert</div>
+      8-stelliges Passwort aus 52 Buchstaben + 10 Ziffern = 62 Zeichen. Mindestens eine Ziffer?<br>
+      <span class="step">→ Alle − "keine Ziffer" = 62⁸ − 52⁸</span><br>
+      <em>(Passwörter nur aus 52 Buchstaben haben keine Ziffer)</em>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 3 (VmW)</div>
+    <div class="ex-intro">Gib auch immer die Klassifizierung an (VmW, Produktregel, …)</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.1</div>
+      <div class="ex-text">Wie viele 3-stellige Passwörter aus den Zeichen {a, b, c, d} gibt es?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Reihenfolge zählt (Passwort) und Zeichen dürfen sich <b>wiederholen</b> → <strong>Variation mit Wiederholung (VmW)</strong>: nᵏ.<br>
+        n=4 Zeichen, k=3 Stellen → 4³ = <strong>64</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.2</div>
+      <div class="ex-text">Passwörter aus 26 Kleinbuchstaben + 10 Ziffern (keine Umlaute, Groß/Klein nicht unterschieden):<br>
+      a) Wie viele achtstellige Passwörter gibt es insgesamt?<br>
+      b) Wie viele beginnen mit 'a' und enden mit '9'?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        n = 26 + 10 = 36 mögliche Zeichen. Reihenfolge zählt, Wiederholung erlaubt → <strong>VmW</strong>.
+        <span class="step"><b>a)</b> 8 freie Stellen: 36⁸.</span>
+        <span class="step"><b>b)</b> Stelle 1 = 'a' (1 Möglichkeit), Stelle 8 = '9' (1 Möglichkeit), Stellen 2–7 frei (je 36). Produktregel:<br>1 · 36⁶ · 1 = <strong>36⁶ = 2.176.782.336</strong>.</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.3</div>
+      <div class="ex-text">Wie viele verschiedene 10-stellige Dualzahlen (0 oder 1) gibt es?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Jede Stelle ist 0 oder 1 (n=2), Reihenfolge zählt, Wiederholung erlaubt → <strong>VmW</strong>: 2¹⁰ = <strong>1.024</strong>.<br>
+        (Genau deshalb hat ein 10-Bit-Wort 1024 mögliche Zustände.)
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.4 ⭐</div>
+      <div class="ex-text">8-stelliges Passwort aus 62 Zeichen (52 Buchstaben + 10 Ziffern). Wie viele enthalten <strong>mindestens eine Ziffer</strong>?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        „Mindestens eine Ziffer" ist direkt mühsam (1 Ziffer, 2 Ziffern, …) → <b>Komplementregel</b>: Alle minus „keine Ziffer".
+        <span class="step">Alle Passwörter: 62⁸.</span>
+        <span class="step">„Keine Ziffer" = nur die 52 Buchstaben: 52⁸.</span>
+        <span class="step">→ 62⁸ − 52⁸ = 218.340.105.584.896 − 53.459.728.531.456 = <strong>164.880.377.053.440</strong>.</span>
+        Faustregel: „mindestens ein …" ⇒ fast immer Komplementregel.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODUL 4 – VoW & PoW ====== -->
+<div class="module" id="m4">
+  <span class="badge">Modul 4</span>
+  <h2>VoW &amp; PoW</h2>
+  <p class="subtitle">Reihenfolge wichtig · Keine Wiederholung</p>
+
+  <div class="card">
+    <div class="card-title">📌 Variation ohne Wiederholung (VoW)</div>
+    <div class="formula">
+      <div class="flabel">VoW – k Elemente aus n, Reihenfolge wichtig, kein Element doppelt</div>
+      <div class="fmain">n! / (n−k)! = n · (n−1) · … · (n−k+1)</div>
+      <div class="fnote">Genau k Faktoren, beginnend bei n abwärts</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Rennen Top 3</div>
+      10 Fahrer, wie viele Möglichkeiten für Gold, Silber, Bronze?<br>
+      <span class="step">→ VoW: k=3, n=10: 10·9·8 = <strong>720</strong></span><br>
+      <em>(oder: 10!/(10−3)! = 10!/7! = 720)</em>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Permutation ohne Wiederholung (PoW)</div>
+    <div class="formula">
+      <div class="flabel">PoW – Spezialfall VoW wenn k = n (ALLE Elemente anordnen)</div>
+      <div class="fmain">n!</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Bücher im Regal</div>
+      5 verschiedene Bücher, wie viele Reihenfolgen?<br>
+      <span class="step">→ PoW: 5! = <strong>120</strong></span>
+    </div>
+    <div class="tip">
+      🔑 VoW vs. VmW: Bei VoW darf jedes Element nur EINMAL vorkommen!<br>
+      Erkennungsmerkmal: "ohne Wiederholung", "kein Zeichen doppelt", "alle verschiedene Positionen"
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 4 (VoW & PoW)</div>
+    <div class="ex-intro">Klassifiziere als VoW oder PoW und gib die Formel an!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.1</div>
+      <div class="ex-text">7 Studierende stellen sich in einer Reihe auf. Wie viele Möglichkeiten gibt es?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Alle 7 Personen werden angeordnet (k=n), Reihenfolge zählt, keine Wiederholung → <strong>Permutation ohne Wiederholung (PoW)</strong> = n!.<br>
+        7! = <strong>5.040</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.2</div>
+      <div class="ex-text">An einem Rennen nehmen 10 Fahrer teil. Auf wie viele Arten können die ersten 3 Plätze belegt werden? (Reihenfolge zählt, kein Fahrer doppelt)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Reihenfolge zählt (Platz 1/2/3 sind verschieden), kein Fahrer doppelt, aber <b>nicht alle</b> werden vergeben → <strong>Variation ohne Wiederholung (VoW)</strong>: n!/(n−k)!.<br>
+        10·9·8 = 10!/7! = <strong>720</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.3</div>
+      <div class="ex-text">Wie viele achtstellige Passwörter gibt es aus 62 Zeichen, wenn <strong>kein Zeichen doppelt</strong> vorkommen darf?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Reihenfolge zählt, kein Zeichen doppelt → <strong>VoW</strong>, k=8 aus n=62:<br>
+        62!/54! = 62·61·60·59·58·57·56·55 = <strong>136.325.893.334.400</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.4</div>
+      <div class="ex-text">5 Personen im Festkomitee stellen sich für ein Foto in eine Reihe auf. Harry will in der Mitte stehen. Wie viele Möglichkeiten gibt es?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        <span class="step">Harry steht <b>fix</b> in der Mitte → dieser Platz ist vergeben, keine Wahl.</span>
+        <span class="step">Die übrigen 4 Personen werden auf die 4 Restplätze angeordnet → <strong>PoW</strong>: 4! = <strong>24</strong>.</span>
+        Trick: feste Vorgaben zuerst setzen, dann den Rest frei anordnen.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODUL 5 – PmW ====== -->
+<div class="module" id="m5">
+  <span class="badge">Modul 5</span>
+  <h2>PmW – Permutation mit Wiederholung</h2>
+  <p class="subtitle">Alle Elemente anordnen · Manche Elemente sind identisch</p>
+
+  <div class="card">
+    <div class="card-title">📌 PmW – Wenn Elemente mehrfach vorkommen</div>
+    <div class="formula">
+      <div class="flabel">PmW – n Elemente total, n₁ identische vom Typ 1, n₂ vom Typ 2, …</div>
+      <div class="fmain">n! / (n₁! · n₂! · … · nₘ!)</div>
+      <div class="fnote">Bedingung: n₁ + n₂ + … + nₘ = n</div>
+    </div>
+    <div class="tip">
+      🔑 Erkennungsmerkmal: "Wie viele verschiedene Wörter aus ABBC?" oder "Anordnungen von n Dingen, bei denen manche identisch sind".<br>
+      Man teilt durch n₁!·n₂!·… weil identische Elemente untereinander keine neuen Anordnungen erzeugen.
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 1 – ABBC</div>
+      n=4: A=1, B=2, C=1 → Summe: 1+2+1=4 ✓<br>
+      <span class="step">→ 4! / (1!·2!·1!) = 24/2 = <strong>12</strong></span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 2 – MISSISSIPPI (aus dem Skript)</div>
+      n=11: M=1, I=4, S=4, P=2 → Summe: 1+4+4+2=11 ✓<br>
+      <span class="step">→ 11! / (1!·4!·4!·2!) = 39.916.800 / (1·24·24·2) = 39.916.800 / 1.152 = <strong>34.650</strong></span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 3 – 8-stelliges Passwort aus 3×X, 2×Q, 3×0</div>
+      n=8: X=3, Q=2, 0=3 → Summe: 3+2+3=8 ✓<br>
+      <span class="step">→ 8! / (3!·2!·3!) = 40.320 / (6·2·6) = 40.320/72 = <strong>560</strong></span>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 5 (PmW)</div>
+    <div class="ex-intro">Immer zuerst: n bestimmen, dann n₁, n₂, … zählen und Summe prüfen!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.1</div>
+      <div class="ex-text">Wie viele verschiedene "Wörter" kann man aus dem Wort AAAAABB bilden?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Alle 7 Buchstaben werden angeordnet, aber manche sind gleich → <strong>Permutation mit Wiederholung (PmW)</strong>: n! / (Vielfachheiten!).<br>
+        n=7 mit A=5, B=2 (5+2=7 ✓):<br>
+        7!/(5!·2!) = 5040/(120·2) = <strong>21</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.2</div>
+      <div class="ex-text">Wie viele 8-stellige Passwörter gibt es aus genau 3× Buchstabe X, 2× Buchstabe Q und 3× Ziffer 0?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Anordnung mit Wiederholungen → <strong>PmW</strong>. n=8 mit X=3, Q=2, 0=3 (3+2+3=8 ✓):<br>
+        8!/(3!·2!·3!) = 40320/(6·2·6) = 40320/72 = <strong>560</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.3</div>
+      <div class="ex-text">Wie viele verschiedene Wörter gibt es aus den Buchstaben von MISSISSIPPI?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        <strong>PmW</strong> mit den Buchstaben von MISSISSIPPI. Erst die Buchstaben zählen: n=11 mit M=1, I=4, S=4, P=2.<br>
+        11!/(1!·4!·4!·2!) = <strong>34.650</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.4 ⭐</div>
+      <div class="ex-text">Harry isst 5 Schoko-Muffins und 4 Blaubeer-Muffins nacheinander. Wie viele verschiedene Reihenfolgen gibt es, wenn nur die Sorte (S oder B) unterschieden wird?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        <strong>PmW</strong> mit 2 Sorten. n=9 mit S=5, B=4 (5+4=9 ✓):<br>
+        9!/(5!·4!) = 362880/(120·24) = <strong>126</strong>.<br>
+        <em>Das ist genau C(9,4) = C(9,5) — kein Zufall: eine PmW mit nur 2 Typen ist immer ein Binomialkoeffizient (man wählt nur, welche der 9 Plätze die B's bekommen).</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODUL 6 – KoW & KmW ====== -->
+<div class="module" id="m6">
+  <span class="badge">Modul 6</span>
+  <h2>KoW &amp; KmW – Kombinationen</h2>
+  <p class="subtitle">Reihenfolge EGAL · Nur die Auswahl zählt, nicht die Anordnung</p>
+
+  <div class="card">
+    <div class="card-title">📌 Kombination ohne Wiederholung (KoW)</div>
+    <div class="formula">
+      <div class="flabel">KoW – k aus n auswählen (Reihenfolge egal, kein Element doppelt)</div>
+      <div class="fmain">C(n,k) = n! / (k! · (n−k)!)</div>
+      <div class="fnote">KoW = Binomialkoeffizient! Das ist das gleiche C(n,k) aus Modul 2.</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 1 – Lotto 6 aus 49</div>
+      6 Zahlen aus 49, Reihenfolge egal, keine Zahl doppelt:<br>
+      <span class="step">→ KoW: C(49,6) = <strong>13.983.816</strong></span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 2 – Stichprobe mit Bedingung (aus dem Skript)</div>
+      10 PCs: 3 defekt, 7 OK. Stichprobe von 5. Wie viele enthalten genau 2 defekte?<br>
+      <span class="step">→ Wähle 2 defekte aus 3: C(3,2) = 3</span><br>
+      <span class="step">→ Wähle 3 OK aus 7: C(7,3) = 35</span><br>
+      <span class="step">→ Gesamt: C(3,2) · C(7,3) = 3 · 35 = <strong>105</strong></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Kombination mit Wiederholung (KmW)</div>
+    <div class="formula">
+      <div class="flabel">KmW – k aus n (Reihenfolge egal, Wiederholung erlaubt)</div>
+      <div class="fmain">C(n+k−1, k)</div>
+      <div class="fnote">Denk an Eiskugeln: Du kannst dieselbe Sorte mehrfach wählen, aber Schoko+Vanille = Vanille+Schoko</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Eiskugeln (aus dem Skript)</div>
+      8 Sorten, du wählst 3 Kugeln, Reihenfolge egal, Sorte kann wiederholt werden:<br>
+      <span class="step">→ KmW: C(8+3−1, 3) = C(10,3) = (10·9·8)/(3·2·1) = <strong>120</strong></span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 2 – Kugeln auf Schachteln</div>
+      4 identische Kugeln auf 10 Fächer verteilen (mehrere Kugeln pro Fach erlaubt):<br>
+      <span class="step">→ KmW: C(10+4−1, 4) = C(13,4) = <strong>715</strong></span>
+    </div>
+    <div class="tip">
+      KmW: Das <strong>gleiche Element darf mehrfach</strong> gewählt werden, aber A,B = B,A (Reihenfolge egal).<br>
+      Beispiele: Würfeln ohne Reihenfolge, Eis mit Wunschsorte mehrfach, Kugeln auf Fächer.
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 6 (KoW & KmW)</div>
+    <div class="ex-intro">Klassifiziere als KoW oder KmW und zeige die Berechnung!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.1</div>
+      <div class="ex-text">Aus 40 Studierenden sollen 5 für ein Festkomitee gewählt werden (Reihenfolge egal, keine Person doppelt). Wie viele Möglichkeiten?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Auswahl, Reihenfolge egal (Komitee), keine Person doppelt → <strong>Kombination ohne Wiederholung (KoW)</strong>: C(n,k).<br>
+        C(40,5) = (40·39·38·37·36)/(5·4·3·2·1) = <strong>658.008</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.2</div>
+      <div class="ex-text">Eisdiele mit 8 Sorten. Du kaufst 3 Kugeln, keine Sorte doppelt. Wie viele verschiedene Kombinationen?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Eisbecher: Reihenfolge der Kugeln egal, keine Sorte doppelt → <strong>KoW</strong>.<br>
+        C(8,3) = (8·7·6)/(3·2·1) = 336/6 = <strong>56</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.3</div>
+      <div class="ex-text">Ein Würfel wird 10-mal geworfen. Wie viele verschiedene Ausgänge gibt es, wenn die Reihenfolge KEINE Rolle spielt? (Zwei Würfe gelten als gleich, wenn dieselbe Anzahl von 1,2,3,4,5,6 auftritt)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Reihenfolge egal, aber Augenzahlen dürfen sich <b>wiederholen</b> → <strong>Kombination mit Wiederholung (KmW)</strong>: C(n+k−1, k).<br>
+        n=6 Augenzahlen, k=10 Würfe:<br>
+        C(6+10−1, 10) = C(15,10) = C(15,5) = (15·14·13·12·11)/(5·4·3·2·1) = <strong>3.003</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.4 ⭐</div>
+      <div class="ex-text">10 PCs: 3 defekt, 7 OK. Stichprobe von 5. Wie viele Stichproben enthalten <strong>mindestens 1</strong> defektes Gerät?<br><em>Tipp: Komplementregel + KoW!</em></div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        „Mindestens 1 defekt" → <b>Komplementregel</b> + <strong>KoW</strong> (Stichprobe: Reihenfolge egal).
+        <span class="step">Alle Stichproben: C(10,5) = 252.</span>
+        <span class="step">„Keine defekten" = alle 5 aus den 7 OK-Geräten: C(7,5) = C(7,2) = 21.</span>
+        <span class="step">Mindestens 1 defekt: 252 − 21 = <strong>231</strong>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MODUL 7 – Entscheidungsbaum ====== -->
+<div class="module" id="m7">
+  <span class="badge">Modul 7 ⭐</span>
+  <h2>Entscheidungsbaum</h2>
+  <p class="subtitle">Welche der 6 Formeln? – Das ist das wichtigste Modul für die Klausur!</p>
+
+  <div class="card">
+    <div class="card-title">📌 Schnellübersicht – Alle 6 Typen</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Kürzel</th><th>Reihenfolge</th><th>Wiederholung</th><th>Formel</th><th>Typisches Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag vmw">VmW</span></td><td>✅ Ja</td><td>✅ Ja</td><td><code>nᵏ</code></td><td>PIN-Code, Passwort mit Doppelzeichen</td></tr>
+          <tr><td><span class="tag vow">VoW</span></td><td>✅ Ja</td><td>❌ Nein</td><td><code>n!/(n−k)!</code></td><td>Top-3 Platzierung aus 10 Fahrern</td></tr>
+          <tr><td><span class="tag pow">PoW</span></td><td>✅ Ja (k=n)</td><td>❌ Nein</td><td><code>n!</code></td><td>Bücher im Regal anordnen</td></tr>
+          <tr><td><span class="tag pmw">PmW</span></td><td>✅ Ja (k=n)</td><td>✅ Fix</td><td><code>n!/(n₁!·n₂!·…)</code></td><td>Wörter aus MISSISSIPPI</td></tr>
+          <tr><td><span class="tag kow">KoW</span></td><td>❌ Nein</td><td>❌ Nein</td><td><code>C(n,k)</code></td><td>Lotto, Komitee wählen</td></tr>
+          <tr><td><span class="tag kmw">KmW</span></td><td>❌ Nein</td><td>✅ Ja</td><td><code>C(n+k−1, k)</code></td><td>Eiskugeln mit Lieblingsorte doppelt</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Schritt-für-Schritt Entscheidungsbaum</div>
+    <div class="dtree">
+      <div class="dq">❓ 1. Spielt die Reihenfolge eine Rolle?</div>
+      <div class="dyes">
+        <strong>✅ JA – Reihenfolge wichtig</strong>
+        <div class="dq">❓ 2. Gibt es identische Elemente in der Ausgangsmenge? (z.B. mehrere gleiche Buchstaben)</div>
+        <div class="dyes">
+          <strong>✅ JA → <span class="r-pmw">PmW: n!/(n₁!·n₂!·…)</span></strong><br>
+          <em>Alle n Elemente werden angeordnet, manche sind gleich</em>
+        </div>
+        <div class="dno">
+          <strong>❌ NEIN – alle Elemente verschieden</strong>
+          <div class="dq">❓ 3. Werden ALLE n Elemente angeordnet (k = n)?</div>
+          <div class="dyes"><strong>✅ JA → <span class="r-pow">PoW: n!</span></strong></div>
+          <div class="dno">
+            <strong>❌ NEIN – nur k &lt; n Elemente</strong>
+            <div class="dq">❓ 4. Darf ein Element mehrfach vorkommen?</div>
+            <div class="dyes"><strong>✅ JA → <span class="r-vmw">VmW: nᵏ</span></strong></div>
+            <div class="dno"><strong>❌ NEIN → <span class="r-vow">VoW: n!/(n−k)!</span></strong></div>
+          </div>
+        </div>
+      </div>
+      <div class="dno">
+        <strong>❌ NEIN – Reihenfolge egal</strong>
+        <div class="dq">❓ 2. Darf ein Element mehrfach ausgewählt werden?</div>
+        <div class="dno"><strong>❌ NEIN → <span class="r-kow">KoW: C(n,k)</span></strong></div>
+        <div class="dyes"><strong>✅ JA → <span class="r-kmw">KmW: C(n+k−1, k)</span></strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 7 (Klassifizierung)</div>
+    <div class="ex-intro">Klassifiziere als VmW/VoW/PoW/PmW/KoW/KmW und gib die Berechnungsformel an!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 7.1</div>
+      <div class="ex-text">4 identische schwarze Kugeln sollen auf 10 verschiedene Fächer verteilt werden. In jedem Fach dürfen mehrere Kugeln liegen.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Entscheidung: Kugeln <b>identisch</b> ⇒ Reihenfolge egal; <b>mehrere pro Fach</b> erlaubt ⇒ Wiederholung → <strong>KmW</strong>: C(n+k−1, k).<br>
+        n=10 Fächer, k=4 Kugeln: C(10+4−1, 4) = C(13,4) = <strong>715</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 7.2</div>
+      <div class="ex-text">Eisdiele mit 8 Sorten. Du kaufst 3 Kugeln, <strong>keine Sorte zweimal</strong> (Abwechslung schmeckt besser!).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Entscheidung: Reihenfolge egal (Eisbecher) und keine Sorte zweimal ⇒ keine Wiederholung → <strong>KoW</strong>.<br>
+        C(8,3) = <strong>56</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 7.3</div>
+      <div class="ex-text">40 Studierende wählen: Sprecher, Stellvertreter und Event-Organisator. Eine Person darf nur <strong>eine</strong> Rolle übernehmen.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Entscheidung: 3 <b>verschiedene</b> Rollen ⇒ Reihenfolge wichtig; eine Person nur eine Rolle ⇒ keine Wiederholung → <strong>VoW</strong>.<br>
+        40·39·38 = 40!/37! = <strong>59.280</strong>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 7.4</div>
+      <div class="ex-text">Ein Würfel wird 10-mal geworfen. Die <strong>Reihenfolge der Ergebnisse wird notiert</strong>. Wie viele verschiedene Ausgänge gibt es?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Entscheidung: Reihenfolge wird notiert ⇒ wichtig; Augenzahl kann sich wiederholen → <strong>VmW</strong>: nᵏ.<br>
+        6¹⁰ = <strong>60.466.176</strong>.<br>
+        <em>Vergleiche Aufgabe 6.3: gleiche Würfe, aber Reihenfolge egal → KmW. Nur die Reihenfolge-Frage entscheidet zwischen VmW und KmW!</em>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 7.5 ⭐ Klausurklassiker</div>
+      <div class="ex-text">8-stelliges Passwort aus 52 Buchstaben + 10 Ziffern = 62 Zeichen. Wie viele enthalten <strong>genau 2 Ziffern</strong>?<br><em>Tipp: 3 Schritte! (1) Positionen der Ziffern wählen, (2) Ziffern füllen, (3) Buchstaben füllen</em></div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Klausurklassiker in <b>3 Schritten</b> (am Ende mit der Produktregel verknüpfen):
+        <span class="step"><b>Schritt 1 – Welche 2 der 8 Stellen sind Ziffern?</b> Reihenfolge der Positionswahl egal → <strong>KoW</strong>: C(8,2) = 28.</span>
+        <span class="step"><b>Schritt 2 – die 2 Ziffer-Stellen füllen</b> (0–9, Wiederholung ok) → <strong>VmW</strong>: 10² = 100.</span>
+        <span class="step"><b>Schritt 3 – die 6 Buchstaben-Stellen füllen</b> (52 Buchstaben) → <strong>VmW</strong>: 52⁶.</span>
+        <span class="step">Produktregel: C(8,2) · 10² · 52⁶ = 28 · 100 · 19.770.609.664 = <strong>55.357.707.059.200</strong>.</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 7.6 ⭐ Sitzordnung im PKW</div>
+      <div class="ex-text">5 Personen wollen sich in einem PKW setzen. Nur 3 von ihnen haben einen Führerschein. Wie viele Sitzordnungen gibt es? (Fahrersitz zählt!)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung zeigen</button>
+      <div class="sol">
+        Trick: die <b>Einschränkung zuerst</b> besetzen (Fahrersitz), dann den Rest frei anordnen.
+        <span class="step"><b>Fahrersitz:</b> nur 3 der 5 Personen haben einen Führerschein → 3 Möglichkeiten.</span>
+        <span class="step"><b>Restliche 4 Sitze:</b> die übrigen 4 Personen frei anordnen → <strong>PoW</strong>: 4! = 24.</span>
+        <span class="step">Produktregel: 3 · 4! = 3 · 24 = <strong>72</strong>.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<script>
+function show(id) {
+  var mod = document.getElementById(id);
+  if (mod) mod.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// All modules stay visible & scrollable; the sticky tab bar is a quick-jump
+// nav and the active tab follows the module currently in view.
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var mods=[].slice.call(document.querySelectorAll('.module'));
+  if(!('IntersectionObserver' in window)||!mods.length) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-m')===e.target.id); });
+    });
+  },{rootMargin:'-58px 0px -65% 0px',threshold:0});
+  mods.forEach(function(m){io.observe(m);});
+})();
+
+function tog(btn) {
+  var sol = btn.nextElementSibling;
+  if (sol.classList.contains('open')) {
+    sol.classList.remove('open');
+    btn.textContent = '👁 Lösung zeigen';
+  } else {
+    sol.classList.add('open');
+    btn.textContent = '🙈 Ausblenden';
+  }
+}
+</script>
+</body>
+</html>

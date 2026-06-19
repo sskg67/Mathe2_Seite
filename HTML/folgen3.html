@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Folgen – Klausurvorbereitung</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" async></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16243f;font-size:15px;line-height:1.55}
+.header{background:linear-gradient(135deg,#10233f,#0d6e75);color:#fff;padding:18px 20px;text-align:center}
+.header h1{font-size:1.3rem;font-weight:800}
+.header p{font-size:.8rem;opacity:.85;margin-top:3px}
+.tabs{display:flex;background:#10233f;overflow-x:auto;padding:0 6px;scrollbar-width:none;gap:2px;position:sticky;top:0;z-index:20}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:10px 13px;color:rgba(255,255,255,.55);border:none;background:none;cursor:pointer;font-size:.74rem;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent;transition:color .2s}
+.tab:hover{color:rgba(255,255,255,.85)}
+.tab.active{color:#2dd4bf;border-bottom-color:#2dd4bf}
+.page{max-width:820px;margin:0 auto;padding:18px 14px 60px}
+.module{display:block;padding-top:20px;border-top:1px solid #d7deea;margin-top:20px;scroll-margin-top:58px}
+.module:first-of-type{border-top:none;margin-top:0;padding-top:6px}
+.badge{display:inline-block;background:#ccfbf1;color:#0f766e;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:20px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+h2{font-size:1.32rem;font-weight:800;color:#10233f}
+.subtitle{color:#5b6b85;font-size:.85rem;margin:3px 0 16px}
+.card{background:#fff;border-radius:12px;padding:18px;margin-bottom:14px;box-shadow:0 1px 5px rgba(16,35,63,.10)}
+.card-title{font-size:.82rem;font-weight:800;color:#10233f;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em}
+.formula{background:#f0fdfa;border:1.5px solid #99f6e4;border-radius:8px;padding:12px 16px;margin:10px 0}
+.flabel{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#0d9488;margin-bottom:6px}
+.fnote{font-size:.8rem;color:#0d9488;margin-top:6px}
+.ex-block{background:#f0f7ff;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:.9rem}
+.ex-lbl{font-size:.68rem;font-weight:800;text-transform:uppercase;color:#1d4ed8;margin-bottom:6px;letter-spacing:.05em}
+.step{display:block;margin:4px 0 4px 6px;color:#1e3a8a}
+.tip{background:#fffbeb;border:1px dashed #f59e0b;border-radius:8px;padding:10px 14px;font-size:.84rem;margin:10px 0;color:#78350f}
+.warn{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:.84rem;margin:10px 0;color:#991b1b}
+.exercises{background:#f5f3ff;border:1.5px solid #c4b5fd;border-radius:12px;padding:18px;margin-top:20px}
+.ex-header{font-size:.82rem;font-weight:800;color:#6d28d9;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.ex-intro{font-size:.79rem;color:#7c3aed;margin-bottom:14px}
+.ex-item{background:#fff;border-radius:8px;padding:13px 15px;margin-bottom:10px;border:1px solid #ede9fe}
+.ex-num{font-size:.68rem;font-weight:800;color:#7c3aed;text-transform:uppercase;margin-bottom:5px;letter-spacing:.05em}
+.ex-text{font-size:.9rem}
+.hint{font-size:.78rem;color:#0d9488;margin-top:7px;font-style:italic}
+.sol-btn{margin-top:10px;padding:5px 13px;background:none;border:1.5px solid #8b5cf6;color:#6d28d9;border-radius:20px;cursor:pointer;font-size:.76rem;font-weight:700;transition:all .2s}
+.sol-btn:hover{background:#6d28d9;color:#fff}
+.sol{display:none;margin-top:10px;background:#faf5ff;border-radius:6px;padding:10px 13px;font-size:.86rem;border-left:3px solid #7c3aed}
+.sol.open{display:block}
+.table-wrap{overflow-x:auto;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+th{background:#10233f;color:#fff;padding:9px 12px;text-align:left;font-weight:700}
+td{padding:9px 12px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.graph{display:block;margin:8px auto;max-width:100%}
+.caption{text-align:center;font-size:.78rem;color:#5b6b85;margin-top:2px;margin-bottom:6px}
+.klausur{background:#fff7ed;border:2px solid #fb923c;border-radius:12px;padding:16px;margin-bottom:12px}
+.klausur .pts{float:right;font-size:.72rem;font-weight:800;color:#c2410c;background:#ffedd5;padding:2px 9px;border-radius:12px}
+.klausur-tag{font-size:.68rem;font-weight:800;color:#c2410c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+code{background:#eef2f7;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.88em}
+b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
+.backbar{max-width:820px;margin:0 auto;padding:14px 14px 0}
+.back{display:inline-block;padding:6px 14px;font-size:.76rem;font-weight:700;color:#10233f;background:#fff;border:1.5px solid #cbd5e1;border-radius:20px;text-decoration:none;transition:all .15s}
+.back:hover{background:#10233f;color:#fff;border-color:#10233f}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📈 Folgen – Klausurzusammenfassung</h1>
+  <p>Mathe 2 · Hochschule Offenburg · SS 2026 · Decker, Altenberend, Kreilos · Kapitel 3</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="show('m1',this)">M1: Grundbegriffe</button>
+  <button class="tab" onclick="show('m2',this)">M2: Monotonie &amp; Schranken</button>
+  <button class="tab" onclick="show('m3',this)">M3: Konvergenz</button>
+  <button class="tab" onclick="show('m4',this)">M4: Wachstum</button>
+  <button class="tab" onclick="show('m5',this)">M5: GW berechnen ⭐</button>
+  <button class="tab" onclick="show('m6',this)">M6: Klausur ⭐</button>
+</div>
+
+<div class="backbar"><a class="back" href="index.html">← Zur Übersicht</a></div>
+
+<div class="page">
+
+<!-- ===================== MODUL 1 ===================== -->
+<div class="module active" id="m1">
+  <span class="badge">Modul 1</span>
+  <h2>Grundbegriffe – Was ist eine Folge?</h2>
+  <p class="subtitle">Definition, explizit vs. rekursiv, Teilfolge, geometrische Folge</p>
+
+  <div class="card">
+    <div class="card-title">📌 Definition</div>
+    <p>Eine <b class="green">Folge</b> ist nichts anderes als eine spezielle Funktion, deren Definitionsbereich die natürlichen Zahlen sind. Statt \(f(x)\) für jedes reelle \(x\) gibt es nur einen Wert für jedes \(n = 1, 2, 3, \dots\)</p>
+    <div class="formula">
+      <div class="flabel">Folge als Funktion von \(\mathbb{N}\) nach \(\mathbb{R}\)</div>
+      \[ (a_n)_{n\in\mathbb{N}}, \qquad a_n = f(n), \quad n\in\mathbb{N} \]
+      <div class="fnote">Schreibweise \((a_n)\). Jedes \(a_n\) heißt ein <b>Folgeglied</b>, \(n\) ist der <b>Index</b>.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Explizit vs. Rekursiv</div>
+    <p>Es gibt zwei Wege, eine Folge zu beschreiben:</p>
+    <div class="formula">
+      <div class="flabel">Explizit – Formel direkt aus \(n\)</div>
+      \[ a_n = 2^n \quad\Rightarrow\quad (a_n) = 2, 4, 8, 16, 32, \dots \]
+      <div class="fnote">Vorteil: Man kann <b>jedes</b> Glied direkt berechnen (z.B. \(a_{100}\)) ohne die Vorgänger.</div>
+    </div>
+    <div class="formula">
+      <div class="flabel">Rekursiv – jedes Glied aus dem/den Vorgänger(n)</div>
+      \[ a_n = 2\cdot a_{n-1}, \qquad a_0 = 1 \]
+      <div class="fnote">Man braucht immer den Startwert \(a_0\) (oder \(a_1\)) und das Bildungsgesetz.</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – beide Darstellungen der Halbierungsfolge</div>
+      \( 1, \tfrac12, \tfrac14, \tfrac18, \tfrac1{16}, \dots \)
+      <span class="step">Explizit: \( a_n = \left(\tfrac12\right)^{n} \) (mit \(n=0,1,2,\dots\))</span>
+      <span class="step">Rekursiv: \( a_n = \tfrac12\, a_{n-1}, \quad a_0 = 1 \)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Geometrische Folge (sehr wichtig!)</div>
+    <p>Bei einer geometrischen Folge ist jedes Glied ein <b>konstantes Vielfaches</b> des Vorgängers \(\Leftrightarrow\) exponentielles Wachstum/Zerfall.</p>
+    <div class="formula">
+      <div class="flabel">Geometrische Folge mit Faktor \(q\)</div>
+      \[ a_n = a_0\cdot q^{\,n} \qquad\Longleftrightarrow\qquad a_n = q\cdot a_{n-1} \]
+      <div class="fnote">\(q&gt;1\): Wachstum &nbsp;|&nbsp; \(0&lt;q&lt;1\): Zerfall. Die Verdopplungsfolge \(2^n\) hat \(q=2\).</div>
+    </div>
+    <svg class="graph" viewBox="0 0 560 300" width="560">
+      <line x1="60" y1="250" x2="540" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="60" y1="30" x2="60" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="545" y="254" font-size="12" fill="#5b6b85">n</text>
+      <text x="40" y="40" font-size="12" fill="#5b6b85">aₙ</text>
+      <!-- a_n = (1/2)^n decreasing dots, scaled v*150 from y=250 -->
+      <circle cx="98"  cy="175" r="5" fill="#0d9488"/>
+      <circle cx="146" cy="212" r="5" fill="#0d9488"/>
+      <circle cx="194" cy="231" r="5" fill="#0d9488"/>
+      <circle cx="242" cy="241" r="5" fill="#0d9488"/>
+      <circle cx="290" cy="245" r="5" fill="#0d9488"/>
+      <circle cx="338" cy="247" r="5" fill="#0d9488"/>
+      <circle cx="386" cy="249" r="5" fill="#0d9488"/>
+      <circle cx="434" cy="249" r="5" fill="#0d9488"/>
+      <line x1="60" y1="100" x2="540" y2="100" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+      <text x="100" y="92" font-size="11" fill="#0f766e">a₀=1 (Start, oben außerhalb skaliert)</text>
+      <text x="160" y="285" font-size="12" fill="#5b6b85">Geometrische Folge \(a_n=(½)^n\): Punkte fallen gegen 0 (Nullfolge)</text>
+    </svg>
+    <div class="tip">💡 Eine Folge zeichnet man als <b>einzelne Punkte</b> (nicht als durchgezogene Linie!), denn sie ist nur für ganzzahlige \(n\) definiert.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Teilfolge</div>
+    <p>Eine <b class="green">Teilfolge</b> entsteht, wenn man beliebig viele Glieder weglässt (auch unendlich viele). Das wird in Modul 3 & 6 zum wichtigsten Werkzeug für Divergenz-Beweise!</p>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Teilfolge der geraden Indizes</div>
+      Aus \( (a_n) = 1, 2, 4, 8, 16, 32, 64, \dots \) (also \(a_n=2^n\))<br>
+      wird die Teilfolge der geraden Indizes: \( (a_{2k}) = a_0, a_2, a_4, \dots = 1, 4, 16, 64, \dots \)
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 1</div>
+    <div class="ex-intro">Bearbeite selbst und schick mir deine Lösung im Chat!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.1</div>
+      <div class="ex-text">Gegeben ist die Folge \( 15, 30, 60, 120, 240, \dots \) mit \(a_1 = 15\). Gib die explizite und die rekursive Bildungsvorschrift an.</div>
+      <div class="hint">Tipp: Was passiert von Glied zu Glied? → geometrische Folge, Faktor \(q\) suchen.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Schaue, was von Glied zu Glied passiert: \(15\to30\to60\to120\), jedes Mal <b>×2</b>. Ein konstanter Faktor ⇒ <b>geometrische Folge</b> mit \(q=2\).
+        <span class="step"><b>Rekursiv</b> (jedes Glied aus dem Vorgänger): \(a_n = 2\cdot a_{n-1}\), Startwert \(a_1=15\).</span>
+        <span class="step"><b>Explizit</b> (direkt aus \(n\)): vom Start \(a_1=15\) aus braucht man \(n-1\) Schritte, also \(a_n = 15\cdot 2^{\,n-1}\).</span>
+        <span class="step">Probe: \(a_4 = 15\cdot 2^{3} = 15\cdot 8 = 120\) ✓</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.2</div>
+      <div class="ex-text">Es sei \(a_n\) das Produkt der Zahlen \(1,2,\dots,n\). a) Wie heißt diese Folge? b) Gib sie explizit und rekursiv an.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>a)</b> Das Produkt der ersten \(n\) natürlichen Zahlen ist die <b>Fakultät</b> \(n!\).
+        <span class="step"><b>Explizit:</b> \(a_n = n! = 1\cdot 2\cdot 3\cdots n\).</span>
+        <span class="step"><b>Rekursiv:</b> jedes Glied ist das vorige mal \(n\): \(a_n = n\cdot a_{n-1}\), mit \(a_1 = 1\).</span>
+        <span class="step">Probe: \(a_4 = 4\cdot a_3 = 4\cdot 6 = 24 = 4!\) ✓</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.3</div>
+      <div class="ex-text">Eine Produktionsmenge wächst jährlich um 2 %. Start heute: 10 000 Stück. Stelle die explizite Formel für die Menge nach \(n\) Jahren auf und berechne den Wert nach 35 Jahren.</div>
+      <div class="hint">Tipp: +2 % bedeutet Faktor \(q = 1{,}02\) pro Jahr.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        +2 % pro Jahr bedeutet: mit dem <b>Faktor</b> \(q = 1+0{,}02 = 1{,}02\) multiplizieren (nicht \(0{,}02\) addieren!). Das ist exponentielles = geometrisches Wachstum.
+        <span class="step"><b>Explizit</b> (\(n\) Jahre ab heute): \(a_n = 10000\cdot 1{,}02^{\,n}\).</span>
+        <span class="step"><b>Nach 35 Jahren:</b> \(a_{35} = 10000\cdot 1{,}02^{35}\approx 10000\cdot 1{,}9999 \approx 19999\).</span>
+        <span class="step">Faustregel: bei 2 % Wachstum verdoppelt sich der Bestand in rund 35 Jahren („72er-Regel": \(72/2=36\)).</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 2 ===================== -->
+<div class="module" id="m2">
+  <span class="badge">Modul 2</span>
+  <h2>Monotonie &amp; Beschränktheit</h2>
+  <p class="subtitle">Steigt/fällt die Folge? Bleibt sie in einem Bereich?</p>
+
+  <div class="card">
+    <div class="card-title">📌 Monotonie</div>
+    <div class="formula">
+      <div class="flabel">Monoton steigend / fallend</div>
+      \[ \text{steigend: } a_n \le a_{n+1} \quad\text{für alle } n \qquad \text{fallend: } a_n \ge a_{n+1} \]
+      <div class="fnote"><b>streng</b> monoton, wenn \(<\) bzw. \(>\) gilt (kein Gleichheitszeichen).</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Monotonie-Nachweis (Skript Kap. 3, S. 17)</div>
+      Zeige die Ungleichung \( a_n < a_{n+1} \) ist wahr. Beispiel \( a_n = \dfrac{n}{n+1} \):
+      <span class="step">Zu zeigen: \( \dfrac{n}{n+1} < \dfrac{n+1}{n+2} \)</span>
+      <span class="step">Über Kreuz multiplizieren (Nenner positiv): \( n(n+2) < (n+1)^2 \)</span>
+      <span class="step">\( n^2+2n < n^2+2n+1 \;\Leftrightarrow\; 0<1 \) ✓ → streng monoton steigend</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Beschränktheit</div>
+    <div class="formula">
+      <div class="flabel">Nach oben / unten / insgesamt beschränkt</div>
+      \[ \text{nach oben: } a_n \le S_o \qquad \text{nach unten: } a_n \ge S_u \qquad \text{beschränkt: } |a_n|\le S \]
+      <div class="fnote">\(S_o\) heißt obere Schranke, \(S_u\) untere Schranke. "Beschränkt" = nach oben <b>und</b> unten beschränkt.</div>
+    </div>
+    <svg class="graph" viewBox="0 0 560 290" width="560">
+      <line x1="60" y1="250" x2="540" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="60" y1="20" x2="60" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="545" y="254" font-size="12" fill="#5b6b85">n</text>
+      <!-- obere Schranke -->
+      <line x1="60" y1="70" x2="540" y2="70" stroke="#dc2626" stroke-dasharray="5 4" stroke-width="1.5"/>
+      <text x="430" y="64" font-size="11" fill="#dc2626">obere Schranke Sₒ = 1</text>
+      <!-- a_n = n/(n+1) -> 1, increasing, bounded. v in [0.5,~0.92], y=250 - v*180 -->
+      <circle cx="98"  cy="160" r="4.5" fill="#0d9488"/>
+      <circle cx="146" cy="130" r="4.5" fill="#0d9488"/>
+      <circle cx="194" cy="115" r="4.5" fill="#0d9488"/>
+      <circle cx="242" cy="106" r="4.5" fill="#0d9488"/>
+      <circle cx="290" cy="100" r="4.5" fill="#0d9488"/>
+      <circle cx="338" cy="96"  r="4.5" fill="#0d9488"/>
+      <circle cx="386" cy="93"  r="4.5" fill="#0d9488"/>
+      <circle cx="434" cy="90"  r="4.5" fill="#0d9488"/>
+      <circle cx="482" cy="88"  r="4.5" fill="#0d9488"/>
+      <text x="120" y="285" font-size="12" fill="#5b6b85">\(a_n=\tfrac{n}{n+1}\): streng monoton steigend &amp; durch 1 nach oben beschränkt</text>
+    </svg>
+    <div class="tip">💡 <b>Wichtiger Satz:</b> Jede Folge, die <b>monoton</b> UND <b>beschränkt</b> ist, ist automatisch <b>konvergent</b> (Monotonie-Kriterium).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Vorsicht: Logik-Fallen (Klausur-Lieblingsfrage!)</div>
+    <div class="warn">
+      ❌ "Jede beschränkte, monoton fallende Folge ist eine Nullfolge" – <b>FALSCH!</b><br>
+      Gegenbeispiel: \(a_n = 1+\tfrac1n\) ist beschränkt und monoton fallend, aber Grenzwert \(=1\neq 0\).
+    </div>
+    <div class="warn">
+      ❌ "Jede Nullfolge ist monoton fallend und beschränkt" – <b>FALSCH!</b><br>
+      Gegenbeispiel: \(a_n = \tfrac{(-1)^n}{n}\) ist eine Nullfolge, aber <b>nicht</b> monoton (springt + / −).
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 2</div>
+    <div class="ex-intro">Schick mir deinen Rechenweg / deine Skizze!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.1</div>
+      <div class="ex-text">Zeige rechnerisch, dass \( a_n = \dfrac{2n-1}{n} \) streng monoton steigend ist.</div>
+      <div class="hint">Tipp: \(a_n = 2 - \tfrac1n\) umschreiben, oder \(a_n < a_{n+1}\) über Kreuz prüfen.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Zwei saubere Wege:
+        <span class="step"><b>Weg 1 (umschreiben):</b> \(a_n = \frac{2n-1}{n} = 2 - \frac1n\). Da \(\frac1n\) streng fällt, wächst \(2-\frac1n\) streng. ✓</span>
+        <span class="step"><b>Weg 2 (\(a_n &lt; a_{n+1}\) über Kreuz):</b> zu zeigen \(\frac{2n-1}{n} &lt; \frac{2n+1}{n+1}\). Beide Nenner positiv ⇒ über Kreuz multiplizieren:</span>
+        \[ (2n-1)(n+1) &lt; (2n+1)\,n \;\Leftrightarrow\; 2n^2+n-1 &lt; 2n^2+n \;\Leftrightarrow\; -1 &lt; 0. \]
+        Die letzte Aussage ist <b>immer</b> wahr ⇒ streng monoton steigend.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.2</div>
+      <div class="ex-text">Betrachte \( a_n = \dfrac{\sin(n)}{n} \). Welche der Aussagen sind wahr? (a) beschränkt (b) monoton (c) konvergent (d) Nullfolge</div>
+      <div class="hint">Tipp: \(-1\le\sin(n)\le 1\), also \(|a_n|\le \tfrac1n\).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Schlüssel-Abschätzung: \(-1\le \sin(n)\le 1\), also \(|a_n| = \frac{|\sin n|}{n} \le \frac1n\).
+        <span class="step"><b>(a) beschränkt</b> ✓ — wegen \(|a_n|\le \frac1n\le 1\).</span>
+        <span class="step"><b>(d) Nullfolge</b> ✓ — \(\frac1n\to 0\) drückt \(a_n\) zwischen \(\pm\frac1n\) auf \(0\) (Einschnürungssatz).</span>
+        <span class="step"><b>(c) konvergent</b> ✓ — jede Nullfolge konvergiert (gegen \(0\)).</span>
+        <span class="step"><b>(b) monoton</b> ✗ — \(\sin(n)\) springt hin und her.</span>
+        Merksatz: <b>Nullfolge × beschränkter Faktor = Nullfolge.</b>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.3 (richtig/falsch begründen)</div>
+      <div class="ex-text">"Jede beschränkte Folge ist konvergent." Wahr oder falsch? Begründe mit einem Beispiel.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>Falsch</b> — Beschränktheit allein genügt nicht.
+        <span class="step"><b>Gegenbeispiel:</b> \(a_n=(-1)^n = 1,-1,1,-1,\dots\) Sie ist beschränkt (\(|a_n|=1\)), springt aber ewig und hat keinen Grenzwert ⇒ divergent.</span>
+        <span class="step"><b>Richtig wäre:</b> beschränkt <b>und monoton</b> ⇒ konvergent (Monotoniekriterium).</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 3 ===================== -->
+<div class="module" id="m3">
+  <span class="badge">Modul 3</span>
+  <h2>Konvergenz &amp; Divergenz</h2>
+  <p class="subtitle">Der Grenzwert-Begriff: der ε-Schlauch und das Teilfolgen-Kriterium</p>
+
+  <div class="card">
+    <div class="card-title">📌 Die drei Verhaltensweisen</div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Verhalten</th><th>Symbol</th><th>Bedeutung</th></tr></thead>
+        <tbody>
+          <tr><td><b class="green">Konvergenz</b> gegen \(a\)</td><td>\(\lim\limits_{n\to\infty} a_n = a\)</td><td>Glieder kommen einem festen Wert \(a\) beliebig nahe. \(a=0\) → <b>Nullfolge</b>.</td></tr>
+          <tr><td><b class="blue">Bestimmte Divergenz</b></td><td>\(\lim\limits_{n\to\infty} a_n = \pm\infty\)</td><td>Glieder übersteigen jede Schranke (wachsen unbeschränkt nach \(+\infty\) oder \(-\infty\)).</td></tr>
+          <tr><td><b class="red">Unbestimmte Divergenz</b></td><td>\(\lim\) existiert nicht</td><td>Kein Grenzwert, auch nicht \(\pm\infty\). Z.B. springende Folge \((-1)^n\).</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Der ε-Schlauch (Konvergenz anschaulich)</div>
+    <p>\(a_n\to a\) heißt: Egal wie dünn man einen Schlauch (Streifen der Breite \(\pm\epsilon\)) um \(a\) legt – <b>ab einem Index \(N\)</b> liegen <b>alle</b> späteren Glieder darin.</p>
+    <div class="formula">
+      <div class="flabel">Exakte Definition (ε-Kriterium)</div>
+      \[ \forall\, \epsilon>0 \ \ \exists\, N\in\mathbb{N}: \quad |a_n - a| < \epsilon \ \ \text{für alle } n>N \]
+    </div>
+    <svg class="graph" viewBox="0 0 560 280" width="560">
+      <line x1="60" y1="250" x2="540" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="60" y1="20" x2="60" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="545" y="254" font-size="12" fill="#5b6b85">n</text>
+      <!-- epsilon band around limit a=1 (y=180); band 169.5..190.5 -->
+      <rect x="60" y="169.5" width="480" height="21" fill="#ccfbf1" opacity="0.7"/>
+      <line x1="60" y1="180" x2="540" y2="180" stroke="#0d9488" stroke-width="1.5"/>
+      <text x="500" y="176" font-size="11" fill="#0f766e">a = 1</text>
+      <text x="470" y="166" font-size="10" fill="#0d9488">a+ε</text>
+      <text x="470" y="202" font-size="10" fill="#0d9488">a−ε</text>
+      <!-- N marker -->
+      <line x1="288" y1="20" x2="288" y2="250" stroke="#dc2626" stroke-dasharray="4 4"/>
+      <text x="270" y="34" font-size="11" fill="#dc2626">ab N</text>
+      <!-- a_n = 1+1/n points -->
+      <circle cx="98"  cy="110" r="4.5" fill="#2563eb"/>
+      <circle cx="136" cy="145" r="4.5" fill="#2563eb"/>
+      <circle cx="174" cy="157" r="4.5" fill="#2563eb"/>
+      <circle cx="212" cy="162" r="4.5" fill="#2563eb"/>
+      <circle cx="250" cy="166" r="4.5" fill="#2563eb"/>
+      <circle cx="288" cy="168" r="4.5" fill="#2563eb"/>
+      <circle cx="326" cy="170" r="4.5" fill="#0d9488"/>
+      <circle cx="364" cy="171" r="4.5" fill="#0d9488"/>
+      <circle cx="402" cy="172" r="4.5" fill="#0d9488"/>
+      <circle cx="440" cy="173" r="4.5" fill="#0d9488"/>
+      <circle cx="478" cy="174" r="4.5" fill="#0d9488"/>
+      <circle cx="516" cy="174" r="4.5" fill="#0d9488"/>
+      <text x="150" y="275" font-size="12" fill="#5b6b85">\(a_n=1+\tfrac1n \to 1\): ab N liegen alle Glieder im ε-Streifen</text>
+    </svg>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Divergenz beweisen: das Teilfolgen-Kriterium ⭐</div>
+    <p>Das ist der wichtigste Trick für die Klausur (siehe Modul 6):</p>
+    <div class="formula">
+      <div class="flabel">Eigenschaften konvergenter Folgen</div>
+      <span class="step">① Konvergiert eine Folge, so konvergiert <b>jede</b> Teilfolge gegen <b>denselben</b> GW.</span>
+      <span class="step">② Findet man <b>2 Teilfolgen mit verschiedenen Grenzwerten</b> ⟹ die Folge <b>divergiert</b>.</span>
+      <span class="step">③ Findet man <b>eine divergente Teilfolge</b> ⟹ die Folge divergiert.</span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – warum \((-1)^n\) divergiert</div>
+      Teilfolge gerade \(n\): \(a_{2k} = 1, 1, 1, \dots \to 1\)<br>
+      Teilfolge ungerade \(n\): \(a_{2k+1} = -1, -1, \dots \to -1\)<br>
+      <span class="step">Zwei verschiedene Grenzwerte (1 und −1) ⟹ \((-1)^n\) divergiert <b class="red">unbestimmt</b>.</span>
+    </div>
+    <div class="warn">
+      ⚠️ <b>Klausurfalle:</b> Man darf den Grenzwert einer Summe <b>nicht</b> aufspalten, wenn die Teile gar nicht konvergieren! Z.B. ist \(\lim\big((-1)^n+(-1)^{n+1}\big)=\lim 0 = 0\) richtig, aber \(\lim(-1)^n + \lim(-1)^{n+1}\) ist <b>verboten</b> (beide Limites existieren nicht).
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 3</div>
+    <div class="ex-intro">Begründe jeweils mit Rechenweg / Teilfolgen-Argument!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.1</div>
+      <div class="ex-text">Konvergiert oder divergiert \( a_n = \begin{cases} 1+\tfrac1n & n \text{ gerade}\\[2pt] 3-\tfrac1n & n \text{ ungerade}\end{cases} \)? Begründe.</div>
+      <div class="hint">Tipp: Teilfolgen gerade / ungerade getrennt betrachten.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Trick bei springenden Folgen: gerade und ungerade Glieder als <b>Teilfolgen</b> getrennt betrachten.
+        <span class="step">Gerade Indizes: \(1+\frac1n \to 1\).</span>
+        <span class="step">Ungerade Indizes: \(3-\frac1n \to 3\).</span>
+        Zwei Teilfolgen mit <b>verschiedenen</b> Grenzwerten (\(1\neq 3\)) ⇒ kein gemeinsamer Grenzwert ⇒ <b>unbestimmt divergent</b> (auch nicht \(\pm\infty\)).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.2</div>
+      <div class="ex-text">Über eine Folge ist bekannt: sie ist beschränkt, und zwei Teilfolgen konvergieren beide gegen denselben Wert \(a\). Was folgt? (a) divergent (b) konvergent gegen \(a\) (c) konvergent, evtl. anderer Wert (d) unentscheidbar.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>(d) unentscheidbar.</b>
+        <span class="step">Zwei Teilfolgen mit demselben GW \(a\) beweisen noch nichts — es könnte eine <b>dritte</b> Teilfolge mit anderem GW geben.</span>
+        <span class="step">Beispiel \(a_n=(-1)^n\): die Teilfolgen \(a_{4k}\) und \(a_{4k+2}\) gehen beide gegen \(1\), trotzdem divergiert die Folge (denn \(a_{4k+1}\to -1\)).</span>
+        Für Konvergenz müssten <b>alle</b> Teilfolgen denselben Grenzwert haben.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.3</div>
+      <div class="ex-text">Ist \( a_n = \dfrac{(-1)^n}{n} \) konvergent? Wenn ja, gegen welchen Wert?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>Konvergent gegen 0.</b>
+        <span class="step">\(|a_n| = \frac1n \to 0\). Geht der <b>Betrag</b> gegen \(0\), geht auch die Folge selbst gegen \(0\) — das Vorzeichen ist egal.</span>
+        <span class="step">Die Folge ist <b>nicht</b> monoton (sie pendelt um \(0\)), aber Monotonie ist für Konvergenz nicht nötig.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 4 ===================== -->
+<div class="module" id="m4">
+  <span class="badge">Modul 4</span>
+  <h2>Wachstum im Vergleich &amp; Standardgrenzwerte</h2>
+  <p class="subtitle">Welcher Term „gewinnt"? Die Hierarchie, die man auswendig braucht.</p>
+
+  <div class="card">
+    <div class="card-title">📌 Die Wachstums-Hierarchie (auswendig!) ⭐</div>
+    <p>Für großes \(n\) wachsen die Grundfunktionen mit sehr unterschiedlicher „Geschwindigkeit". Diese Reihenfolge entscheidet, welcher Term in Zähler/Nenner <b>dominiert</b>:</p>
+    <div class="formula">
+      <div class="flabel">Wachstum von langsam → schnell</div>
+      \[ \ln n \;<\; \sqrt{n} \;<\; n \;<\; n^2 \;<\; n^3 \;<\;\dots\;<\; 2^n \;<\; e^n \;<\; n! \;<\; n^n \]
+      <div class="fnote">Exponentielles Wachstum (\(2^n, e^n\)) schlägt jede Potenz \(n^k\). Fakultät \(n!\) schlägt jedes Exponential.</div>
+    </div>
+    <svg class="graph" viewBox="0 0 560 280" width="560">
+      <line x1="60" y1="250" x2="540" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="60" y1="20" x2="60" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="545" y="254" font-size="12" fill="#5b6b85">n</text>
+      <text x="30" y="20" font-size="11" fill="#5b6b85">Wert</text>
+      <text x="20" y="30" font-size="9" fill="#94a3b8">(log)</text>
+      <polyline points="60,250 111,250 162,249 213,245 264,242 316,241 367,239 418,238 469,237 520,237" fill="none" stroke="#94a3b8" stroke-width="2"/>
+      <text x="522" y="237" font-size="11" fill="#64748b">ln n</text>
+      <polyline points="60,250 111,239 162,233 213,228 264,224 316,221 367,219 418,217 469,215 520,213" fill="none" stroke="#0d9488" stroke-width="2"/>
+      <text x="522" y="213" font-size="11" fill="#0d9488">n</text>
+      <polyline points="60,250 111,228 162,215 213,206 264,199 316,193 367,188 418,184 469,180 520,177" fill="none" stroke="#2563eb" stroke-width="2"/>
+      <text x="522" y="177" font-size="11" fill="#2563eb">n²</text>
+      <polyline points="60,239 111,228 162,217 213,206 264,195 316,184 367,173 418,162 469,151 520,140" fill="none" stroke="#d97706" stroke-width="2"/>
+      <text x="522" y="140" font-size="11" fill="#d97706">2ⁿ</text>
+      <polyline points="60,250 111,239 162,221 213,199 264,174 316,145 367,114 418,81 469,46 520,30" fill="none" stroke="#dc2626" stroke-width="2"/>
+      <text x="500" y="28" font-size="11" fill="#dc2626">n!</text>
+    </svg>
+    <div class="caption">Log-Skala: je höher die Kurve, desto schneller das Wachstum. \(n!\) schießt davon.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Kehrwerte = Nullfolgen</div>
+    <p>Wenn der Nenner unbeschränkt wächst, geht der Kehrwert gegen 0. Die Hierarchie umgedreht:</p>
+    <div class="formula">
+      \[ \frac{1}{\ln n} > \frac{1}{\sqrt n} > \frac{1}{n} > \frac{1}{n^2} > \dots > \frac{1}{2^n} > \frac{1}{n!} \;\xrightarrow[n\to\infty]{}\; 0 \]
+      <div class="fnote">Alle sind Nullfolgen – aber die rechten konvergieren <b>viel schneller</b> gegen 0.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Geometrische Folge \(q^n\) – die 3 Fälle</div>
+    <div class="formula">
+      \[ q^{\,n} \xrightarrow[n\to\infty]{} \begin{cases} 0 & \text{falls } |q|<1 \quad(\text{Zerfall, Nullfolge})\\[3pt] 1 & \text{falls } q=1 \\[3pt] +\infty & \text{falls } q>1 \quad(\text{bestimmt divergent})\\[3pt] \text{divergent} & \text{falls } q\le -1 \end{cases} \]
+      <div class="fnote">Vgl. Formelsammlung S. 6 (geometrische Reihe, Basis \(q\) entscheidend).</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel</div>
+      \( \left(\tfrac45\right)^n \to 0 \) &nbsp;(weil \(|q|<1\)) &nbsp;·&nbsp; \( \left(\tfrac54\right)^n \to \infty \) &nbsp;(weil \(q>1\)) &nbsp;·&nbsp; \( (-2)^n \) divergiert (springt und wächst).
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Die Euler-Zahl als Grenzwert (muss man kennen!)</div>
+    <div class="formula">
+      <div class="flabel">Formelsammlung S. 8, Anmerkung 1</div>
+      \[ e = \lim_{n\to\infty}\left(1+\frac1n\right)^n = 2{,}71828\dots \qquad\text{allgemein}\qquad \lim_{n\to\infty}\left(1+\frac{x}{n}\right)^n = e^{x} \]
+      <div class="fnote">Typ \(1^\infty\): Hier hilft KEIN „1 hoch unendlich = 1"! Immer auf diese Formel zurückführen.</div>
+    </div>
+    <div class="tip">💡 Erkennungsmerkmal: \(\left(1+\tfrac{\text{const}}{n}\right)^n\) → das Ergebnis ist \(e^{\text{const}}\). Beispiel: \(\left(1+\tfrac{3}{n}\right)^n \to e^3\).</div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 4</div>
+    <div class="ex-intro">Nur Grenzwert + kurze Begründung (welcher Term dominiert)!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.1</div>
+      <div class="ex-text">Ordne nach aufsteigendem Wachstum (für großes \(n\)): \( n^2,\ \ 2^n,\ \ \sqrt n,\ \ n!,\ \ \log n,\ \ n \).</div>
+      <div class="hint">Tipp: Skript Kap. 3, S. 16 – die Hierarchie.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Die <b>Wachstums-Hierarchie</b>: Logarithmus &lt; Wurzel &lt; Potenzen &lt; Exponential &lt; Fakultät.
+        \[ \log n \;&lt;\; \sqrt n \;&lt;\; n \;&lt;\; n^2 \;&lt;\; 2^n \;&lt;\; n! \]
+        Merke: für großes \(n\) „gewinnt" stets der Term weiter rechts — egal welche Konstanten davorstehen.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.2</div>
+      <div class="ex-text">Berechne \( \displaystyle\lim_{n\to\infty}\frac{4^{n+1}}{5^n} \).</div>
+      <div class="hint">Tipp: \(4^{n+1}=4\cdot 4^n\), dann zur Form \(q^n\) mit \(q=\tfrac45\) zusammenfassen.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Ziel: alles in die Form \(q^n\) bringen.
+        <span class="step">Zähler aufspalten: \(4^{n+1} = 4\cdot 4^n\).</span>
+        \[ \frac{4\cdot 4^n}{5^n} = 4\left(\frac45\right)^{n}. \]
+        <span class="step">Wegen \(|q| = \frac45 &lt; 1\) gilt \(\left(\frac45\right)^n \to 0\).</span>
+        ⇒ Grenzwert \(4\cdot 0 = \mathbf{0}\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.3</div>
+      <div class="ex-text">Berechne \( \displaystyle\lim_{n\to\infty}\left(1+\frac{2}{n}\right)^{n} \).</div>
+      <div class="hint">Tipp: Formelsammlung S. 8, Anmerkung 1.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Das ist die <b>\(e\)-Form</b>: \(\left(1+\frac{x}{n}\right)^n \to e^{x}\).
+        <span class="step">Hier ist \(x=2\), also Grenzwert \(e^{2}\approx 7{,}39\).</span>
+        <span class="step">Voraussetzung beachten: die Basis muss gegen \(1\) gehen (\(1+\frac2n\to 1\)) — nur dann gilt die \(e\)-Formel.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 5 ===================== -->
+<div class="module" id="m5">
+  <span class="badge">Modul 5 ⭐</span>
+  <h2>Grenzwerte berechnen – Rechenregeln &amp; rationale Folgen</h2>
+  <p class="subtitle">Die Standard-Klausurtechnik: höchste Potenz ausklammern</p>
+
+  <div class="card">
+    <div class="card-title">📌 Rechenregeln für Grenzwerte</div>
+    <p>Wenn \(\lim a_n = a\) und \(\lim b_n = b\) beide existieren (endlich!), dann:</p>
+    <div class="formula">
+      \[ \lim(a_n \pm b_n) = a \pm b \qquad \lim(a_n \cdot b_n) = a\cdot b \qquad \lim\frac{a_n}{b_n} = \frac{a}{b}\ \ (b\neq 0) \]
+      <div class="fnote">Auch: \(\lim\big(c\cdot a_n\big) = c\cdot a\) und \(\lim f(a_n) = f(a)\) für Grundfunktionen \(f\).</div>
+    </div>
+    <div class="warn">⚠️ Diese Regeln gelten <b>nur</b>, wenn die Einzel-Grenzwerte existieren! Sonst → Teilfolgen (Modul 6).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Rationale Folgen: höchste Potenz ausklammern ⭐</div>
+    <p>Bei einem Bruch aus Polynomen (evtl. mit \(\sqrt n\)): Bestimme den dominanten Term oben &amp; unten und klammere die <b>höchste Potenz des Nenners</b> aus.</p>
+    <div class="formula">
+      <div class="flabel">Die 3 Fälle (Grad = höchste \(n\)-Potenz)</div>
+      \[ \frac{\text{Zähler}}{\text{Nenner}} \to \begin{cases} 0 & \text{Grad(Z)} < \text{Grad(N)} \\[3pt] \dfrac{\text{Leitkoeff. Z}}{\text{Leitkoeff. N}} & \text{Grad(Z)} = \text{Grad(N)} \\[3pt] \pm\infty & \text{Grad(Z)} > \text{Grad(N)} \end{cases} \]
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 1 – gleicher Grad (Methode Schritt für Schritt)</div>
+      \( a_n = \dfrac{3n^2 + 2n - 1}{5n^2 - n} \)
+      <span class="step">Höchste Potenz \(n^2\) oben &amp; unten ausklammern:</span>
+      <span class="step">\( = \dfrac{n^2\left(3 + \tfrac2n - \tfrac1{n^2}\right)}{n^2\left(5 - \tfrac1n\right)} = \dfrac{3 + \tfrac2n - \tfrac1{n^2}}{5 - \tfrac1n} \)</span>
+      <span class="step">Alle \(\tfrac1n, \tfrac1{n^2}\to 0\): \( \to \dfrac{3+0-0}{5-0} = \dfrac{3}{5} \)</span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 2 – mit Wurzel (\(\sqrt n = n^{1/2}\) zählt als Grad ½)</div>
+      \( a_n = \dfrac{4 - 3\sqrt n - 2n^3}{1 + n(1-n)^2} \)
+      <span class="step">Nenner ausmultiplizieren: \(1 + n(1-2n+n^2) = n^3 - 2n^2 + n + 1\)</span>
+      <span class="step">Dominant oben: \(-2n^3\), dominant unten: \(n^3\) → gleicher Grad 3</span>
+      <span class="step">\( \to \dfrac{-2}{1} = -2 \)</span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 3 – Zählergrad kleiner → Nullfolge</div>
+      \( a_n = \dfrac{2n + 512}{n^2} \): Grad oben 1 \(<\) Grad unten 2 \(\Rightarrow \to 0\).
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Erlaubtes Rechnen mit ±∞</div>
+    <div class="formula">
+      <span class="step">\( \infty + \infty = \infty \quad,\quad \infty \cdot \infty = \infty \quad,\quad \dfrac{c}{\pm\infty} = 0 \)</span>
+      <span class="step"><b>Unbestimmte Ausdrücke</b> (nicht direkt!): \( \infty - \infty,\quad \dfrac{\infty}{\infty},\quad 0\cdot\infty,\quad 1^\infty \)</span>
+      <div class="fnote">Bei unbestimmten Ausdrücken: umformen / ausklammern (oder später l'Hospital im Grenzwert-Kapitel).</div>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen – Modul 5</div>
+    <div class="ex-intro">Rechenweg angeben (ausklammern zeigen)! Schick mir deine Lösung.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.1</div>
+      <div class="ex-text">Berechne \( \displaystyle\lim_{n\to\infty}\frac{7n^3 - 2n + 4}{3n^3 + n^2} \).</div>
+      <div class="hint">Tipp: \(n^3\) ausklammern. Gleicher Grad → Leitkoeffizienten.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Höchste Potenz (\(n^3\)) in Zähler und Nenner ausklammern und kürzen:
+        \[ \frac{7n^3-2n+4}{3n^3+n^2} = \frac{7 - \frac{2}{n^2} + \frac{4}{n^3}}{3 + \frac1n}. \]
+        <span class="step">Alle \(\frac{1}{n^{\dots}}\)-Terme \(\to 0\), übrig bleiben die Leitkoeffizienten.</span>
+        ⇒ \(\frac{7}{3}\). Regel: <b>gleicher Grad ⇒ Grenzwert = Quotient der Leitkoeffizienten.</b>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.2</div>
+      <div class="ex-text">Berechne \( \displaystyle\lim_{n\to\infty}\frac{5n + 3\sqrt n}{n^2 - 1} \).</div>
+      <div class="hint">Tipp: Grad oben (1) vs. Grad unten (2) vergleichen.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Grad oben \(=1\), Grad unten \(=2\) — der Nenner wächst schneller.
+        \[ \frac{5n+3\sqrt n}{n^2-1} = \frac{\frac5n + \frac{3}{n^{3/2}}}{1 - \frac1{n^2}} \to \frac{0}{1} = 0. \]
+        Regel: <b>Grad oben &lt; Grad unten ⇒ Grenzwert \(0\).</b>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.3</div>
+      <div class="ex-text">Betrachte \( a_n = \sqrt{n^4 + \ln(n)} - e^{-n} \). Konvergiert oder divergiert die Folge? (Rechenregeln nutzen)</div>
+      <div class="hint">Tipp: Die Summanden einzeln betrachten; welcher dominiert? (Skript Kap. 3, S. 12 / S. 16)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Die zwei Summanden einzeln betrachten (Rechenregeln):
+        <span class="step">\(\sqrt{n^4+\ln n}\): unter der Wurzel dominiert \(n^4\) den \(\ln n\) völlig, also \(\approx \sqrt{n^4} = n^2 \to \infty\).</span>
+        <span class="step">\(e^{-n} = \frac{1}{e^{n}} \to 0\).</span>
+        ⇒ \(a_n \to \infty - 0 = +\infty\): <b>bestimmt divergent</b> (gegen \(+\infty\)).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.4</div>
+      <div class="ex-text">Zwei Folgen mit \(\lim a_n = 2\) und \(\lim b_n = -3\). Berechne \( \displaystyle\lim_{n\to\infty}\big(a_n\cdot b_n - \sin(\pi\cdot a_n)\big) \).</div>
+      <div class="hint">Tipp: Rechenregeln + \(\sin\) ist stetig (\(\lim\sin(\dots)=\sin(\lim\dots)\)).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Rechenregeln + Stetigkeit von \(\sin\) (der Grenzwert darf ins Argument gezogen werden):
+        <span class="step">\(a_n\cdot b_n \to 2\cdot(-3) = -6\).</span>
+        <span class="step">\(\sin(\pi\cdot a_n) \to \sin(\pi\cdot 2) = \sin(2\pi) = 0\).</span>
+        ⇒ \(-6 - 0 = \mathbf{-6}\).
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 6 ===================== -->
+<div class="module" id="m6">
+  <span class="badge">Modul 6 ⭐</span>
+  <h2>Klausuraufgaben im Kreilos-Stil</h2>
+  <p class="subtitle">Der Signatur-Aufgabentyp: rationale Folge mit \((-1)^n\) → Teilfolgen</p>
+
+  <div class="card">
+    <div class="card-title">🎯 So fragt Kreilos in der Klausur</div>
+    <p>In jeder Klausur (Beispiel 1, Aufgabe 1.1 b) kommt eine Folge-Grenzwert-Aufgabe. Der gefährlichste Typ: <b>rationale Folge mit \((-1)^n\)</b>. Strategie immer gleich:</p>
+    <div class="formula">
+      <span class="step">① \((-1)^n\) gedanklich weglassen → den <b>Betrag</b> (die rationale Folge) per Ausklammern bestimmen.</span>
+      <span class="step">② Geht der Betrag gegen <b>0</b>? → ganze Folge konvergiert gegen 0 (Nullfolge × beschränkt).</span>
+      <span class="step">③ Geht der Betrag gegen <b>\(\infty\)</b> oder einen Wert \(\neq 0\)? → Teilfolgen gerade/ungerade haben verschiedene Grenzwerte → <b class="red">divergent</b>.</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📝 Vorgerechnetes Original (Klausur Beispiel 1, 1.1 b)(2)</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Aufgabe: Grenzwert bzw. Divergenz begründen</div>
+      \( a_n = \dfrac{(-1)^n\,(7 - 4n^2 - 6n^3)}{1 - n^2 + \sqrt n} \)
+      <span class="step"><b>① Betrag:</b> dominanter Term oben \(-6n^3\) (Grad 3), unten \(-n^2\) (Grad 2).</span>
+      <span class="step">Grad oben \(>\) Grad unten \(\Rightarrow\) Betrag \( \approx \dfrac{-6n^3}{-n^2} = 6n \to +\infty \).</span>
+      <span class="step"><b>② Mit \((-1)^n\):</b> gerade \(n\): \(+1\cdot(+\infty) = +\infty\); ungerade \(n\): \(-1\cdot(+\infty)=-\infty\).</span>
+      <span class="step"><b>③ Ergebnis:</b> Teilfolge der geraden Indizes \(\to +\infty\), der ungeraden \(\to -\infty\) ⟹ die Folge <b class="red">divergiert</b> (unbestimmt).</span>
+    </div>
+    <div class="tip">📌 Genau so steht es im offiziellen Lösungsschlüssel: „TF der geraden Indizes GW +∞, TF der ungeraden Indizes GW −∞ ⟹ Divergenz."</div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Klausur-Übungen – Modul 6</div>
+    <div class="ex-intro">Klausurformat: 8–10 Punkte. „Rechenweg bzw. nachvollziehbare Begründung angeben!" Schick mir deine Lösungen!</div>
+
+    <div class="ex-item klausur">
+      <div class="klausur-tag">Klausuraufgabe K.1 <span class="pts">8 P</span></div>
+      <div class="ex-text">Berechnen Sie den Grenzwert bzw. begründen Sie die Divergenz der Folge
+      \[ a_n = \frac{(-1)^n\,(2n^2 + 5)}{3n^2 - n}. \]</div>
+      <div class="hint">Tipp: Erst Betrag (gleicher Grad → Leitkoeffizienten), dann Teilfolgen-Argument.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>Schritt 1 – Betrag</b> (Vorzeichen weglassen): gleicher Grad \(2\) ⇒ Quotient der Leitkoeffizienten: \(\frac{2n^2+5}{3n^2-n} \to \frac23\).</span>
+        <span class="step"><b>Schritt 2 – Vorzeichen \((-1)^n\)</b> über Teilfolgen: gerade \(n \to +\frac23\), ungerade \(n \to -\frac23\).</span>
+        Zwei verschiedene Grenzwerte ⇒ <b>unbestimmt divergent</b>.
+      </div>
+    </div>
+
+    <div class="ex-item klausur">
+      <div class="klausur-tag">Klausuraufgabe K.2 <span class="pts">8 P</span></div>
+      <div class="ex-text">Berechnen Sie den Grenzwert bzw. begründen Sie die Divergenz der Folge
+      \[ a_n = \frac{(-1)^n\,(n + 1)}{n^2 + 3}. \]</div>
+      <div class="hint">Tipp: Achtung – hier ist der Ausgang anders als bei K.1! Wohin geht der Betrag?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>Schritt 1 – Betrag:</b> Grad oben \(1 &lt;\) Grad unten \(2\) ⇒ \(\frac{n+1}{n^2+3} \to 0\).</span>
+        <span class="step"><b>Schritt 2:</b> Da der Betrag eine <b>Nullfolge</b> ist, macht das Vorzeichen \((-1)^n\) nichts kaputt — Nullfolge × beschränkter Faktor bleibt Nullfolge.</span>
+        ⇒ \(a_n \to \mathbf{0}\), <b>konvergent</b>! (Anders als K.1, weil hier schon der Betrag gegen \(0\) geht.)
+      </div>
+    </div>
+
+    <div class="ex-item klausur">
+      <div class="klausur-tag">Klausuraufgabe K.3 <span class="pts">6 P</span></div>
+      <div class="ex-text">Berechnen Sie \( \displaystyle\lim_{n\to\infty}\left(3 - \frac{1}{n}\right)^{n} \) bzw. begründen Sie die Divergenz.</div>
+      <div class="hint">Tipp: Die Basis geht gegen 3. Vorsicht – das ist KEIN \(e\)-Typ! Vergleiche mit \(q^n\) für \(q>1\).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>Keine \(e\)-Form!</b> Die \(e\)-Formel braucht eine Basis, die gegen \(1\) geht — hier geht die Basis gegen \(3\).
+        <span class="step">Für großes \(n\) ist die Basis \(&gt; 2\), also \(\left(3-\frac1n\right)^n \ge 2^n \to \infty\).</span>
+        ⇒ <b>bestimmt divergent gegen \(+\infty\)</b>.
+      </div>
+    </div>
+
+    <div class="ex-item klausur">
+      <div class="klausur-tag">Klausuraufgabe K.4 <span class="pts">8 P</span></div>
+      <div class="ex-text">Berechnen Sie \( \displaystyle\lim_{n\to\infty}\frac{4 - 3\sqrt n - 2n^3}{1 + n(1-n)^2} \) (Rechenweg!).</div>
+      <div class="hint">Tipp: Nenner zuerst ausmultiplizieren, dann \(n^3\) ausklammern (Beispiel 2 aus Modul 5).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>Schritt 1 – Nenner ausmultiplizieren:</b> \(1+n(1-n)^2 = 1 + n(1-2n+n^2) = n^3 - 2n^2 + n + 1\).</span>
+        <span class="step"><b>Schritt 2 – höchste Potenz \(n^3\) ausklammern:</b></span>
+        \[ \frac{4-3\sqrt n-2n^3}{n^3-2n^2+n+1} = \frac{\frac4{n^3} - \frac{3}{n^{5/2}} - 2}{1 - \frac2n + \frac1{n^2} + \frac1{n^3}} \to \frac{-2}{1}. \]
+        ⇒ \(\mathbf{-2}\) (gleicher Grad \(3\) ⇒ Leitkoeffizienten \(-2/1\)).
+      </div>
+    </div>
+
+    <div class="ex-item klausur">
+      <div class="klausur-tag">Klausuraufgabe K.5 <span class="pts">6 P</span></div>
+      <div class="ex-text">Konvergiert oder divergiert \( a_n = \dfrac{(-1)^n\,4^{\,n+1}}{5^n} \)? Begründen Sie.</div>
+      <div class="hint">Tipp: Betrag zur Form \(q^n\) bringen (Modul 4, Aufgabe 4.2).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>Betrag in \(q^n\)-Form:</b> \(\frac{4^{n+1}}{5^n} = 4\left(\frac45\right)^{n} \to 0\), da \(|q|=\frac45 &lt; 1\).</span>
+        <span class="step">Der Betrag ist eine Nullfolge ⇒ das Vorzeichen \((-1)^n\) ist egal.</span>
+        ⇒ \(a_n \to \mathbf{0}\), <b>konvergent</b>.
+      </div>
+    </div>
+
+    <div class="ex-item klausur">
+      <div class="klausur-tag">Klausuraufgabe K.6 <span class="pts">5 P</span></div>
+      <div class="ex-text">Wo liegt der Fehler? Jemand rechnet:
+      \[ 0 = \lim_{n\to\infty}\big((-1)^n + (-1)^{n+1}\big) = \lim (-1)^n + \lim(-1)^{n+1} = 2\lim(-1)^n \Rightarrow \lim(-1)^n = 0. \]
+      Das Ergebnis ist falsch (denn \((-1)^n\) divergiert). Wo steckt der Fehler?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Der Fehler steckt im <b>Aufspalten der Summe</b> (zweites Gleichheitszeichen).
+        <span class="step">Die Summenregel \(\lim(a_n+b_n)=\lim a_n + \lim b_n\) gilt nur, wenn <b>beide</b> Einzelgrenzwerte existieren.</span>
+        <span class="step">Hier divergieren \((-1)^n\) und \((-1)^{n+1}\) beide ⇒ man darf <b>nicht</b> aufspalten.</span>
+        <span class="step">Tatsächlich ist \((-1)^n + (-1)^{n+1} = 0\) für jedes \(n\) (die Terme heben sich auf), die Summenfolge ist konstant \(0\) — daher stimmt die linke \(0\), aber der Rechenweg ist ungültig.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+function show(id, btn){
+  var mod = document.getElementById(id);
+  if(mod) mod.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function tog(btn){
+  var s=btn.nextElementSibling;
+  if(s.classList.contains('open')){s.classList.remove('open');btn.textContent='👁 Lösung';}
+  else{s.classList.add('open');btn.textContent='🙈 Ausblenden';}
+}
+// All modules are always visible & scrollable. The tabs act as a sticky
+// quick-jump bar; the active tab follows the module currently in view.
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var mods=[].slice.call(document.querySelectorAll('.module'));
+  if(!('IntersectionObserver' in window)||!mods.length) return;
+  function setActive(id){
+    tabs.forEach(function(t){
+      var on=t.getAttribute('onclick')||'';
+      t.classList.toggle('active', on.indexOf("'"+id+"'")>-1);
+    });
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting) setActive(e.target.id); });
+  },{rootMargin:'-58px 0px -65% 0px',threshold:0});
+  mods.forEach(function(m){io.observe(m);});
+})();
+</script>
+</body>
+</html>

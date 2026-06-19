@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reihen – Klausurvorbereitung</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" async></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16243f;font-size:15px;line-height:1.55}
+.header{background:linear-gradient(135deg,#10233f,#0d6e75);color:#fff;padding:18px 20px;text-align:center}
+.header h1{font-size:1.3rem;font-weight:800}
+.header p{font-size:.8rem;opacity:.85;margin-top:3px}
+.tabs{display:flex;background:#10233f;overflow-x:auto;padding:0 6px;scrollbar-width:none;gap:2px;position:sticky;top:0;z-index:20}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:10px 13px;color:rgba(255,255,255,.55);border:none;background:none;cursor:pointer;font-size:.74rem;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent;transition:color .2s}
+.tab:hover{color:rgba(255,255,255,.85)}
+.tab.active{color:#2dd4bf;border-bottom-color:#2dd4bf}
+.page{max-width:820px;margin:0 auto;padding:18px 14px 60px}
+.module{display:block;padding-top:20px;border-top:1px solid #d7deea;margin-top:20px;scroll-margin-top:58px}
+.module:first-of-type{border-top:none;margin-top:0;padding-top:6px}
+.badge{display:inline-block;background:#ccfbf1;color:#0f766e;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:20px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+h2{font-size:1.32rem;font-weight:800;color:#10233f}
+.subtitle{color:#5b6b85;font-size:.85rem;margin:3px 0 16px}
+.card{background:#fff;border-radius:12px;padding:18px;margin-bottom:14px;box-shadow:0 1px 5px rgba(16,35,63,.10)}
+.card-title{font-size:.82rem;font-weight:800;color:#10233f;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em}
+.formula{background:#f0fdfa;border:1.5px solid #99f6e4;border-radius:8px;padding:12px 16px;margin:10px 0}
+.flabel{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#0d9488;margin-bottom:6px}
+.fnote{font-size:.8rem;color:#0d9488;margin-top:6px}
+.ex-block{background:#f0f7ff;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:.9rem}
+.ex-lbl{font-size:.68rem;font-weight:800;text-transform:uppercase;color:#1d4ed8;margin-bottom:6px;letter-spacing:.05em}
+.step{display:block;margin:4px 0 4px 6px;color:#1e3a8a}
+.tip{background:#fffbeb;border:1px dashed #f59e0b;border-radius:8px;padding:10px 14px;font-size:.84rem;margin:10px 0;color:#78350f}
+.warn{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:.84rem;margin:10px 0;color:#991b1b}
+.exercises{background:#f5f3ff;border:1.5px solid #c4b5fd;border-radius:12px;padding:18px;margin-top:20px}
+.ex-header{font-size:.82rem;font-weight:800;color:#6d28d9;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.ex-intro{font-size:.79rem;color:#7c3aed;margin-bottom:14px}
+.ex-item{background:#fff;border-radius:8px;padding:13px 15px;margin-bottom:10px;border:1px solid #ede9fe}
+.ex-num{font-size:.68rem;font-weight:800;color:#7c3aed;text-transform:uppercase;margin-bottom:5px;letter-spacing:.05em}
+.ex-text{font-size:.9rem}
+.hint{font-size:.78rem;color:#0d9488;margin-top:7px;font-style:italic}
+.sol-btn{margin-top:10px;padding:5px 13px;background:none;border:1.5px solid #8b5cf6;color:#6d28d9;border-radius:20px;cursor:pointer;font-size:.76rem;font-weight:700;transition:all .2s}
+.sol-btn:hover{background:#6d28d9;color:#fff}
+.sol{display:none;margin-top:10px;background:#faf5ff;border-radius:6px;padding:10px 13px;font-size:.86rem;border-left:3px solid #7c3aed}
+.sol.open{display:block}
+.table-wrap{overflow-x:auto;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+th{background:#10233f;color:#fff;padding:9px 12px;text-align:left;font-weight:700}
+td{padding:9px 12px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.caption{text-align:center;font-size:.78rem;color:#5b6b85;margin-top:2px;margin-bottom:6px}
+.klausur{background:#fff7ed;border:2px solid #fb923c;border-radius:12px;padding:16px;margin-bottom:12px}
+.klausur .pts{float:right;font-size:.72rem;font-weight:800;color:#c2410c;background:#ffedd5;padding:2px 9px;border-radius:12px}
+.klausur-tag{font-size:.68rem;font-weight:800;color:#c2410c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+code{background:#eef2f7;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.88em}
+b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
+.backbar{max-width:820px;margin:0 auto;padding:14px 14px 0}
+.back{display:inline-block;padding:6px 14px;font-size:.76rem;font-weight:700;color:#10233f;background:#fff;border:1.5px solid #cbd5e1;border-radius:20px;text-decoration:none;transition:all .15s}
+.back:hover{background:#10233f;color:#fff;border-color:#10233f}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>➕ Reihen – Klausurzusammenfassung</h1>
+  <p>Mathe 2 · Hochschule Offenburg · SS 2026 · Decker, Altenberend, Kreilos · Kapitel 4</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-m="m1" onclick="show('m1')">M1: Grundbegriffe</button>
+  <button class="tab" data-m="m2" onclick="show('m2')">M2: Endliche Summen</button>
+  <button class="tab" data-m="m3" onclick="show('m3')">M3: Geom. &amp; ber. Reihen</button>
+  <button class="tab" data-m="m4" onclick="show('m4')">M4: Konvergenzkriterien ⭐</button>
+  <button class="tab" data-m="m5" onclick="show('m5')">M5: Potenzreihen</button>
+  <button class="tab" data-m="m6" onclick="show('m6')">M6: Strategie &amp; Klausur ⭐</button>
+</div>
+
+<div class="backbar"><a class="back" href="index.html">← Zur Übersicht</a></div>
+
+<div class="page">
+
+<!-- ===================== MODUL 1 ===================== -->
+<div class="module active" id="m1">
+  <span class="badge">Modul 1</span>
+  <h2>Grundbegriffe – Was ist eine Reihe?</h2>
+  <p class="subtitle">Partialsummen, Reihenwert, konvergent vs. divergent</p>
+
+  <div class="card">
+    <div class="card-title">📌 Definition</div>
+    <p>Eine <b class="green">Reihe</b> ist kurz gesagt eine <b>Summe aus unendlich vielen Zahlen</b>. Man bildet sie aus einer Folge \((a_k)\) – den <b>Reihengliedern</b>.</p>
+    <div class="formula">
+      <div class="flabel">Reihe = unendliche Summe</div>
+      \[ \sum_{k=0}^{\infty} a_k = a_0 + a_1 + a_2 + \cdots \]
+    </div>
+    <p>In endlicher Zeit kann man unendlich viele Zahlen nicht aufaddieren. Den Wert definiert man deshalb als <b>Grenzwert der Teilsummen</b>.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🧱 Partialsumme (Teilsumme)</div>
+    <p>Die \(m\)-te <b class="green">Partialsumme</b> bricht die Summe beim Glied \(a_m\) ab:</p>
+    <div class="formula">
+      <div class="flabel">Partialsumme</div>
+      \[ s_m = \sum_{k=0}^{m} a_k = a_0 + a_1 + \cdots + a_m \]
+    </div>
+    <div class="formula">
+      <div class="flabel">Reihenwert = Grenzwert der Partialsummen</div>
+      \[ s = \sum_{k=0}^{\infty} a_k = \lim_{m\to\infty} s_m \]
+      <div class="fnote">Das Symbol \(\sum a_k\) hat eine Doppelbedeutung: die Folge der Partialsummen \((s_m)\) <i>und</i> deren Grenzwert \(s\).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✅ Konvergent vs. ❌ divergent</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td><b class="green">konvergent</b></td><td>\(\lim_{m\to\infty}s_m\) existiert und ist <b>endlich</b> \(\Rightarrow\) die Reihe hat einen Wert \(s\).</td></tr>
+        <tr><td><b class="red">divergent</b></td><td>der Grenzwert existiert nicht oder ist \(\pm\infty\).</td></tr>
+      </table>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – periodische Dezimalzahl</div>
+      \(0{,}\overline{1} = 0{,}1 + 0{,}01 + 0{,}001 + \cdots = \sum_{k=1}^{\infty}0{,}1^{\,k} = \tfrac{1}{9}\)
+      <span class="step">Obwohl unendlich oft etwas Positives addiert wird, ist das Ergebnis endlich.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 2 ===================== -->
+<div class="module" id="m2">
+  <span class="badge">Modul 2</span>
+  <h2>Endliche Summen (Grundlage)</h2>
+  <p class="subtitle">Arithmetische &amp; geometrische Summenformeln</p>
+
+  <div class="card">
+    <div class="card-title">➗ Arithmetische Folge &amp; Summe</div>
+    <p>Aufeinanderfolgende Glieder haben den <b>gleichen Abstand</b> \(d\): \(a_k = a_{k-1}+d\), explizit \(a_k = a_0 + kd\).</p>
+    <div class="formula">
+      <div class="flabel">Arithmetische Summe</div>
+      \[ s_n = \sum_{k=0}^{n} a_k = (n+1)\,a_0 + \frac{n(n+1)}{2}\,d \]
+    </div>
+    <div class="formula">
+      <div class="flabel">Spezialfall – Gauß'sche Summe</div>
+      \[ 1+2+\cdots+n = \frac{n(n+1)}{2} \]
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✖️ Geometrische Folge &amp; Summe</div>
+    <p>Aufeinanderfolgende Glieder stehen im <b>gleichen Verhältnis</b> \(q\): \(a_k = a_{k-1}\cdot q\), explizit \(a_k = a_0\cdot q^{k}\).</p>
+    <div class="formula">
+      <div class="flabel">Geometrische Summe (\(q \neq 1\))</div>
+      \[ s_n = \sum_{k=0}^{n} a_0\,q^{k} = a_0\,\frac{1-q^{\,n+1}}{1-q} \]
+    </div>
+    <div class="formula">
+      <div class="flabel">Spezialfall – Summe der Potenzen</div>
+      \[ 1 + q + q^2 + \cdots + q^{n} = \frac{1-q^{\,n+1}}{1-q} \]
+    </div>
+    <div class="tip">💡 Diese <b>endliche</b> geometrische Summe ist der Schlüssel: Lässt man \(n\to\infty\) laufen, entsteht daraus die <b>geometrische Reihe</b> (Modul 3).</div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 3 ===================== -->
+<div class="module" id="m3">
+  <span class="badge">Modul 3</span>
+  <h2>Geometrische &amp; berühmte Reihen</h2>
+  <p class="subtitle">Die Reihen, deren Verhalten man auswendig können muss</p>
+
+  <div class="card">
+    <div class="card-title">⭐ Geometrische Reihe</div>
+    <p>Aus \(s_n = \dfrac{1-q^{\,n+1}}{1-q}\) wird für \(n\to\infty\): falls \(|q|<1\) geht \(q^{\,n+1}\to 0\).</p>
+    <div class="formula">
+      <div class="flabel">Geometrische Reihe</div>
+      \[ \sum_{k=0}^{\infty} q^{k} = \frac{1}{1-q}\quad\text{für } |q|<1 \]
+      <div class="fnote">Mit Vorfaktor: \(\displaystyle\sum_{k=0}^{\infty} a_0\,q^{k} = \frac{a_0}{1-q}\). Start erst bei \(k=m\): \(\displaystyle\sum_{k=m}^{\infty} q^{k} = \frac{q^{m}}{1-q}\).</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>\(q\)</th><th>Verhalten</th></tr>
+        <tr><td>\(|q|<1\)</td><td><b class="green">konvergent</b>, Wert \(\frac{1}{1-q}\)</td></tr>
+        <tr><td>\(q\ge 1\)</td><td><b class="red">divergent</b> (\(\to\infty\))</td></tr>
+        <tr><td>\(q\le -1\)</td><td><b class="red">divergent</b> (kein GW)</td></tr>
+      </table>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel</div>
+      \(16+8+4+2+1+\tfrac12+\tfrac14+\cdots\) hat \(q=\tfrac12\). Mit Start \(a_0=16\): \(\dfrac{16}{1-\frac12}=32\).
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚦 Nullfolgenkriterium (notwendige Bedingung)</div>
+    <div class="formula">
+      <div class="flabel">Trivialkriterium</div>
+      \[ \text{Wenn } \lim_{k\to\infty} a_k \neq 0 \;\Rightarrow\; \sum a_k \text{ divergiert.} \]
+    </div>
+    <div class="warn">⚠️ Das ist <b>nur notwendig, nicht hinreichend!</b> \(a_k\to0\) garantiert <u>keine</u> Konvergenz – siehe harmonische Reihe.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📚 Harmonische &amp; allgemeine harmonische Reihe</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Reihe</th><th>Glied</th><th>Verhalten</th></tr>
+        <tr><td>Harmonische Reihe</td><td>\(a_k=\frac{1}{k}\)</td><td><b class="red">divergent</b> (\(\to\infty\))</td></tr>
+        <tr><td>Allg. harmonische (\(p\)-Reihe)</td><td>\(a_k=\frac{1}{k^{\alpha}}\)</td><td>\(\alpha>1\): <b class="green">konvergent</b><br>\(\alpha\le 1\): <b class="red">divergent</b></td></tr>
+      </table>
+    </div>
+    <div class="formula">
+      \[ \sum_{k=1}^{\infty}\frac{1}{k^{\alpha}}\ \begin{cases}\text{konvergiert} & \alpha>1\\[2pt]\text{divergiert} & \alpha\le 1\end{cases} \]
+    </div>
+    <div class="tip">💡 Die harmonische Reihe ist die <b>Schwelle</b>: Sie ist eine Nullfolge, geht aber „zu langsam" gegen 0. Erst ab \(\alpha>1\) konvergiert es. Diese Reihen sind die wichtigsten <b>Vergleichsreihen</b> für Modul 4.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">➕ Rechnen mit konvergenten Reihen</div>
+    <p>Konvergente Reihen darf man <b>gliedweise addieren, subtrahieren und mit einem festen Faktor multiplizieren</b> – das Ergebnis konvergiert wieder:</p>
+    <div class="formula">
+      \[ \sum (\lambda a_k + \mu b_k) = \lambda\sum a_k + \mu\sum b_k \]
+    </div>
+    <div class="warn">⚠️ Reihen <b>nicht</b> miteinander multiplizieren (dafür bräuchte man absolute Konvergenz / Cauchyprodukt – nicht Stoff dieses Kurses).</div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 3 – Wert geometrischer Reihen</div>
+    <div class="ex-intro">Vorgehen: zuerst Vorfaktor \(a_0\) und Quotient \(q\) erkennen, dann \(|q|&lt;1\) prüfen und in \(\frac{a_0}{1-q}\) einsetzen.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.1</div>
+      <div class="ex-text">\( \displaystyle\sum_{k=0}^{\infty}\frac{3}{4^{k}} \)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Schreibe \(\frac{3}{4^{k}} = 3\cdot\left(\frac14\right)^{k}\). Damit ist der Vorfaktor \(a_0=3\) und der Quotient \(q=\frac14\).<br>
+        Wegen \(|q|=\frac14&lt;1\) <b class="green">konvergiert</b> die Reihe. Einsetzen:
+        \[ \frac{a_0}{1-q}=\frac{3}{1-\frac14}=\frac{3}{\frac34}=3\cdot\frac43=\mathbf{4}. \]
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.2</div>
+      <div class="ex-text">\( \displaystyle\sum_{k=0}^{\infty}\frac{(-3)^{k}}{4^{k}} \)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Trick: Zähler und Nenner haben dieselbe Potenz \(k\), also zusammenfassen:
+        \(\frac{(-3)^{k}}{4^{k}}=\left(\frac{-3}{4}\right)^{k}\). Damit \(q=-\frac34\) und \(a_0=1\).<br>
+        Es zählt der <b>Betrag</b>: \(|q|=\frac34&lt;1\) ⇒ <b class="green">konvergent</b>.
+        \[ \frac{1}{1-\left(-\frac34\right)}=\frac{1}{1+\frac34}=\frac{1}{\frac74}=\mathbf{\frac47}. \]
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.3</div>
+      <div class="ex-text">\( \displaystyle\sum_{k=1}^{\infty}(-1)^{k}\frac{1}{4^{k}} \)</div>
+      <div class="hint">Achtung: die Summe beginnt bei \(k=1\), nicht bei \(k=0\)!</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Zusammenfassen: \((-1)^{k}\frac{1}{4^{k}}=\left(-\frac14\right)^{k}\), also \(q=-\frac14\).<br>
+        Da der Startindex \(k=1\) (statt \(0\)) ist, fehlt der erste Summand \(q^{0}=1\). Es gilt
+        \[ \sum_{k=1}^{\infty}q^{k}=\underbrace{\frac{1}{1-q}}_{\text{ab }0}-\,1=\frac{q}{1-q}. \]
+        Einsetzen: \(\dfrac{-\frac14}{1-\left(-\frac14\right)}=\dfrac{-\frac14}{\frac54}=\mathbf{-\frac15}.\)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 4 ===================== -->
+<div class="module" id="m4">
+  <span class="badge">Modul 4 ⭐</span>
+  <h2>Konvergenzkriterien</h2>
+  <p class="subtitle">Entscheiden, OB eine Reihe konvergiert (auch ohne den Wert zu kennen)</p>
+
+  <div class="tip">💡 Idee aller Kriterien: Man vergleicht \(a_k\) mit einer bekannten Reihe (geometrisch oder harmonisch) oder schaut, wie schnell die Glieder schrumpfen.</div>
+
+  <div class="card">
+    <div class="card-title">1️⃣ Majoranten- &amp; Minorantenkriterium (Vergleich)</div>
+    <div class="formula">
+      <div class="flabel">Majorante (Obergrenze) → Konvergenz</div>
+      \[ 0\le a_k\le b_k,\ \textstyle\sum b_k \text{ konv.} \;\Rightarrow\; \sum a_k \text{ konvergiert} \]
+    </div>
+    <div class="formula">
+      <div class="flabel">Minorante (Untergrenze) → Divergenz</div>
+      \[ a_k\ge b_k\ge 0,\ \textstyle\sum b_k \text{ div.} \;\Rightarrow\; \sum a_k \text{ divergiert} \]
+    </div>
+    <div class="fnote">Merksatz: „Kleiner als konvergent = konvergent. Größer als divergent = divergent."</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">2️⃣ Quotientenkriterium</div>
+    <p>Ideal bei <b>Fakultäten</b> (\(k!\)) und <b>Potenzen</b> (\(q^k\)).</p>
+    <div class="formula">
+      <div class="flabel">Grenzwert des Betrags-Quotienten</div>
+      \[ L = \lim_{k\to\infty}\left|\frac{a_{k+1}}{a_k}\right| \]
+      <div class="fnote">\(L<1\Rightarrow\) <b class="green">konvergent</b> &nbsp;·&nbsp; \(L>1\Rightarrow\) <b class="red">divergent</b> &nbsp;·&nbsp; \(L=1\Rightarrow\) keine Aussage</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">3️⃣ Grenzwertkriterium (Limesvergleich)</div>
+    <p>Vergleich mit einer bekannten Reihe \(\sum b_k\) (meist \(\frac{1}{k^{\alpha}}\)):</p>
+    <div class="formula">
+      \[ \lim_{k\to\infty}\frac{a_k}{b_k} = c,\quad 0&lt;c&lt;\infty \;\Rightarrow\; \sum a_k \text{ und } \sum b_k \text{ verhalten sich gleich} \]
+    </div>
+    <div class="fnote">Praktisch bei Brüchen aus Polynomen: nur die höchsten Potenzen zählen, z.&nbsp;B. \(\frac{k^2+1}{k^3-1}\sim\frac1k\Rightarrow\) divergent.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">4️⃣ Leibniz-Kriterium (alternierende Reihen)</div>
+    <p>Für Reihen mit wechselndem Vorzeichen \(\sum(-1)^k a_k\):</p>
+    <div class="formula">
+      <div class="flabel">Leibniz – alle 3 Bedingungen nötig</div>
+      \[ a_k\ge 0,\quad a_k \text{ monoton fallend},\quad a_k\to 0 \;\Rightarrow\; \text{konvergent} \]
+    </div>
+    <div class="warn">⚠️ Erst prüfen, ob überhaupt eine <b>Nullfolge</b> vorliegt! Bei \(\sum(-1)^n\frac{2^n}{n^4}\) gilt \(\frac{2^n}{n^4}\to\infty\) → trotz Alternation <b class="red">divergent</b>.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🗺️ Welches Kriterium wann?</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Du siehst…</th><th>Nimm…</th></tr>
+        <tr><td>\(a_k\) geht nicht gegen 0</td><td>Nullfolgenkriterium → divergent</td></tr>
+        <tr><td>\(k!\) oder \(q^k\) im Term</td><td>Quotientenkriterium</td></tr>
+        <tr><td>Bruch aus Polynomen</td><td>Grenzwertkriterium (Vergleich \(\frac1{k^\alpha}\))</td></tr>
+        <tr><td>einfache Abschätzung möglich</td><td>Majoranten-/Minorantenkriterium</td></tr>
+        <tr><td>\((-1)^k\)-Vorzeichen</td><td>Leibniz (nach Nullfolge-Check)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 4 – Welches Kriterium? Konvergent oder divergent?</div>
+    <div class="ex-intro">Erst mit der Tabelle oben das passende Kriterium wählen, dann anwenden. Lösung antippen für den vollständigen Rechenweg.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.1</div>
+      <div class="ex-text">\( \displaystyle\sum_{n=1}^{\infty}\frac{n}{n+1} \)</div>
+      <div class="hint">Tipp: Liegt überhaupt eine Nullfolge vor?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Vor jedem aufwändigen Kriterium <b>immer zuerst die notwendige Bedingung</b> (Nullfolge) prüfen. Hier:
+        \[ \frac{n}{n+1}=\frac{1}{1+\frac1n}\;\xrightarrow{\,n\to\infty\,}\;\frac{1}{1+0}=1. \]
+        Die Glieder gehen gegen \(1\), <b>nicht</b> gegen \(0\). Damit ist die notwendige Bedingung verletzt, ein endlicher Reihenwert ist unmöglich ⇒ <b class="red">divergent</b> (Nullfolgenkriterium).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.2</div>
+      <div class="ex-text">\( \displaystyle\sum_{k=1}^{\infty}\frac{(k+1)^2}{k!} \)</div>
+      <div class="hint">Tipp: Fakultät → Quotientenkriterium</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Eine Fakultät \(k!\) ist das klassische Signal fürs Quotientenkriterium. Mit \(a_k=\frac{(k+1)^2}{k!}\):
+        \[ \left|\frac{a_{k+1}}{a_k}\right|=\frac{(k+2)^2}{(k+1)!}\cdot\frac{k!}{(k+1)^2}. \]
+        Wegen \((k+1)!=(k+1)\cdot k!\) kürzt sich \(k!\) weg:
+        \[ =\frac{(k+2)^2}{(k+1)\,(k+1)^2}=\frac{(k+2)^2}{(k+1)^3}. \]
+        Zähler wächst wie \(k^2\), Nenner wie \(k^3\), also Grenzwert \(0&lt;1\) ⇒ <b class="green">konvergent</b>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.3</div>
+      <div class="ex-text">\( \displaystyle\sum_{k=1}^{\infty}\frac{k^{2}+1}{k^{3}-1} \)</div>
+      <div class="hint">Tipp: Bruch aus Polynomen → Grenzwertkriterium</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Bei Brüchen aus Polynomen zählen nur die höchsten Potenzen: \(\frac{k^2}{k^3}=\frac1k\). Vergleiche also mit der harmonischen Reihe \(b_k=\frac1k\):
+        \[ \frac{a_k}{b_k}=\frac{k^{2}+1}{k^{3}-1}\cdot k=\frac{k^{3}+k}{k^{3}-1}\;\xrightarrow{\,k\to\infty\,}\;1. \]
+        Der Grenzwert ist endlich und \(&gt;0\), also verhalten sich beide Reihen <b>gleich</b>. Da \(\sum\frac1k\) (harmonisch) divergiert ⇒ <b class="red">divergent</b>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.4</div>
+      <div class="ex-text">\( \displaystyle\sum_{n=1}^{\infty}\frac{(-1)^{n}}{\sqrt{n}} \)</div>
+      <div class="hint">Tipp: alternierend → Leibniz</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Wechselndes Vorzeichen ⇒ Leibniz. Betrachte den Betrag \(a_n=\frac{1}{\sqrt n}\) und prüfe alle <b>drei</b> Bedingungen:
+        <span class="step">(1) \(a_n\ge 0\) ✓</span>
+        <span class="step">(2) monoton fallend: \(\sqrt n\) wächst, also fällt \(\frac{1}{\sqrt n}\) ✓</span>
+        <span class="step">(3) \(a_n=\frac{1}{\sqrt n}\to 0\) ✓</span>
+        Alle erfüllt ⇒ <b class="green">konvergent</b>.<br>
+        Bemerkenswert: \(\sum\frac{1}{\sqrt n}\) (ohne Vorzeichen) ist die \(p\)-Reihe mit \(\alpha=\frac12\le1\) und <b>divergiert</b> — erst das alternierende Vorzeichen erzeugt die Konvergenz.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.5</div>
+      <div class="ex-text">\( \displaystyle\sum_{k=1}^{\infty}\frac{100^{k}}{k!} \)</div>
+      <div class="hint">Tipp: Potenz &amp; Fakultät → Quotientenkriterium</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        \[ \left|\frac{a_{k+1}}{a_k}\right|=\frac{100^{k+1}}{(k+1)!}\cdot\frac{k!}{100^{k}}=\frac{100}{k+1}\;\xrightarrow{\,k\to\infty\,}\;0&lt;1 \]
+        ⇒ <b class="green">konvergent</b>. Merke: die Fakultät \(k!\) wächst schneller als jede feste Potenz \(c^{k}\). Der große Faktor \(100\) wird ab \(k>99\) vom \(k+1\) im Nenner „überholt".
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.6</div>
+      <div class="ex-text">\( \displaystyle\sum_{n=1}^{\infty}(-1)^{n}\frac{2^{n}}{n^{4}} \)</div>
+      <div class="hint">Tipp: naheliegend Leibniz – aber liegt eine Nullfolge vor?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>Falle!</b> Das \((-1)^{n}\) verleitet sofort zu Leibniz. Aber Leibniz verlangt als Erstes eine Nullfolge. Prüfe den Betrag:
+        \[ \frac{2^{n}}{n^{4}}\;\xrightarrow{\,n\to\infty\,}\;\infty, \]
+        denn die Exponentialfunktion \(2^{n}\) schlägt jede feste Potenz \(n^{4}\). Die Glieder gehen also <b>nicht</b> gegen \(0\) ⇒ trotz Alternation <b class="red">divergent</b> (Leibniz gar nicht erst anwendbar).
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 5 ===================== -->
+<div class="module" id="m5">
+  <span class="badge">Modul 5</span>
+  <h2>Potenzreihen</h2>
+  <p class="subtitle">„Polynome vom Grad ∞" und ihr Konvergenzradius</p>
+
+  <div class="card">
+    <div class="card-title">📌 Definition</div>
+    <div class="formula">
+      <div class="flabel">Potenzreihe</div>
+      \[ \sum_{k=0}^{\infty} a_k\,(x-x_0)^{k} = a_0 + a_1(x-x_0) + a_2(x-x_0)^2 + \cdots \]
+      <div class="fnote">\(a_k\) = Koeffizienten, \(x_0\) = Entwicklungspunkt (Mittelpunkt des Konvergenzintervalls).</div>
+    </div>
+    <p>Frage: Für <b>welche \(x\)</b> konvergiert die Reihe? Die Antwort ist ein <b>Intervall</b> um \(x_0\).</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📏 Schritt 1 – Konvergenzradius</div>
+    <div class="formula">
+      <div class="flabel">Konvergenzradius \(r\)</div>
+      \[ r = \lim_{k\to\infty}\left|\frac{a_k}{a_{k+1}}\right| \]
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📐 Schritt 2 – Konvergenzbereich (KB)</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Lage von \(x\)</th><th>Verhalten</th></tr>
+        <tr><td>\(|x-x_0|&lt;r\) (innen)</td><td><b class="green">konvergent</b></td></tr>
+        <tr><td>\(|x-x_0|&gt;r\) (außen)</td><td><b class="red">divergent</b></td></tr>
+        <tr><td>\(x = x_0\pm r\) (Rand)</td><td>einzeln einsetzen &amp; mit Reihenkriterien (Modul 4) prüfen</td></tr>
+      </table>
+    </div>
+    <div class="fnote">Der KB ist also \((x_0-r,\,x_0+r)\) – je nach Randverhalten offen, halboffen oder geschlossen.</div>
+    <div class="tip">💡 Sonderfälle: \(r=0\) → konvergiert nur in \(x=x_0\) (z.&nbsp;B. \(\sum k!\,x^k\)). &nbsp; \(r=\infty\) → konvergiert für alle \(x\) (z.&nbsp;B. \(\sum \frac{x^k}{k!}=e^x\)).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🧮 Mini-Beispiel</div>
+    <div class="ex-block">
+      <div class="ex-lbl">\( \sum_{k=1}^{\infty}\frac{(x-4)^k}{k} \)</div>
+      <span class="step">Koeffizienten \(a_k=\frac1k\). Radius: \(r=\lim\left|\frac{1/k}{1/(k+1)}\right|=\lim\frac{k+1}{k}=1\).</span>
+      <span class="step">Innen \(|x-4|&lt;1\) ⇒ \(3&lt;x&lt;5\) konvergent.</span>
+      <span class="step">Rand \(x=5\): \(\sum\frac1k\) → divergent. &nbsp; Rand \(x=3\): \(\sum\frac{(-1)^k}{k}\) → (Leibniz) konvergent.</span>
+      <span class="step">⇒ KB \(=[3,\,5)\).</span>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übung zu Modul 5 – Konvergenzbereich bestimmen</div>
+    <div class="ex-intro">Rezept: Radius \(r\) berechnen → Intervall \(|x-x_0|&lt;r\) → beide Ränder einzeln einsetzen und mit den Reihenkriterien prüfen.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.1</div>
+      <div class="ex-text">\( \displaystyle\sum_{k=0}^{\infty}\frac{(x-2)^{k}}{3^{k}} \)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Koeffizienten \(a_k=\frac{1}{3^{k}}\), Entwicklungspunkt \(x_0=2\).
+        <span class="step"><b>Radius:</b> \(r=\lim\limits_{k\to\infty}\left|\frac{a_k}{a_{k+1}}\right|=\lim\frac{1/3^{k}}{1/3^{k+1}}=\lim\frac{3^{k+1}}{3^{k}}=3.\)</span>
+        <span class="step"><b>Innen:</b> \(|x-2|&lt;3\) ⇒ \(-1&lt;x&lt;5\) konvergent.</span>
+        <span class="step"><b>Rand \(x=5\):</b> \(\sum\frac{3^{k}}{3^{k}}=\sum 1\) → divergent (keine Nullfolge).</span>
+        <span class="step"><b>Rand \(x=-1\):</b> \(\sum\frac{(-3)^{k}}{3^{k}}=\sum(-1)^{k}\) → divergent (keine Nullfolge).</span>
+        <span class="step">⇒ <b class="green">KB \(=(-1,\,5)\)</b> (beide Ränder offen).</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 6 ===================== -->
+<div class="module" id="m6">
+  <span class="badge">Modul 6 ⭐</span>
+  <h2>Strategie &amp; Klausuraufgaben</h2>
+  <p class="subtitle">Vorgehen + typische Aufgaben mit Lösung</p>
+
+  <div class="card">
+    <div class="card-title">🧭 Entscheidungs-Fahrplan</div>
+    <p class="step"><b>1.</b> Ist \(a_k\) eine <b>Nullfolge</b>? Nein → sofort <b class="red">divergent</b>.</p>
+    <p class="step"><b>2.</b> Ist es eine <b>geometrische Reihe</b> (\(q^k\))? → Wert direkt \(\frac{a_0}{1-q}\) (falls \(|q|<1\)).</p>
+    <p class="step"><b>3.</b> Stecken \(k!\) / Potenzen drin? → <b>Quotientenkriterium</b>.</p>
+    <p class="step"><b>4.</b> Bruch aus Polynomen? → <b>Grenzwertkriterium</b> (vergleiche mit \(\frac1{k^\alpha}\)).</p>
+    <p class="step"><b>5.</b> Alternierend \((-1)^k\)? → <b>Leibniz</b> (nach Nullfolge-Check).</p>
+    <p class="step"><b>6.</b> Sonst: <b>Majorante/Minorante</b> abschätzen.</p>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Gemischte Klausuraufgaben – das richtige Kriterium selbst wählen</div>
+    <div class="ex-intro">Hier steht kein Tipp dabei – wie in der Klausur. Erst mit dem Fahrplan oben entscheiden, dann lösen. (Fragen aus dem Skript.)</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.1</div>
+      <div class="ex-text">Konvergiert \( \displaystyle\sum_{n=1}^{\infty}\frac{100}{n^{2}+2} \)?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        \(n^{2}\) im Nenner → an die \(p\)-Reihe denken und nach oben abschätzen (Majorante):
+        \[ \frac{100}{n^{2}+2}\le\frac{100}{n^{2}}=100\cdot\frac{1}{n^{2}}. \]
+        Die Vergleichsreihe \(\sum\frac{1}{n^{2}}\) ist die allgemeine harmonische Reihe mit \(\alpha=2&gt;1\) → konvergent. Eine konvergente Majorante ⇒ <b class="green">konvergent</b>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.2</div>
+      <div class="ex-text">Konvergiert \( \displaystyle\sum_{n=1}^{\infty}\frac{\ln n}{n} \)?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Vorsicht: \(\frac{\ln n}{n}\to 0\) ist zwar eine Nullfolge, das beweist aber noch nichts (siehe harmonische Reihe). Nach unten abschätzen: für \(n\ge 3\) ist \(\ln n\ge 1\), also
+        \[ \frac{\ln n}{n}\ge\frac{1}{n}. \]
+        Das ist eine <b>Minorante</b>: \(\sum\frac1n\) divergiert und unsere Glieder sind noch größer ⇒ <b class="red">divergent</b> (Minorantenkriterium).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.3</div>
+      <div class="ex-text">Konvergiert \( \displaystyle\sum_{n=1}^{\infty}\frac{n^{2}}{3^{n}} \)?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Potenz \(3^{n}\) im Nenner → Quotientenkriterium.
+        \[ \left|\frac{a_{n+1}}{a_n}\right|=\frac{(n+1)^{2}}{3^{n+1}}\cdot\frac{3^{n}}{n^{2}}=\frac13\cdot\left(\frac{n+1}{n}\right)^{2}\;\xrightarrow{\,n\to\infty\,}\;\frac13\cdot 1=\frac13&lt;1 \]
+        ⇒ <b class="green">konvergent</b>. Der Faktor \(\frac13\) (aus \(3^{n}\)) gewinnt klar gegen den polynomialen Anteil \(\left(\frac{n+1}{n}\right)^{2}\to 1\).
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+function show(id){
+  var mod = document.getElementById(id);
+  if(mod) mod.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function tog(btn){
+  var s=btn.nextElementSibling;
+  if(s.classList.contains('open')){s.classList.remove('open');btn.textContent='👁 Lösung';}
+  else{s.classList.add('open');btn.textContent='🙈 Ausblenden';}
+}
+// All modules stay visible & scrollable; the sticky tab bar is a quick-jump
+// nav and the active tab follows the module currently in view.
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var mods=[].slice.call(document.querySelectorAll('.module'));
+  if(!('IntersectionObserver' in window)||!mods.length) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-m')===e.target.id); });
+    });
+  },{rootMargin:'-58px 0px -65% 0px',threshold:0});
+  mods.forEach(function(m){io.observe(m);});
+})();
+</script>
+</body>
+</html>

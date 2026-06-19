@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mathe 2 – Übersicht</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16243f;font-size:15px;line-height:1.55;min-height:100vh;display:flex;flex-direction:column}
+.header{background:linear-gradient(135deg,#10233f,#0d6e75);color:#fff;padding:30px 20px;text-align:center}
+.header h1{font-size:1.55rem;font-weight:800}
+.header p{font-size:.85rem;opacity:.85;margin-top:6px}
+.header .author{font-size:.78rem;opacity:.7;margin-top:10px}
+.page{max-width:920px;width:100%;margin:0 auto;padding:24px 16px 50px;flex:1}
+.intro{font-size:.9rem;color:#5b6b85;margin-bottom:20px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.card{display:block;text-decoration:none;color:inherit;background:#fff;border-radius:12px;padding:18px;box-shadow:0 1px 5px rgba(16,35,63,.10);border:1px solid transparent;transition:transform .15s,box-shadow .15s,border-color .15s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(16,35,63,.16);border-color:#99f6e4}
+.card .num{font-size:.72rem;font-weight:800;color:#0d9488;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.card .ttl{font-size:1.05rem;font-weight:800;color:#10233f;margin-bottom:6px}
+.card .desc{font-size:.8rem;color:#5b6b85;min-height:34px}
+.card .tag{display:inline-block;margin-top:10px;font-size:.66rem;font-weight:800;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
+.tag.html{background:#ccfbf1;color:#0f766e}
+.tag.pdf{background:#fef3c7;color:#92400e}
+.card .icon{position:absolute;top:14px;right:16px;font-size:1.3rem;opacity:.85}
+.title-link{text-decoration:none;color:inherit;display:block}
+.title-link:hover .ttl{color:#0d9488}
+.btn-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.btn{flex:1 1 auto;text-align:center;text-decoration:none;font-size:.72rem;font-weight:800;padding:7px 8px;border-radius:8px;background:#f0fdfa;border:1.5px solid #99f6e4;color:#0f766e;transition:background .15s,color .15s;white-space:nowrap}
+.btn:hover{background:#0d9488;color:#fff;border-color:#0d9488}
+.btn.pa{background:#fff7ed;border-color:#fdba74;color:#c2410c}
+.btn.pa:hover{background:#c2410c;color:#fff;border-color:#c2410c}
+.btn.ueb{background:#f5f3ff;border-color:#c4b5fd;color:#6d28d9}
+.btn.ueb:hover{background:#6d28d9;color:#fff;border-color:#6d28d9}
+.footer{background:#10233f;color:rgba(255,255,255,.7);text-align:center;padding:18px 20px;font-size:.78rem}
+.footer b{color:#2dd4bf}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📚 Mathematik 2 – Klausurvorbereitung</h1>
+  <p>Hochschule Offenburg · Angewandte Informatik · SS 2026 · Decker, Altenberend, Kreilos</p>
+  <p class="author">Zusammengestellt von Soleyman Sakha</p>
+</div>
+
+<div class="page">
+  <p class="intro">Wähle ein Thema. Themen mit dem Symbol ✅ haben eine ausführliche, interaktive Zusammenfassung – die übrigen verlinken direkt auf das Skript-PDF.</p>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="icon">📐</span>
+      <a class="title-link" href="mathe_kombinatorik1.html">
+        <div class="num">Thema 1 &amp; 2</div>
+        <div class="ttl">Kombinatorik</div>
+        <div class="desc">Zählprinzipien, Permutationen, Variationen &amp; Kombinationen (Thema 1 und 2 teilen sich das Skript).</div>
+        <span class="tag html">✅ Zusammenfassung</span>
+      </a>
+      <div class="btn-row">
+        <a class="btn" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-01-Skript-Kombinatorik.pdf">📖 Skript</a>
+        <a class="btn ueb" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-01-Üb-Kombinatorik.pdf">✏️ Übung</a>
+      </div>
+      <div class="btn-row">
+        <a class="btn pa" href="../Mathe Unterlagen/Mathematik 2 - PA-Blaetter/Mathe2-01-PA.pdf">📝 PA 01</a>
+        <a class="btn pa" href="../Mathe Unterlagen/Mathematik 2 - PA-Blaetter/Mathe2-02-PA.pdf">📝 PA 02</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="icon">📈</span>
+      <a class="title-link" href="folgen3.html">
+        <div class="num">Thema 3</div>
+        <div class="ttl">Folgen</div>
+        <div class="desc">Grundbegriffe, Monotonie, Schranken, Konvergenz und Wachstum.</div>
+        <span class="tag html">✅ Zusammenfassung</span>
+      </a>
+      <div class="btn-row">
+        <a class="btn" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-03-Skript-Folgen (1).pdf">📖 Skript</a>
+        <a class="btn pa" href="../Mathe Unterlagen/Mathematik 2 - PA-Blaetter/Mathe2-03-PA-Folgen.pdf">📝 PA-Anteil</a>
+        <a class="btn ueb" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-03-Üb-Folgen.pdf">✏️ Übung</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="icon">➕</span>
+      <a class="title-link" href="reihen4.html">
+        <div class="num">Thema 4</div>
+        <div class="ttl">Reihen</div>
+        <div class="desc">Partialsummen, geometrische Reihe, Konvergenzkriterien und Potenzreihen.</div>
+        <span class="tag html">✅ Zusammenfassung</span>
+      </a>
+      <div class="btn-row">
+        <a class="btn" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-04-Skript-Reihen.pdf">📖 Skript</a>
+        <a class="btn pa" href="../Mathe Unterlagen/Mathematik 2 - PA-Blaetter/Mathe2-04-PA-Reihen.pdf">📝 PA-Anteil</a>
+        <a class="btn ueb" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-04-Üb-Reihen.pdf">✏️ Übung</a>
+      </div>
+    </div>
+
+    <a class="card" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-05-Skript-Grenzwerte-Stetigkeit.pdf">
+      <span class="icon">📉</span>
+      <div class="num">Thema 5</div>
+      <div class="ttl">Grenzwerte &amp; Stetigkeit</div>
+      <div class="desc">Grenzwerte von Funktionen, Stetigkeit und ihre Eigenschaften.</div>
+      <span class="tag pdf">📄 Skript-PDF</span>
+    </a>
+
+    <a class="card" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-06-Skript-Ableitung.pdf">
+      <span class="icon">📐</span>
+      <div class="num">Thema 6</div>
+      <div class="ttl">Ableitung</div>
+      <div class="desc">Differentialrechnung in einer Variablen, Ableitungsregeln.</div>
+      <span class="tag pdf">📄 Skript-PDF</span>
+    </a>
+
+    <a class="card" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-06-Skript-Ableitung.pdf">
+      <span class="icon">🎯</span>
+      <div class="num">Thema 7</div>
+      <div class="ttl">Extremwerte &amp; Optimierung</div>
+      <div class="desc">Lokale Extrema, Kurvendiskussion und Optimierungsaufgaben (Skript 06).</div>
+      <span class="tag pdf">📄 Skript-PDF</span>
+    </a>
+
+    <a class="card" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-08-Skript-Mehrdimensionale-Differentialrechnung.pdf">
+      <span class="icon">🧊</span>
+      <div class="num">Thema 8</div>
+      <div class="ttl">Mehrdim. Differentialrechnung</div>
+      <div class="desc">Partielle Ableitungen, Gradient und totales Differential.</div>
+      <span class="tag pdf">📄 Skript-PDF</span>
+    </a>
+
+    <a class="card" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-08-Skript-Mehrdimensionale-Differentialrechnung.pdf">
+      <span class="icon">⛰️</span>
+      <div class="num">Thema 9</div>
+      <div class="ttl">Mehrdim. Extrema &amp; Lagrange</div>
+      <div class="desc">Lokale Extrema, Sattelpunkte und Lagrange-Multiplikatoren (Skript 08).</div>
+      <span class="tag pdf">📄 Skript-PDF</span>
+    </a>
+
+    <a class="card" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-10-Skript-Approximationen.pdf">
+      <span class="icon">〰️</span>
+      <div class="num">Thema 10</div>
+      <div class="ttl">Approximationen</div>
+      <div class="desc">Taylor-Polynome, Linearisierung und Fehlerabschätzung.</div>
+      <span class="tag pdf">📄 Skript-PDF</span>
+    </a>
+
+    <a class="card" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-11-Skript-Integralrechnung.pdf">
+      <span class="icon">∫</span>
+      <div class="num">Thema 11</div>
+      <div class="ttl">Integralrechnung</div>
+      <div class="desc">Bestimmtes &amp; unbestimmtes Integral, Hauptsatz der Analysis.</div>
+      <span class="tag pdf">📄 Skript-PDF</span>
+    </a>
+
+    <a class="card" href="../Mathe Unterlagen/Skript und Übungen/Mathe2-12-Skript-Integrationstechniken.pdf">
+      <span class="icon">🔧</span>
+      <div class="num">Thema 12</div>
+      <div class="ttl">Integrationstechniken</div>
+      <div class="desc">Substitution, partielle Integration und Partialbruchzerlegung.</div>
+      <span class="tag pdf">📄 Skript-PDF</span>
+    </a>
+
+  </div>
+</div>
+
+<div class="footer">
+  © 2026 · Mathe 2 Lernseite · erstellt von <b>Soleyman Sakha</b>
+</div>
+
+</body>
+</html>
