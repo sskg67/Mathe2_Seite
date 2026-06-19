@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grenzwerte &amp; Stetigkeit – Klausurvorbereitung</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" async></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16243f;font-size:15px;line-height:1.55}
+.header{background:linear-gradient(135deg,#10233f,#0d6e75);color:#fff;padding:18px 20px;text-align:center}
+.header h1{font-size:1.3rem;font-weight:800}
+.header p{font-size:.8rem;opacity:.85;margin-top:3px}
+.tabs{display:flex;background:#10233f;overflow-x:auto;padding:0 6px;scrollbar-width:none;gap:2px;position:sticky;top:0;z-index:20}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:10px 13px;color:rgba(255,255,255,.55);border:none;background:none;cursor:pointer;font-size:.74rem;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent;transition:color .2s}
+.tab:hover{color:rgba(255,255,255,.85)}
+.tab.active{color:#2dd4bf;border-bottom-color:#2dd4bf}
+.page{max-width:820px;margin:0 auto;padding:18px 14px 60px}
+.module{display:block;padding-top:20px;border-top:1px solid #d7deea;margin-top:20px;scroll-margin-top:58px}
+.module:first-of-type{border-top:none;margin-top:0;padding-top:6px}
+.badge{display:inline-block;background:#ccfbf1;color:#0f766e;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:20px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+h2{font-size:1.32rem;font-weight:800;color:#10233f}
+.subtitle{color:#5b6b85;font-size:.85rem;margin:3px 0 16px}
+.card{background:#fff;border-radius:12px;padding:18px;margin-bottom:14px;box-shadow:0 1px 5px rgba(16,35,63,.10)}
+.card-title{font-size:.82rem;font-weight:800;color:#10233f;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em}
+.formula{background:#f0fdfa;border:1.5px solid #99f6e4;border-radius:8px;padding:12px 16px;margin:10px 0}
+.flabel{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#0d9488;margin-bottom:6px}
+.fnote{font-size:.8rem;color:#0d9488;margin-top:6px}
+.ex-block{background:#f0f7ff;border-left:3px solid #2563eb;border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:.9rem}
+.ex-lbl{font-size:.68rem;font-weight:800;text-transform:uppercase;color:#1d4ed8;margin-bottom:6px;letter-spacing:.05em}
+.step{display:block;margin:4px 0 4px 6px;color:#1e3a8a}
+.tip{background:#fffbeb;border:1px dashed #f59e0b;border-radius:8px;padding:10px 14px;font-size:.84rem;margin:10px 0;color:#78350f}
+.warn{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:.84rem;margin:10px 0;color:#991b1b}
+.exercises{background:#f5f3ff;border:1.5px solid #c4b5fd;border-radius:12px;padding:18px;margin-top:20px}
+.ex-header{font-size:.82rem;font-weight:800;color:#6d28d9;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.ex-intro{font-size:.79rem;color:#7c3aed;margin-bottom:14px}
+.ex-item{background:#fff;border-radius:8px;padding:13px 15px;margin-bottom:10px;border:1px solid #ede9fe}
+.ex-num{font-size:.68rem;font-weight:800;color:#7c3aed;text-transform:uppercase;margin-bottom:5px;letter-spacing:.05em}
+.ex-text{font-size:.9rem}
+.hint{font-size:.78rem;color:#0d9488;margin-top:7px;font-style:italic}
+.sol-btn{margin-top:10px;padding:5px 13px;background:none;border:1.5px solid #8b5cf6;color:#6d28d9;border-radius:20px;cursor:pointer;font-size:.76rem;font-weight:700;transition:all .2s}
+.sol-btn:hover{background:#6d28d9;color:#fff}
+.sol{display:none;margin-top:10px;background:#faf5ff;border-radius:6px;padding:10px 13px;font-size:.86rem;border-left:3px solid #7c3aed}
+.sol.open{display:block}
+.sol .step{color:#4c1d95}
+.table-wrap{overflow-x:auto;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+th{background:#10233f;color:#fff;padding:9px 12px;text-align:left;font-weight:700}
+td{padding:9px 12px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.graph{display:block;margin:10px auto 2px;max-width:100%}
+.caption{text-align:center;font-size:.78rem;color:#5b6b85;margin-top:2px;margin-bottom:6px}
+.klausur{background:#fff7ed;border:2px solid #fb923c;border-radius:12px;padding:16px;margin-bottom:12px}
+.klausur .pts{float:right;font-size:.72rem;font-weight:800;color:#c2410c;background:#ffedd5;padding:2px 9px;border-radius:12px}
+.klausur-tag{font-size:.68rem;font-weight:800;color:#c2410c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+code{background:#eef2f7;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.88em}
+b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
+.backbar{max-width:820px;margin:0 auto;padding:14px 14px 0}
+.back{display:inline-block;padding:6px 14px;font-size:.76rem;font-weight:700;color:#10233f;background:#fff;border:1.5px solid #cbd5e1;border-radius:20px;text-decoration:none;transition:all .15s}
+.back:hover{background:#10233f;color:#fff;border-color:#10233f}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📉 Grenzwerte &amp; Stetigkeit – Klausurzusammenfassung</h1>
+  <p>Mathe 2 · Hochschule Offenburg · SS 2026 · Decker, Altenberend, Kreilos · Kapitel 5</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-m="m1" onclick="show('m1')">M1: Grundbegriffe</button>
+  <button class="tab" data-m="m2" onclick="show('m2')">M2: GW bei x→±∞ ⭐</button>
+  <button class="tab" data-m="m3" onclick="show('m3')">M3: Einseitige GW</button>
+  <button class="tab" data-m="m4" onclick="show('m4')">M4: Stetigkeit ⭐</button>
+  <button class="tab" data-m="m5" onclick="show('m5')">M5: Zwischenwertsatz</button>
+  <button class="tab" data-m="m6" onclick="show('m6')">M6: Strategie &amp; Klausur ⭐</button>
+</div>
+
+<div class="backbar"><a class="back" href="index.html">← Zur Übersicht</a></div>
+
+<div class="page">
+
+<!-- ===================== MODUL 1 ===================== -->
+<div class="module active" id="m1">
+  <span class="badge">Modul 1</span>
+  <h2>Grenzwerte – Grundbegriffe</h2>
+  <p class="subtitle">Was bedeutet \(\lim\) bei einer Funktion?</p>
+
+  <div class="card">
+    <div class="card-title">📌 Idee des Grenzwerts</div>
+    <p>Ein <b class="green">Grenzwert</b> beschreibt, welchem Wert \(f(x)\) <b>beliebig nahe</b> kommt, wenn \(x\) sich einer Stelle nähert (oder gegen \(\pm\infty\) läuft) – auch dort, wo \(f\) selbst gar nicht definiert ist.</p>
+    <div class="formula">
+      <div class="flabel">Schreibweisen</div>
+      \[ \lim_{x\to a} f(x) = L \qquad\text{oder}\qquad f(x)\to L \ \ (\text{für } x\to a) \]
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Einführungsbeispiel</div>
+      \(f(x)=\dfrac{\sin x}{x}\) ist bei \(x=0\) <b>nicht</b> definiert (\(\tfrac00\)). Trotzdem nähern sich die Werte einem festen Wert:
+      \[ \lim_{x\to 0}\frac{\sin x}{x} = 1. \]
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📈 Grenzwert bei \(x\to\infty\)</div>
+    <svg class="graph" viewBox="0 0 560 250" width="560" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="210" x2="545" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="62" y1="20" x2="62" y2="225" stroke="#94a3b8" stroke-width="1.5"/>
+      <polygon points="545,210 536,206 536,214" fill="#94a3b8"/>
+      <polygon points="62,20 58,29 66,29" fill="#94a3b8"/>
+      <line x1="62" y1="120" x2="545" y2="120" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text x="500" y="113" fill="#dc2626" font-size="13" font-weight="700">y = a</text>
+      <path d="M 82 48 C 190 108, 320 117, 545 119" fill="none" stroke="#0d9488" stroke-width="2.6"/>
+      <text x="529" y="226" fill="#5b6b85" font-size="13">x</text>
+      <text x="68" y="32" fill="#5b6b85" font-size="13">y</text>
+    </svg>
+    <div class="caption">Für \(x\to\infty\) schmiegt sich \(f(x)\) an die waagrechte Asymptote \(y=a\) an: \(\lim_{x\to\infty}f(x)=a\).</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Verhalten für \(x\to\infty\)</th><th>Bedeutung</th></tr>
+        <tr><td>\(\lim f(x)=a\in\mathbb{R}\)</td><td><b class="green">konvergent</b> gegen \(a\) (waagrechte Asymptote)</td></tr>
+        <tr><td>\(\lim f(x)=\pm\infty\)</td><td>„bestimmt divergent" (uneigentlicher GW)</td></tr>
+        <tr><td>GW existiert nicht</td><td><b class="red">divergent</b> (z.&nbsp;B. \(\sin x\) pendelt)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚠️ Häufiger Denkfehler</div>
+    <div class="warn">„Wenn \(x\) wächst, kommt \(\tfrac1x\) näher an \(0\), also ist \(\lim_{x\to 100}\tfrac1x=0\)." — <b>Falsch!</b> Bei \(x\to 100\) ist die Funktion stetig, man setzt einfach ein: \(\lim_{x\to100}\tfrac1x=\tfrac1{100}=0{,}01\). Nur bei \(x\to\infty\) gilt \(\tfrac1x\to 0\).</div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 1 – Grenzwert-Verständnis</div>
+    <div class="ex-intro">Lösung antippen.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.1</div>
+      <div class="ex-text">Bestimme \( \displaystyle\lim_{x\to\infty}\frac1x \) und \( \displaystyle\lim_{x\to 100}\frac1x \).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>\(x\to\infty\):</b> der Nenner wächst unbegrenzt, also \(\frac1x\to \mathbf{0}\) (waagrechte Asymptote \(y=0\)).</span>
+        <span class="step"><b>\(x\to 100\):</b> hier ist \(\frac1x\) stetig (kein Problem bei \(100\)) → einfach einsetzen: \(\frac{1}{100}=\mathbf{0{,}01}\).</span>
+        Merke: „Grenzwert an einer harmlosen Stelle" = Funktionswert einsetzen. Nur Ränder/Lücken brauchen echte GW-Überlegung.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.2</div>
+      <div class="ex-text">Wahr oder falsch: \(\lim_{x\to a}f(x)=K\) heißt, je näher \(x\) bei \(a\), desto näher ist \(f(x)\) bei \(K\) — und zwar <i>immer</i> monoton.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>Falsch.</b> Der GW verlangt nur, dass \(f(x)\) <b>beliebig nahe</b> an \(K\) kommt — nicht, dass die Annäherung monoton (immer „näher") verläuft. Beispiel \(f(x)=x\sin\frac1x\) zappelt um \(0\) und konvergiert trotzdem gegen \(0\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.3</div>
+      <div class="ex-text">Du setzt \(x=0{,}1;\,0{,}01;\,0{,}001;\dots\) ein und bekommst stets \(f(x)=0\). Weißt du damit sicher, dass \(\lim_{x\to0}f(x)=0\)?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>Nein!</b> Eine einzelne Folge \(x_n=\frac{1}{10^n}\to 0\) reicht nicht — der GW verlangt, dass <b>jede</b> Folge \(x_n\to 0\) denselben Wert liefert. Andere Folgen könnten etwas anderes ergeben. (Genau dieses Folgen-Argument zeigt später, dass z.&nbsp;B. \(\sin\frac1x\) bei \(0\) keinen GW hat.)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 2 ===================== -->
+<div class="module" id="m2">
+  <span class="badge">Modul 2 ⭐</span>
+  <h2>Grenzwerte bei \(x\to\pm\infty\) berechnen</h2>
+  <p class="subtitle">Polynome, gebrochen-rationale Funktionen, Exp/Log-Hierarchie</p>
+
+  <div class="card">
+    <div class="card-title">1️⃣ Polynome → höchste Potenz entscheidet</div>
+    <p>Für \(x\to\pm\infty\) dominiert die <b>höchste Potenz</b> alle anderen Terme. Man darf auf sie verkürzen:</p>
+    <div class="formula">
+      \[ \lim_{x\to\pm\infty}\big(a_p x^{p}+\cdots+a_1x+a_0\big) = \lim_{x\to\pm\infty} a_p x^{p}. \]
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel</div>
+      \(\lim_{x\to\infty}(-5x^3+6x^2-7x+8) = \lim_{x\to\infty}(-5x^3) = -\infty\). Für \(x\to-\infty\): \((-5)\cdot(-\infty)^3 = +\infty\).
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">2️⃣ Gebrochen-rational → Grade vergleichen</div>
+    <p>Bei \(\frac{\text{Polynom}}{\text{Polynom}}\) zählen nur die höchsten Potenzen von Zähler (Grad \(z\)) und Nenner (Grad \(n\)):</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Vergleich</th><th>Grenzwert für \(x\to\pm\infty\)</th></tr>
+        <tr><td>\(z &lt; n\) (echt gebrochen)</td><td><b class="green">\(0\)</b></td></tr>
+        <tr><td>\(z = n\)</td><td>Quotient der <b>Leitkoeffizienten</b></td></tr>
+        <tr><td>\(z &gt; n\)</td><td>\(\pm\infty\) (wie das verkürzte Potenz­verhältnis)</td></tr>
+      </table>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiele</div>
+      <span class="step">\(\lim_{x\to\infty}\dfrac{-5x^3+6x^2-7x+8}{2x^3+3x+1} = \dfrac{-5x^3}{2x^3} = -\tfrac52 = -2{,}5\) &nbsp;(\(z=n\)).</span>
+      <span class="step">\(\lim_{x\to\infty}\dfrac{-5x^3+\dots}{2x^4+\dots} = 0\) &nbsp;(\(z&lt;n\)).</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">3️⃣ Exp- &amp; Log-Hierarchie</div>
+    <p>Bei Mischungen aus Exponential, Potenz und Logarithmus gilt für \(x\to\infty\) die Schnelligkeits-Reihenfolge:</p>
+    <div class="formula">
+      \[ \ln x \;\ll\; x^{p} \;\ll\; e^{x} \qquad(p&gt;0) \]
+      <div class="fnote">Der schnellere Term „gewinnt". So geht z.&nbsp;B. \((2-10t)\,e^{-3t}\to 0\) für \(t\to\infty\) (das \(e^{-3t}\) drückt das Polynom auf \(0\)).</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Grenzwert</th><th>Ergebnis</th><th>warum</th></tr>
+        <tr><td>\(\lim_{x\to\infty}e^{x}\)</td><td>\(+\infty\)</td><td>—</td></tr>
+        <tr><td>\(\lim_{x\to-\infty}e^{x}\)</td><td>\(0\)</td><td>\(e^{-\infty}=\frac{1}{e^{\infty}}\)</td></tr>
+        <tr><td>\(\lim_{x\to\infty}x\,\ln x\)</td><td>\(+\infty\)</td><td>beide \(\to\infty\)</td></tr>
+        <tr><td>\(\lim_{x\to\infty}\frac{\ln x}{x}\)</td><td>\(0\)</td><td>\(x\) schlägt \(\ln x\)</td></tr>
+        <tr><td>\(\lim_{x\to\infty}\frac{\sin x}{x}\)</td><td>\(0\)</td><td>beschränkt \(/\,\infty\)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚫 Unbestimmte Ausdrücke</div>
+    <p>Sobald beim Einsetzen etwas wie \(\frac00,\ \frac{\infty}{\infty},\ 0\cdot\infty,\ \infty-\infty\) entsteht, ist das Ergebnis <b>nicht</b> sofort klar – erst umformen (kürzen, ausklammern)!</p>
+    <div class="warn">⚠️ „\(\infty-\infty\)" ist <b>nicht</b> automatisch \(0\): \(\lim(x^2-x)=+\infty\), aber \(\lim(x-x^2)=-\infty\) und \(\lim(x^2-x^2)=0\). (de l'Hospital kommt erst in Kapitel 6.)</div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 2 – GW bei \(x\to\pm\infty\)</div>
+    <div class="ex-intro">Erst Typ erkennen (Polynom / gebrochen-rational / Exp-Log), dann verkürzen.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.1</div>
+      <div class="ex-text">\( \displaystyle\lim_{x\to+\infty}(2x-5x^3+7x^2) \) und \( \displaystyle\lim_{x\to-\infty}(\dots) \).</div>
+      <div class="hint">Tipp: höchste Potenz</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Höchste Potenz ist \(-5x^3\), nur sie zählt:
+        <span class="step"><b>\(x\to+\infty\):</b> \(-5x^3\to -5\cdot(+\infty)=\mathbf{-\infty}\).</span>
+        <span class="step"><b>\(x\to-\infty\):</b> \(-5x^3\to -5\cdot(-\infty)=\mathbf{+\infty}\).</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.2</div>
+      <div class="ex-text">\( \displaystyle\lim_{x\to\infty}\frac{2-3x-4x^3}{6x^3-5x^2+1} \)</div>
+      <div class="hint">Tipp: Grade vergleichen</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Zählergrad \(=\) Nennergrad \(=3\) → Quotient der Leitkoeffizienten:
+        \[ \frac{-4x^3}{6x^3} = -\frac{4}{6} = \mathbf{-\frac23}. \]
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.3</div>
+      <div class="ex-text">\( \displaystyle\lim_{x\to\infty}\frac{6x^2-5x}{2x^2+3} \)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Gleicher Grad \(2\) → Leitkoeffizienten: \(\dfrac{6x^2}{2x^2}=\mathbf{3}\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.4</div>
+      <div class="ex-text">\( \displaystyle\lim_{t\to\infty}(2-10t)\,e^{-3t} \)</div>
+      <div class="hint">Tipp: Wer gewinnt – Polynom oder \(e^{-3t}\)?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Schreibe \(e^{-3t}=\frac{1}{e^{3t}}\). Das Polynom \((2-10t)\to-\infty\), aber \(e^{3t}\to\infty\) <b>viel schneller</b> (Exponential schlägt Potenz). Der Quotient geht daher gegen \(\mathbf{0}\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.5</div>
+      <div class="ex-text">\( \displaystyle\lim_{x\to\infty}\frac{\ln x}{x} \) und \( \displaystyle\lim_{x\to 0^{+}} x\ln x \).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>\(\frac{\ln x}{x}\):</b> \(x\) wächst schneller als \(\ln x\) ⇒ \(\to \mathbf{0}\).</span>
+        <span class="step"><b>\(x\ln x\) bei \(x\to0^{+}\):</b> Typ \(0\cdot(-\infty)\) (unbestimmt). Auch hier „gewinnt" das \(x\): der Ausdruck \(\to \mathbf{0}\).</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 3 ===================== -->
+<div class="module" id="m3">
+  <span class="badge">Modul 3</span>
+  <h2>Einseitige Grenzwerte &amp; innere Stellen</h2>
+  <p class="subtitle">Links- vs. rechtsseitig, Sprung, Polstelle</p>
+
+  <div class="card">
+    <div class="card-title">↔️ Links- und rechtsseitiger Grenzwert</div>
+    <div class="formula">
+      <div class="flabel">von rechts / von links</div>
+      \[ \lim_{x\to x_0^{+}} f(x)=a \qquad\qquad \lim_{x\to x_0^{-}} f(x)=b \]
+    </div>
+    <div class="formula">
+      <div class="flabel">„Der" Grenzwert existiert nur, wenn beide gleich sind</div>
+      \[ \lim_{x\to x_0} f(x) \text{ existiert} \iff \lim_{x\to x_0^{-}}f(x)=\lim_{x\to x_0^{+}}f(x). \]
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🪜 Sprungstelle (endliche, verschiedene GWe)</div>
+    <svg class="graph" viewBox="0 0 560 250" width="560" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="210" x2="545" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="300" y1="20" x2="300" y2="225" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="5 4"/>
+      <polygon points="545,210 536,206 536,214" fill="#94a3b8"/>
+      <!-- left branch approaching high value b -->
+      <path d="M 70 150 C 150 150, 240 152, 296 152" fill="none" stroke="#0d9488" stroke-width="2.6"/>
+      <!-- right branch at low value a -->
+      <path d="M 304 80 C 380 80, 470 78, 540 78" fill="none" stroke="#0d9488" stroke-width="2.6"/>
+      <circle cx="298" cy="152" r="6" fill="#fff" stroke="#0d9488" stroke-width="2.5"/>
+      <circle cx="302" cy="80" r="6" fill="#0d9488"/>
+      <text x="300" y="240" fill="#5b6b85" font-size="12" text-anchor="middle">x₀</text>
+      <text x="120" y="142" fill="#0d9488" font-size="12" font-weight="700">links-GW b</text>
+      <text x="400" y="70" fill="#0d9488" font-size="12" font-weight="700">rechts-GW a</text>
+    </svg>
+    <div class="caption">Beide einseitigen GWe sind endlich, aber \(a\neq b\) ⇒ kein gemeinsamer GW ⇒ <b>Sprungstelle</b>. Typisch bei abschnittweise definierten Funktionen.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📛 Polstelle (mindestens ein GW \(=\pm\infty\))</div>
+    <svg class="graph" viewBox="0 0 560 250" width="560" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="120" x2="545" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="300" y1="15" x2="300" y2="235" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="6 5"/>
+      <path d="M 90 118 C 200 112, 270 90, 292 25" fill="none" stroke="#0d9488" stroke-width="2.6"/>
+      <path d="M 308 230 C 330 165, 400 128, 520 122" fill="none" stroke="#0d9488" stroke-width="2.6"/>
+      <text x="300" y="248" fill="#dc2626" font-size="12" text-anchor="middle">Polstelle x₀</text>
+      <text x="120" y="105" fill="#0d9488" font-size="12" font-weight="700">→ +∞</text>
+      <text x="430" y="145" fill="#0d9488" font-size="12" font-weight="700">→ −∞ (von rechts)</text>
+    </svg>
+    <div class="caption">Beispiel \(\tfrac1x\) bei \(x_0=0\): linksseitig \(\to-\infty\), rechtsseitig \(\to+\infty\). Senkrechte Asymptote = <b>Polstelle</b>.</div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 3 – Einseitige Grenzwerte</div>
+    <div class="ex-intro">Immer beide Seiten getrennt betrachten!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.1</div>
+      <div class="ex-text">Untersuche die Signumfunktion \( \operatorname{sgn}(x) \) bei \(x_0=0\): existieren links-/rechtsseitiger GW? Existiert der GW?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>rechts</b> (\(x&gt;0\)): \(\operatorname{sgn}(x)=1\) ⇒ \(\lim_{x\to0^{+}}=+1\) (existiert).</span>
+        <span class="step"><b>links</b> (\(x&lt;0\)): \(\operatorname{sgn}(x)=-1\) ⇒ \(\lim_{x\to0^{-}}=-1\) (existiert).</span>
+        <span class="step">Beide endlich, aber \(+1\neq-1\) ⇒ <b>der</b> GW \(\lim_{x\to0}\operatorname{sgn}(x)\) existiert <b class="red">nicht</b> (Sprungstelle).</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.2</div>
+      <div class="ex-text">Bestimme \( \displaystyle\lim_{x\to 0^{-}}\frac1x \) und \( \displaystyle\lim_{x\to 0^{+}}\frac1x \). Welche Art Stelle?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>von rechts</b> (\(x=0{,}1;\,0{,}01;\dots\)): \(\frac1x\to +\infty\).</span>
+        <span class="step"><b>von links</b> (\(x=-0{,}1;\,-0{,}01;\dots\)): \(\frac1x\to -\infty\).</span>
+        <span class="step">Mindestens ein einseitiger GW ist \(\pm\infty\) ⇒ <b>Polstelle</b> (senkrechte Asymptote bei \(x=0\)).</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.3</div>
+      <div class="ex-text">\( f(x)=\dfrac{x^2+4x+3}{x^2+1} \). Berechne \( \displaystyle\lim_{x\to -1}f(x) \).</div>
+      <div class="hint">Tipp: ist die Stelle überhaupt kritisch?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Der Nenner \(x^2+1\) ist bei \(x=-1\) gleich \(2\neq 0\) ⇒ <b>keine</b> kritische Stelle, \(f\) ist dort stetig. Einfach einsetzen:
+        \[ \frac{(-1)^2+4(-1)+3}{(-1)^2+1} = \frac{1-4+3}{2} = \frac{0}{2} = \mathbf{0}. \]
+        (Links- und rechtsseitiger GW sind beide \(0\).)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 4 ===================== -->
+<div class="module" id="m4">
+  <span class="badge">Modul 4 ⭐</span>
+  <h2>Stetigkeit</h2>
+  <p class="subtitle">„Ohne Absetzen zeichenbar" – und wie man es prüft</p>
+
+  <div class="card">
+    <div class="card-title">📌 Definition</div>
+    <p>\(f\) heißt <b class="green">stetig</b> an der Stelle \(x_0\), wenn alle drei Dinge zusammenpassen:</p>
+    <div class="formula">
+      \[ \underbrace{\lim_{x\to x_0^{-}}f(x)}_{\text{links}} = \underbrace{\lim_{x\to x_0^{+}}f(x)}_{\text{rechts}} = \underbrace{f(x_0)}_{\text{Funktionswert}} \]
+      <div class="fnote">Anschaulich: keine Lücke, kein Sprung, kein Pol. Der GW existiert <b>und</b> trifft den Funktionswert.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🧩 Zusammengesetzte Funktionen</div>
+    <p>Die <b>Grundfunktionen</b> (Polynome, \(e^x\), \(\ln\), \(\sin\), \(\cos\), \(\sqrt{\ }\), …) sind auf ihrem Definitionsbereich stetig. Daraus folgt:</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Operation</th><th>stetig?</th></tr>
+        <tr><td>Summe, Differenz, Produkt, Potenz</td><td>✅ stetig</td></tr>
+        <tr><td>Quotient</td><td>✅ stetig, <b>solange Nenner \(\neq 0\)</b></td></tr>
+        <tr><td>Verkettung \(f(g(x))\)</td><td>✅ stetig (wo definiert)</td></tr>
+      </table>
+    </div>
+    <div class="tip">💡 Klausur-Argument: „\(f\) ist als Summe/Produkt/Verkettung stetiger Grundfunktionen auf \(D\) stetig." Genauer hinschauen muss man nur dort, wo durch \(0\) geteilt wird oder die Funktion abschnittweise definiert ist.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔎 Drei Arten von Unstetigkeit</div>
+    <svg class="graph" viewBox="0 0 560 210" width="560" xmlns="http://www.w3.org/2000/svg">
+      <!-- Panel A: hebbare Lücke -->
+      <line x1="20" y1="160" x2="180" y2="160" stroke="#94a3b8" stroke-width="1.3"/>
+      <path d="M 35 140 C 70 95, 95 95, 130 70 C 145 60, 160 52, 172 46" fill="none" stroke="#0d9488" stroke-width="2.4"/>
+      <circle cx="100" cy="84" r="5.5" fill="#fff" stroke="#0d9488" stroke-width="2.2"/>
+      <circle cx="100" cy="55" r="5" fill="#7c3aed"/>
+      <text x="100" y="182" fill="#10233f" font-size="11" text-anchor="middle" font-weight="700">hebbar</text>
+      <text x="100" y="196" fill="#5b6b85" font-size="9.5" text-anchor="middle">GW existiert</text>
+      <!-- Panel B: Sprung -->
+      <line x1="200" y1="160" x2="360" y2="160" stroke="#94a3b8" stroke-width="1.3"/>
+      <path d="M 215 120 C 245 120, 270 122, 280 122" fill="none" stroke="#0d9488" stroke-width="2.4"/>
+      <path d="M 282 60 C 310 60, 340 58, 350 58" fill="none" stroke="#0d9488" stroke-width="2.4"/>
+      <circle cx="280" cy="122" r="5.5" fill="#fff" stroke="#0d9488" stroke-width="2.2"/>
+      <circle cx="282" cy="60" r="5" fill="#0d9488"/>
+      <text x="280" y="182" fill="#10233f" font-size="11" text-anchor="middle" font-weight="700">Sprung</text>
+      <text x="280" y="196" fill="#5b6b85" font-size="9.5" text-anchor="middle">GWe verschieden</text>
+      <!-- Panel C: Pol -->
+      <line x1="380" y1="160" x2="545" y2="160" stroke="#94a3b8" stroke-width="1.3"/>
+      <line x1="462" y1="25" x2="462" y2="170" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="5 4"/>
+      <path d="M 395 158 C 430 150, 450 120, 458 35" fill="none" stroke="#0d9488" stroke-width="2.4"/>
+      <path d="M 466 35 C 474 120, 495 150, 530 158" fill="none" stroke="#0d9488" stroke-width="2.4"/>
+      <text x="462" y="182" fill="#10233f" font-size="11" text-anchor="middle" font-weight="700">Polstelle</text>
+      <text x="462" y="196" fill="#5b6b85" font-size="9.5" text-anchor="middle">GW = ±∞</text>
+    </svg>
+    <div class="caption">Links: <b>hebbare</b> Lücke (GW existiert, Funktionswert fehlt/passt nicht). Mitte: <b>Sprung</b> (endliche, verschiedene GWe). Rechts: <b>Polstelle</b> (GW \(=\pm\infty\)).</div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 4 – Stetigkeit prüfen</div>
+    <div class="ex-intro">Argumentieren mit Grundfunktionen + die kritischen Stellen einzeln prüfen.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.1</div>
+      <div class="ex-text">Ist \( f(x)=x^2 e^{x}+\sin x-\sqrt{x} \) auf ihrem Definitionsbereich stetig?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step">Definitionsbereich: wegen \(\sqrt{x}\) ist \(D=[0,\infty)\).</span>
+        <span class="step">\(x^2\), \(e^{x}\), \(\sin x\), \(\sqrt{x}\) sind alle Grundfunktionen, auf \(D\) stetig.</span>
+        <span class="step">Produkt \(x^2 e^x\), Summe und Differenz stetiger Funktionen sind wieder stetig.</span>
+        ⇒ \(f\) ist auf ganz \(D=[0,\infty)\) <b class="green">stetig</b>.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.2</div>
+      <div class="ex-text">Bekannt: „Ist \(f\) ein Polynom, dann ist \(f\) stetig." Welche Aussage folgt logisch? <br>A) Ist \(f\) nicht stetig, dann ist \(f\) kein Polynom. &nbsp; B) Ist \(f\) stetig, dann ist \(f\) ein Polynom.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>A) ist wahr</b> — das ist die <b>Kontraposition</b> von „Polynom ⇒ stetig" (also „nicht stetig ⇒ kein Polynom"). <br>
+        B) ist falsch: \(e^x\) ist stetig, aber kein Polynom.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.3</div>
+      <div class="ex-text">Für welches \(c\) ist \( f(x)=\begin{cases} x+1 &amp; x\le 2\\ c\,x-1 &amp; x&gt;2\end{cases} \) an der Stelle \(x_0=2\) stetig?</div>
+      <div class="hint">Tipp: links-GW = rechts-GW = \(f(2)\) erzwingen.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>links / Funktionswert:</b> \(\lim_{x\to2^{-}}(x+1)=3=f(2)\).</span>
+        <span class="step"><b>rechts:</b> \(\lim_{x\to2^{+}}(c\,x-1)=2c-1\).</span>
+        <span class="step">Stetig ⇔ beide gleich: \(2c-1=3 \Rightarrow 2c=4 \Rightarrow \mathbf{c=2}\).</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.4</div>
+      <div class="ex-text">Welche Art Unstetigkeit hat \( f(x)=\dfrac{x^2-1}{x-1} \) bei \(x_0=1\)?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Zähler faktorisieren: \(\frac{(x-1)(x+1)}{x-1}=x+1\) (für \(x\neq1\)). Der GW existiert: \(\lim_{x\to1}(x+1)=2\) — aber \(f(1)\) ist nicht definiert (\(\tfrac00\)).<br>
+        ⇒ <b>hebbare Lücke</b> bei \((1,\,2)\): definiert man \(f(1):=2\), wird \(f\) stetig.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 5 ===================== -->
+<div class="module" id="m5">
+  <span class="badge">Modul 5</span>
+  <h2>Eigenschaften stetiger Funktionen</h2>
+  <p class="subtitle">Beschränktheit, Max/Min &amp; Zwischenwertsatz</p>
+
+  <div class="card">
+    <div class="card-title">🛡️ Gutartige Eigenschaften auf \([a,b]\)</div>
+    <p>Ist \(f\) auf einem <b>abgeschlossenen</b> Intervall \([a,b]\) stetig, dann gilt:</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Eigenschaft</th><th>Aussage</th></tr>
+        <tr><td>Beschränktheit</td><td>\(f\) ist auf \([a,b]\) beschränkt.</td></tr>
+        <tr><td>Max / Min</td><td>\(f\) nimmt sein Maximum und Minimum tatsächlich an (Extremwertsatz).</td></tr>
+        <tr><td>Zwischenwertsatz</td><td>\(f\) nimmt zwischen zwei Funktionswerten jeden Zwischenwert mindestens einmal an.</td></tr>
+      </table>
+    </div>
+    <div class="warn">⚠️ Beide Voraussetzungen sind nötig: Auf einem <b>offenen</b> Intervall \((a,b)\) (z.&nbsp;B. \(\tfrac1x\) auf \((0,1)\)) muss kein Max/Min existieren.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🎯 Zwischenwertsatz &amp; Nullstellensatz (Bolzano)</div>
+    <svg class="graph" viewBox="0 0 560 250" width="560" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="210" x2="545" y2="210" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- x-axis is the line y=0 here -->
+      <text x="60" y="204" fill="#5b6b85" font-size="11">a</text>
+      <text x="520" y="204" fill="#5b6b85" font-size="11">b</text>
+      <!-- curve from below axis (f(a)<0) to above (f(b)>0) -->
+      <path d="M 80 175 C 180 250, 250 150, 300 130 C 360 105, 430 70, 520 55" fill="none" stroke="#0d9488" stroke-width="2.6"/>
+      <circle cx="80" cy="175" r="5" fill="#0d9488"/>
+      <circle cx="520" cy="55" r="5" fill="#0d9488"/>
+      <text x="86" y="172" fill="#dc2626" font-size="12" font-weight="700">f(a) &lt; 0</text>
+      <text x="470" y="52" fill="#0f766e" font-size="12" font-weight="700">f(b) &gt; 0</text>
+      <!-- crossing of x-axis -->
+      <line x1="252" y1="210" x2="252" y2="158" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <circle cx="252" cy="210" r="5.5" fill="#fff" stroke="#dc2626" stroke-width="2.4"/>
+      <text x="252" y="228" fill="#dc2626" font-size="12" text-anchor="middle" font-weight="700">Nullstelle ξ</text>
+    </svg>
+    <div class="caption">Wechselt eine stetige Funktion das Vorzeichen (\(f(a)&lt;0\), \(f(b)&gt;0\)), muss sie dazwischen die \(x\)-Achse schneiden – es gibt also ein \(\xi\in[a,b]\) mit \(f(\xi)=0\).</div>
+    <div class="formula">
+      <div class="flabel">Nullstellensatz von Bolzano</div>
+      \[ f \text{ stetig auf } [a,b],\ \ f(a)\cdot f(b) &lt; 0 \ \Rightarrow\ \exists\,\xi\in(a,b):\ f(\xi)=0. \]
+    </div>
+    <div class="tip">💡 So beweist man „Diese Gleichung hat eine Lösung", ohne sie auszurechnen: Gleichung auf \(f(x)=0\) bringen, zwei Stellen mit verschiedenem Vorzeichen finden.</div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 5 – Zwischenwertsatz</div>
+    <div class="ex-intro">Funktion stetig? Vorzeichenwechsel an zwei Stellen finden!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.1</div>
+      <div class="ex-text">Zeige: \( f(x)=x^3+x+1 \) hat im Intervall \([-1,1]\) mindestens eine Nullstelle.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step">\(f\) ist ein Polynom ⇒ stetig auf \([-1,1]\). ✓</span>
+        <span class="step">Randwerte: \(f(-1)=-1-1+1=-1&lt;0\), \(\;f(1)=1+1+1=3&gt;0\).</span>
+        <span class="step">Vorzeichenwechsel ⇒ nach Bolzano \(\exists\,\xi\in(-1,1)\) mit \(f(\xi)=0\). ✓</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.2</div>
+      <div class="ex-text">Zeige: die Gleichung \( e^{x^2-1}=x+2 \) hat eine Lösung in \([1,3]\).</div>
+      <div class="hint">Tipp: alles auf eine Seite → \(g(x)=0\).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step">Setze \(g(x)=e^{x^2-1}-(x+2)\). Als Differenz stetiger Funktionen ist \(g\) stetig.</span>
+        <span class="step">\(g(1)=e^{0}-3=1-3=-2&lt;0\).</span>
+        <span class="step">\(g(3)=e^{8}-5\) — \(e^{8}\approx 2981\), also \(\gg 0\).</span>
+        <span class="step">Vorzeichenwechsel ⇒ \(\exists\,\xi\in(1,3)\) mit \(g(\xi)=0\), d.&nbsp;h. \(e^{\xi^2-1}=\xi+2\). ✓</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.3</div>
+      <div class="ex-text">Von einer stetigen Funktion sind diese Werte bekannt:
+        <span class="table-wrap" style="display:block"><table><tr><th>\(x\)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><th>\(f(x)\)</th><td>3</td><td>4</td><td>−2</td><td>−5</td><td>1</td></tr></table></span>
+        Gibt es ein \(x\) mit \(f(x)=0\)?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <b>Ja</b>, sogar mindestens zwei:
+        <span class="step">Zwischen \(x=1\) (\(f=4&gt;0\)) und \(x=2\) (\(f=-2&lt;0\)): Vorzeichenwechsel ⇒ eine Nullstelle.</span>
+        <span class="step">Zwischen \(x=3\) (\(f=-5&lt;0\)) und \(x=4\) (\(f=1&gt;0\)): noch ein Vorzeichenwechsel ⇒ eine weitere Nullstelle.</span>
+        Da \(f\) stetig ist, garantiert der Zwischenwertsatz die Nullstellen.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 6 ===================== -->
+<div class="module" id="m6">
+  <span class="badge">Modul 6 ⭐</span>
+  <h2>Strategie &amp; Klausuraufgaben</h2>
+  <p class="subtitle">Vorgehen + gemischte Aufgaben mit Lösung</p>
+
+  <div class="card">
+    <div class="card-title">🧭 Fahrplan: „Bestimme den Grenzwert / prüfe Stetigkeit"</div>
+    <p class="step"><b>1.</b> Ist die Stelle <b>harmlos</b> (Funktion dort stetig)? → einfach <b>einsetzen</b>.</p>
+    <p class="step"><b>2.</b> \(x\to\pm\infty\) bei Polynom/Bruch? → auf <b>höchste Potenz</b> verkürzen, Grade vergleichen.</p>
+    <p class="step"><b>3.</b> Exp/Log/Potenz gemischt? → <b>Hierarchie</b> \(\ln x\ll x^p\ll e^x\).</p>
+    <p class="step"><b>4.</b> Unbestimmter Ausdruck (\(\tfrac00,\tfrac\infty\infty,\infty-\infty\))? → erst <b>umformen</b> (kürzen/ausklammern).</p>
+    <p class="step"><b>5.</b> Innere Stelle / abschnittweise? → <b>links- und rechtsseitig</b> getrennt; gleich &amp; \(=f(x_0)\)? → stetig.</p>
+    <p class="step"><b>6.</b> „Hat Lösung / Nullstelle"? → <b>Bolzano</b>: stetig + Vorzeichenwechsel.</p>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Gemischte Klausuraufgaben</div>
+    <div class="ex-intro">Kein Tipp dabei – wie in der Klausur. Erst Fahrplan, dann lösen.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.1</div>
+      <div class="ex-text">\( \displaystyle\lim_{x\to\infty}\frac{6x^2-5x}{2x^2+3} \)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Gebrochen-rational, \(x\to\infty\), gleicher Grad \(2\) → Leitkoeffizienten: \(\dfrac{6x^2}{2x^2}=\mathbf{3}\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.2</div>
+      <div class="ex-text">\( f(x)=\dfrac{x^3+4x^2}{x^2}\). Berechne \( \displaystyle\lim_{x\to 0^{+}} f(x)\).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Erst <b>kürzen</b> (Typ \(\tfrac00\) auflösen): \(\dfrac{x^3+4x^2}{x^2}=\dfrac{x^2(x+4)}{x^2}=x+4\) (für \(x\neq0\)).<br>
+        Dann einsetzen: \(\lim_{x\to0^{+}}(x+4)=\mathbf{4}\). (Die scheinbare \(\tfrac00\)-Polstelle ist in Wahrheit eine hebbare Lücke.)
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.3</div>
+      <div class="ex-text">Für welches \(a\) ist \( f(x)=\begin{cases} \dfrac{x^2-9}{x-3} &amp; x\neq 3\\[4pt] a &amp; x=3\end{cases} \) stetig?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step">Für \(x\neq3\): \(\dfrac{x^2-9}{x-3}=\dfrac{(x-3)(x+3)}{x-3}=x+3\).</span>
+        <span class="step">GW bei \(x\to3\): \(x+3\to 6\).</span>
+        <span class="step">Stetig ⇔ \(f(3)=a=\) GW ⇒ \(\mathbf{a=6}\).</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.4</div>
+      <div class="ex-text">Begründe, dass \( \cos x = x \) eine Lösung im Intervall \([0,1]\) hat.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step">Setze \(g(x)=\cos x - x\), stetig (Differenz stetiger Funktionen).</span>
+        <span class="step">\(g(0)=\cos 0 - 0 = 1 &gt; 0\).</span>
+        <span class="step">\(g(1)=\cos 1 - 1 \approx 0{,}540 - 1 = -0{,}460 &lt; 0\).</span>
+        <span class="step">Vorzeichenwechsel ⇒ Bolzano: \(\exists\,\xi\in(0,1)\) mit \(g(\xi)=0\), also \(\cos\xi=\xi\). ✓</span>
+      </div>
+    </div>
+
+    <div class="ex-item klausur">
+      <div class="klausur-tag">Klausurstil – Unstetigkeit klassifizieren <span class="pts">8 P</span></div>
+      <div class="ex-text">Bestimme die Art der Unstetigkeit von \( f(x)=\dfrac{1}{x-2} \) bei \(x_0=2\) und von \( g(x)=\dfrac{\sin x}{x} \) bei \(x_0=0\).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>\(f\) bei \(2\):</b> \(\lim_{x\to2^{-}}\frac{1}{x-2}=-\infty\), \(\lim_{x\to2^{+}}=+\infty\) ⇒ <b>Polstelle</b>.</span>
+        <span class="step"><b>\(g\) bei \(0\):</b> \(\lim_{x\to0}\frac{\sin x}{x}=1\) existiert, aber \(g(0)\) ist nicht definiert ⇒ <b>hebbare Lücke</b> (mit \(g(0):=1\) wird \(g\) stetig).</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+function show(id){
+  var mod = document.getElementById(id);
+  if(mod) mod.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function tog(btn){
+  var s=btn.nextElementSibling;
+  if(s.classList.contains('open')){s.classList.remove('open');btn.textContent='👁 Lösung';}
+  else{s.classList.add('open');btn.textContent='🙈 Ausblenden';}
+}
+// All modules stay visible & scrollable; the sticky tab bar is a quick-jump
+// nav and the active tab follows the module currently in view.
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var mods=[].slice.call(document.querySelectorAll('.module'));
+  if(!('IntersectionObserver' in window)||!mods.length) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-m')===e.target.id); });
+    });
+  },{rootMargin:'-58px 0px -65% 0px',threshold:0});
+  mods.forEach(function(m){io.observe(m);});
+})();
+</script>
+</body>
+</html>
