@@ -47,9 +47,11 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16
 <div class="page">
   <p class="intro">Wähle ein Thema. Themen mit dem Symbol ✅ haben eine ausführliche, interaktive Zusammenfassung – die übrigen verlinken direkt auf das Skript-PDF.</p>
 
+  <div id="overall-progress"></div>
+
   <div class="grid">
 
-    <div class="card">
+    <div class="card" data-chapter="kombinatorik">
       <span class="icon">📐</span>
       <a class="title-link" href="mathe_kombinatorik1.html">
         <div class="num">Thema 1 &amp; 2</div>
@@ -67,7 +69,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-chapter="folgen">
       <span class="icon">📈</span>
       <a class="title-link" href="folgen3.html">
         <div class="num">Thema 3</div>
@@ -82,7 +84,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-chapter="reihen">
       <span class="icon">➕</span>
       <a class="title-link" href="reihen4.html">
         <div class="num">Thema 4</div>
@@ -97,7 +99,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-chapter="stetigkeit">
       <span class="icon">📉</span>
       <a class="title-link" href="stetigkeit5.html">
         <div class="num">Thema 5</div>
@@ -112,7 +114,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" data-chapter="ableitung">
       <span class="icon">📐</span>
       <a class="title-link" href="ableitung6.html">
         <div class="num">Thema 6</div>
@@ -182,5 +184,6 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#16
   © 2026 · Mathe 2 Lernseite · erstellt von <b>Soleyman Sakha</b>
 </div>
 
+<script src="progress.js"></script>
 </body>
 </html>
