@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Differentialrechnung – Klausurvorbereitung</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js" async></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#eef1f6;color:#1a2235;font-size:15px;line-height:1.55}
+.header{background:linear-gradient(135deg,#1e1b4b,#4f46e5);color:#fff;padding:18px 20px;text-align:center}
+.header h1{font-size:1.3rem;font-weight:800}
+.header p{font-size:.8rem;opacity:.85;margin-top:3px}
+.tabs{display:flex;background:#1e1b4b;overflow-x:auto;padding:0 6px;scrollbar-width:none;gap:2px;position:sticky;top:0;z-index:20}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:10px 13px;color:rgba(255,255,255,.55);border:none;background:none;cursor:pointer;font-size:.74rem;font-weight:700;white-space:nowrap;border-bottom:3px solid transparent;transition:color .2s}
+.tab:hover{color:rgba(255,255,255,.85)}
+.tab.active{color:#a5b4fc;border-bottom-color:#a5b4fc}
+.page{max-width:820px;margin:0 auto;padding:18px 14px 60px}
+.module{display:block;padding-top:20px;border-top:1px solid #d7deea;margin-top:20px;scroll-margin-top:58px}
+.module:first-of-type{border-top:none;margin-top:0;padding-top:6px}
+.badge{display:inline-block;background:#e0e7ff;color:#4338ca;font-size:.68rem;font-weight:800;padding:3px 10px;border-radius:20px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+h2{font-size:1.3rem;font-weight:800;color:#312e81}
+.subtitle{color:#64748b;font-size:.85rem;margin:3px 0 16px}
+.card{background:#fff;border-radius:12px;padding:18px;margin-bottom:14px;box-shadow:0 1px 5px rgba(30,27,75,.10)}
+.card-title{font-size:.82rem;font-weight:800;color:#312e81;margin-bottom:12px;text-transform:uppercase;letter-spacing:.04em}
+.formula{background:#eef2ff;border:1.5px solid #c7d2fe;border-radius:8px;padding:12px 16px;margin:10px 0}
+.flabel{font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#4f46e5;margin-bottom:6px}
+.fnote{font-size:.8rem;color:#6366f1;margin-top:6px}
+.ex-block{background:#f0fdf4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:.88rem;line-height:1.65}
+.ex-lbl{font-size:.68rem;font-weight:800;text-transform:uppercase;color:#16a34a;margin-bottom:5px;letter-spacing:.05em}
+.step{display:block;margin:4px 0 4px 6px;color:#15803d}
+.tip{background:#fffbeb;border:1px dashed #f59e0b;border-radius:8px;padding:10px 14px;font-size:.84rem;margin:10px 0;color:#78350f}
+.warn{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:.84rem;margin:10px 0;color:#991b1b}
+.exercises{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:12px;padding:18px;margin-top:20px}
+.ex-header{font-size:.82rem;font-weight:800;color:#6d28d9;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
+.ex-intro{font-size:.79rem;color:#7c3aed;margin-bottom:14px}
+.ex-item{background:#fff;border-radius:8px;padding:13px 15px;margin-bottom:10px;border:1px solid #ede9fe}
+.ex-num{font-size:.68rem;font-weight:800;color:#7c3aed;text-transform:uppercase;margin-bottom:5px;letter-spacing:.05em}
+.ex-text{font-size:.9rem}
+.hint{font-size:.78rem;color:#4f46e5;margin-top:7px;font-style:italic}
+.sol-btn{margin-top:10px;padding:5px 13px;background:none;border:1.5px solid #8b5cf6;color:#6d28d9;border-radius:20px;cursor:pointer;font-size:.76rem;font-weight:700;transition:all .2s}
+.sol-btn:hover{background:#6d28d9;color:#fff}
+.sol{display:none;margin-top:10px;background:#faf5ff;border-radius:6px;padding:10px 13px;font-size:.86rem;border-left:3px solid #7c3aed;line-height:1.65}
+.sol.open{display:block}
+.sol .step{display:block;margin:5px 0 5px 4px;color:#4c1d95}
+.table-wrap{overflow-x:auto;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+th{background:#312e81;color:#fff;padding:9px 12px;text-align:left;font-weight:700}
+td{padding:9px 12px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.graph{display:block;margin:10px auto 2px;max-width:100%}
+.caption{text-align:center;font-size:.78rem;color:#64748b;margin-top:2px;margin-bottom:6px}
+.klausur{background:#fff7ed;border:2px solid #fb923c;border-radius:12px;padding:16px;margin-bottom:12px}
+.klausur .pts{float:right;font-size:.72rem;font-weight:800;color:#c2410c;background:#ffedd5;padding:2px 9px;border-radius:12px}
+.klausur-tag{font-size:.68rem;font-weight:800;color:#c2410c;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+code{background:#eef2f7;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.88em}
+b.green{color:#15803d}b.red{color:#dc2626}b.indigo{color:#4338ca}
+.backbar{max-width:820px;margin:0 auto;padding:14px 14px 0}
+.back{display:inline-block;padding:6px 14px;font-size:.76rem;font-weight:700;color:#312e81;background:#fff;border:1.5px solid #cbd5e1;border-radius:20px;text-decoration:none;transition:all .15s}
+.back:hover{background:#312e81;color:#fff;border-color:#312e81}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📈 Differentialrechnung – Klausurzusammenfassung</h1>
+  <p>Mathe 2 · Hochschule Offenburg · SS 2026 · Decker, Altenberend, Kreilos · Kapitel 6</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-m="m1" onclick="show('m1')">M1: Was ist die Ableitung?</button>
+  <button class="tab" data-m="m2" onclick="show('m2')">M2: Grundableitungen</button>
+  <button class="tab" data-m="m3" onclick="show('m3')">M3: Kettenregel</button>
+  <button class="tab" data-m="m4" onclick="show('m4')">M4: Produkt &amp; Quotient</button>
+  <button class="tab" data-m="m5" onclick="show('m5')">M5: Kurvendiskussion ⭐</button>
+  <button class="tab" data-m="m6" onclick="show('m6')">M6: l'Hospital</button>
+  <button class="tab" data-m="m7" onclick="show('m7')">M7: Strategie &amp; Klausur ⭐</button>
+</div>
+
+<div class="backbar"><a class="back" href="index.html">← Zur Übersicht</a></div>
+
+<div class="page">
+
+<!-- ===================== MODUL 1 ===================== -->
+<div class="module active" id="m1">
+  <span class="badge">Modul 1</span>
+  <h2>Was ist die Ableitung?</h2>
+  <p class="subtitle">Differenzenquotient → Differentialquotient · Steigung &amp; Änderungsrate</p>
+
+  <div class="card">
+    <div class="card-title">📌 Idee: von der Sekante zur Tangente</div>
+    <p>Die <b class="indigo">Ableitung</b> \(f'(x_0)\) ist die <b>Steigung der Tangente</b> an die Kurve im Punkt \(x_0\) – also die <b>momentane Änderungsrate</b> (z.&nbsp;B. Geschwindigkeit \(= \) Ableitung des Weges).</p>
+    <div class="formula">
+      <div class="flabel">Differenzenquotient – mittlere Steigung (Sekante)</div>
+      \[ \frac{\Delta y}{\Delta x} = \frac{f(x_0+\Delta x) - f(x_0)}{\Delta x} \]
+    </div>
+    <div class="formula">
+      <div class="flabel">Differentialquotient – Ableitung (Tangente)</div>
+      \[ f'(x_0) = \lim_{\Delta x \to 0}\frac{f(x_0+\Delta x) - f(x_0)}{\Delta x} = \lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0} \]
+      <div class="fnote">Lässt man \(\Delta x \to 0\) gehen, wird aus der Sekante die Tangente.</div>
+    </div>
+    <svg class="graph" viewBox="0 0 460 270" width="460" xmlns="http://www.w3.org/2000/svg">
+      <!-- axes -->
+      <line x1="50" y1="240" x2="445" y2="240" stroke="#94a3b8" stroke-width="1.5"/>
+      <line x1="55" y1="30" x2="55" y2="250" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="438" y="258" font-size="12" fill="#64748b">x</text>
+      <!-- curve f -->
+      <path d="M70 215 C 170 205, 250 165, 425 55" fill="none" stroke="#4f46e5" stroke-width="2.5"/>
+      <text x="408" y="48" font-size="13" font-weight="700" fill="#4f46e5">f</text>
+      <!-- secant through P and Q -->
+      <line x1="120" y1="211" x2="380" y2="93" stroke="#ea580c" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="300" y="120" font-size="12" font-weight="700" fill="#ea580c">Sekante</text>
+      <!-- tangent at P -->
+      <line x1="108" y1="207" x2="260" y2="161" stroke="#dc2626" stroke-width="2"/>
+      <text x="92" y="223" font-size="12" font-weight="700" fill="#dc2626">Tangente</text>
+      <!-- delta triangle -->
+      <line x1="160" y1="193" x2="320" y2="193" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4 3"/>
+      <line x1="320" y1="193" x2="320" y2="120" stroke="#64748b" stroke-width="1.3" stroke-dasharray="4 3"/>
+      <text x="232" y="207" font-size="12" fill="#475569">Δx</text>
+      <text x="326" y="160" font-size="12" fill="#475569">Δy</text>
+      <!-- points P, Q -->
+      <circle cx="160" cy="193" r="4.5" fill="#1e1b4b"/><text x="142" y="188" font-size="13" font-weight="700" fill="#1e1b4b">P</text>
+      <circle cx="320" cy="120" r="4.5" fill="#1e1b4b"/><text x="328" y="114" font-size="13" font-weight="700" fill="#1e1b4b">Q</text>
+    </svg>
+    <div class="caption">Schiebt man \(Q\) entlang der Kurve auf \(P\) zu (\(\Delta x\to 0\)), nähert sich die Sekantensteigung der Tangentensteigung \(f'(x_0)\).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔣 Schreibweisen &amp; Differenzierbarkeit</div>
+    <p>Gängige Symbole: \(f'(x)\), \(\dfrac{df}{dx}\), \(\dot y(t) = \dfrac{dy}{dt}\) (Punkt = Ableitung nach der Zeit).</p>
+    <div class="warn">⚠️ <b>Differenzierbar</b> heißt: der Grenzwert oben existiert. Eine „Knickstelle" wie \(f(x)=|x|\) ist bei \(0\) <b>stetig, aber nicht differenzierbar</b> (linke und rechte Sekantensteigung verschieden). Merke: differenzierbar \(\Rightarrow\) stetig, aber <b>nicht</b> umgekehrt.</p></div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 1</div>
+    <div class="ex-intro">Verständnis von Ableitung &amp; Differenzierbarkeit.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.1</div>
+      <div class="ex-text">Bestimme \(f'(2)\) für \(f(x)=x^2\) direkt über den Differentialquotienten.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        \[ f'(2)=\lim_{x\to 2}\frac{x^2-4}{x-2}=\lim_{x\to 2}\frac{(x-2)(x+2)}{x-2}=\lim_{x\to 2}(x+2)=\mathbf{4}. \]
+        Der kritische Schritt ist das <b>Kürzen</b> von \((x-2)\) — sonst entsteht \(\tfrac00\). Probe mit Potenzregel: \(f'(x)=2x\Rightarrow f'(2)=4\) ✓.
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 1.2</div>
+      <div class="ex-text">Ist \(f(x)=|x|\) bei \(x=0\) differenzierbar? Begründe.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step">Von rechts (\(x&gt;0\)): Steigung \(+1\). Von links (\(x&lt;0\)): Steigung \(-1\).</span>
+        <span class="step">Der Grenzwert der Sekantensteigung hängt von der Richtung ab ⇒ er existiert nicht.</span>
+        ⇒ \(f\) ist bei \(0\) <b>stetig, aber nicht differenzierbar</b> (Knick).
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 2 ===================== -->
+<div class="module" id="m2">
+  <span class="badge">Modul 2</span>
+  <h2>Grundableitungen &amp; einfache Regeln</h2>
+  <p class="subtitle">Potenz-, Faktor- &amp; Summenregel · Ableitungen der Grundfunktionen</p>
+
+  <div class="card">
+    <div class="card-title">📋 Ableitungen der Grundfunktionen</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>\(f(x)\)</th><th>\(f'(x)\)</th><th>Bemerkung</th></tr>
+        <tr><td>\(x^{r}\)</td><td>\(r\,x^{r-1}\)</td><td>Potenzregel (auch für Wurzeln/Kehrwerte)</td></tr>
+        <tr><td>\(\sqrt{x}=x^{1/2}\)</td><td>\(\dfrac{1}{2\sqrt{x}}\)</td><td></td></tr>
+        <tr><td>\(\dfrac1x = x^{-1}\)</td><td>\(-\dfrac{1}{x^{2}}\)</td><td></td></tr>
+        <tr><td>\(e^{x}\)</td><td>\(e^{x}\)</td><td>bleibt sich selbst</td></tr>
+        <tr><td>\(a^{x}\)</td><td>\(\ln a \cdot a^{x}\)</td><td></td></tr>
+        <tr><td>\(\ln x\)</td><td>\(\dfrac1x\)</td><td></td></tr>
+        <tr><td>\(\sin x\)</td><td>\(\cos x\)</td><td></td></tr>
+        <tr><td>\(\cos x\)</td><td>\(-\sin x\)</td><td>Minus nicht vergessen!</td></tr>
+        <tr><td>\(\tan x\)</td><td>\(\dfrac{1}{\cos^{2}x}\)</td><td></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Faktor- &amp; Summenregel</div>
+    <div class="formula">
+      \[ (c\cdot f)' = c\cdot f' \qquad (f \pm g)' = f' \pm g' \]
+      <div class="fnote">Konstante Faktoren bleiben stehen; Summen werden gliedweise abgeleitet.</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel</div>
+      \(f(x)=3x^4 - 5x^2 + 7\) &nbsp;⇒&nbsp; \(f'(x)=12x^3 - 10x\). &nbsp;(Die Konstante \(7\) fällt weg.)
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 2</div>
+    <div class="ex-intro">Erst Kehrwerte/Wurzeln als Potenzen schreiben, dann Potenzregel.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.1</div>
+      <div class="ex-text">\(f(x)=3x^4 - 5x^2 + 7\)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Gliedweise mit Potenz- und Faktorregel: \(f'(x)=12x^3 - 10x\). Konstante \(7\) verschwindet (Ableitung einer Konstanten \(=0\)).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.2</div>
+      <div class="ex-text">\(f(x)=\sqrt{x} + \dfrac{1}{x}\)</div>
+      <div class="hint">Tipp: als Potenzen \(x^{1/2}\) und \(x^{-1}\) schreiben.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step">\(\sqrt x = x^{1/2} \Rightarrow \frac12 x^{-1/2} = \frac{1}{2\sqrt x}\).</span>
+        <span class="step">\(\frac1x = x^{-1} \Rightarrow -1\cdot x^{-2} = -\frac{1}{x^2}\).</span>
+        ⇒ \(f'(x)=\dfrac{1}{2\sqrt x} - \dfrac{1}{x^2}\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 2.3</div>
+      <div class="ex-text">\(f(x)=2e^{x} - 3\ln x + \cos x\)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        \(f'(x)=2e^{x} - \dfrac{3}{x} - \sin x\). &nbsp;(\(e^x\) bleibt, \(\ln x \to 1/x\), \(\cos x \to -\sin x\).)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 3 ===================== -->
+<div class="module" id="m3">
+  <span class="badge">Modul 3</span>
+  <h2>Kettenregel</h2>
+  <p class="subtitle">Ableitung verketteter Funktionen · „äußere mal innere"</p>
+
+  <div class="card">
+    <div class="card-title">📌 Kettenregel</div>
+    <div class="formula">
+      <div class="flabel">Verkettung \(f(x)=v(u(x))\)</div>
+      \[ f'(x) = v'\big(u(x)\big)\cdot u'(x) \]
+      <div class="fnote">„Äußere Ableitung mal innere Ableitung". Die innere Ableitung anzuhängen heißt <b>Nachdifferenzieren</b>.</div>
+    </div>
+    <div class="formula">
+      <div class="flabel">Wichtiger Spezialfall – lineare innere Funktion</div>
+      \[ \big(f(ax+b)\big)' = a\cdot f'(ax+b) \]
+      <div class="fnote">z.&nbsp;B. \((e^{3x})' = 3e^{3x}\), &nbsp;\((\sin(5x))' = 5\cos(5x)\).</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – \(f(x)=\sin(x^2)\)</div>
+      <span class="step">Innere \(u=x^2\Rightarrow u'=2x\); äußere \(v=\sin u \Rightarrow v'=\cos u\).</span>
+      <span class="step">\(f'(x)=\cos(x^2)\cdot 2x = 2x\cos(x^2)\).</span>
+      <span class="step">Häufiger Fehler: \(\cos(x^2)\) <b>ohne</b> Nachdifferenzieren \(\cdot 2x\).</span>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 3</div>
+    <div class="ex-intro">Immer innere Funktion erkennen und nachdifferenzieren!</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.1</div>
+      <div class="ex-text">\(f(x)=(5x+1)^{6}\)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Innere \(u=5x+1\) (\(u'=5\)), äußere \(u^6\) (\(\to 6u^5\)):<br>
+        \(f'(x)=6(5x+1)^{5}\cdot 5 = \mathbf{30(5x+1)^{5}}\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.2</div>
+      <div class="ex-text">\(f(x)=e^{3x}\) &nbsp; und &nbsp; \(g(x)=\sqrt{\ln x}\)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step">\(f'(x)=3e^{3x}\) (lineare innere Funktion, Faktor \(3\)).</span>
+        <span class="step">\(g(x)=(\ln x)^{1/2}\): \(g'(x)=\frac12(\ln x)^{-1/2}\cdot \frac1x = \dfrac{1}{2x\sqrt{\ln x}}\).</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 3.3 ⭐</div>
+      <div class="ex-text">\(f(x)=2\cos^{2}(x^{3}+5)\)</div>
+      <div class="hint">Tipp: doppelte Verkettung – \(\cos^2(\cdot)\) ist \((\cos(\cdot))^2\).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Drei Schichten: außen \((\,)^2\), Mitte \(\cos\), innen \(x^3+5\).
+        <span class="step">\(\frac{d}{dx}\big[2(\cos(x^3+5))^2\big] = 2\cdot 2\cos(x^3+5)\cdot\big(-\sin(x^3+5)\big)\cdot 3x^2\).</span>
+        <span class="step">\(= -12x^{2}\cos(x^3+5)\sin(x^3+5)\).</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 4 ===================== -->
+<div class="module" id="m4">
+  <span class="badge">Modul 4</span>
+  <h2>Produkt- &amp; Quotientenregel</h2>
+  <p class="subtitle">Zusammengesetzte Funktionen · höhere Ableitungen</p>
+
+  <div class="card">
+    <div class="card-title">📌 Produkt- &amp; Quotientenregel</div>
+    <div class="formula">
+      <div class="flabel">Produktregel</div>
+      \[ (u\cdot v)' = u'\,v + u\,v' \]
+    </div>
+    <div class="formula">
+      <div class="flabel">Quotientenregel</div>
+      \[ \left(\frac{u}{v}\right)' = \frac{u'\,v - u\,v'}{v^{2}} \]
+      <div class="fnote">Reihenfolge im Zähler beachten: erst \(u'v\), dann \(-\,uv'\)!</div>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Produktregel \(f(x)=x^2 e^{x}\)</div>
+      \(u=x^2\ (u'=2x)\), \(v=e^x\ (v'=e^x)\): \(f'(x)=2x\,e^x + x^2 e^x = (2+x)\,x\,e^x\).
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Höhere Ableitungen</div>
+    <div class="formula">
+      \[ f''=(f')', \qquad f'''=(f'')', \qquad f^{(n)}=\big(f^{(n-1)}\big)'. \]
+      <div class="fnote">\(f''\) beschreibt die Krümmung (Änderung der Steigung) – wichtig für die Kurvendiskussion (Modul 5).</div>
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 4</div>
+    <div class="ex-intro">Erst Regel wählen (Produkt? Quotient? Kette?), dann sauber einsetzen.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.1</div>
+      <div class="ex-text">\(f(x)=x^{3}\ln x\)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Produktregel mit \(u=x^3\ (u'=3x^2)\), \(v=\ln x\ (v'=\frac1x)\):<br>
+        \(f'(x)=3x^2\ln x + x^3\cdot\frac1x = 3x^2\ln x + x^2 = x^2(3\ln x + 1)\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.2</div>
+      <div class="ex-text">\(f(x)=\dfrac{\ln x}{x}\)</div>
+      <div class="hint">Tipp: Quotientenregel mit \(u=\ln x,\ v=x\).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        \(u'=\frac1x,\ v'=1\):
+        \[ f'(x)=\frac{\frac1x\cdot x - \ln x\cdot 1}{x^2}=\frac{1-\ln x}{x^{2}}. \]
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.3</div>
+      <div class="ex-text">\(f(x)=\dfrac{2}{(1+3x)^{2}}\) — erste Ableitung.</div>
+      <div class="hint">Tipp: \(2(1+3x)^{-2}\), dann Kettenregel.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        \(f(x)=2(1+3x)^{-2}\). Kettenregel (innere Ableitung \(3\)):<br>
+        \(f'(x)=2\cdot(-2)(1+3x)^{-3}\cdot 3 = \dfrac{-12}{(1+3x)^{3}}\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 4.4</div>
+      <div class="ex-text">Bestimme \(f'\), \(f''\), \(f'''\) für \(f(x)=x^{4}\).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        \(f'(x)=4x^3\), \(f''(x)=12x^2\), \(f'''(x)=24x\). (Jede Ableitung senkt den Grad um 1.)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 5 ===================== -->
+<div class="module" id="m5">
+  <span class="badge">Modul 5 ⭐</span>
+  <h2>Kurvendiskussion</h2>
+  <p class="subtitle">Monotonie · Krümmung · Extrema · Wendepunkte · Tangente/Normale</p>
+
+  <div class="card">
+    <div class="card-title">📌 Was sagen \(f'\) und \(f''\)?</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Bedingung</th><th>Bedeutung</th></tr>
+        <tr><td>\(f'(x) &gt; 0\) auf \(I\)</td><td>streng monoton <b>steigend</b></td></tr>
+        <tr><td>\(f'(x) &lt; 0\) auf \(I\)</td><td>streng monoton <b>fallend</b></td></tr>
+        <tr><td>\(f''(x) &gt; 0\) auf \(I\)</td><td><b>konvex</b> (Linkskrümmung)</td></tr>
+        <tr><td>\(f''(x) &lt; 0\) auf \(I\)</td><td><b>konkav</b> (Rechtskrümmung)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Extrema &amp; Wendepunkte</div>
+    <div class="formula">
+      <div class="flabel">Lokale Extrema</div>
+      \[ f'(x_0)=0 \quad\text{(notwendig)};\qquad f''(x_0)&gt;0 \Rightarrow \text{Minimum},\quad f''(x_0)&lt;0 \Rightarrow \text{Maximum} \]
+    </div>
+    <div class="formula">
+      <div class="flabel">Wendepunkt (Krümmungswechsel)</div>
+      \[ f''(x_0)=0 \ \text{ und Vorzeichenwechsel von } f'' \]
+    </div>
+    <div class="warn">⚠️ \(f'(x_0)=0\) allein heißt nur „waagerechte Tangente": Maximum, Minimum <b>oder Sattelpunkt</b>. Bei \(f''(x_0)=0\) muss man genauer prüfen (z.&nbsp;B. \(f(x)=x^3\) hat in \(0\) einen Sattelpunkt).</div>
+    <svg class="graph" viewBox="0 0 460 280" width="460" xmlns="http://www.w3.org/2000/svg">
+      <line x1="40" y1="150" x2="445" y2="150" stroke="#94a3b8" stroke-width="1.3"/>
+      <line x1="60" y1="30" x2="60" y2="260" stroke="#94a3b8" stroke-width="1.3"/>
+      <text x="438" y="168" font-size="12" fill="#64748b">x</text>
+      <!-- cubic-like curve: max, inflection, min -->
+      <path d="M70 205 C 100 110, 150 100, 200 150 C 250 200, 300 205, 420 70" fill="none" stroke="#4f46e5" stroke-width="2.5"/>
+      <text x="404" y="64" font-size="13" font-weight="700" fill="#4f46e5">f</text>
+      <!-- local max -->
+      <line x1="98" y1="108" x2="158" y2="108" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="5 3"/>
+      <circle cx="128" cy="106" r="4.5" fill="#dc2626"/>
+      <text x="96" y="98" font-size="11.5" font-weight="700" fill="#dc2626">Max: f′=0, f″&lt;0</text>
+      <!-- inflection -->
+      <circle cx="200" cy="150" r="4.5" fill="#2563eb"/>
+      <text x="178" y="140" font-size="11.5" font-weight="700" fill="#2563eb">WP: f″=0</text>
+      <!-- local min -->
+      <line x1="245" y1="203" x2="305" y2="203" stroke="#dc2626" stroke-width="1.6" stroke-dasharray="5 3"/>
+      <circle cx="275" cy="202" r="4.5" fill="#dc2626"/>
+      <text x="243" y="223" font-size="11.5" font-weight="700" fill="#dc2626">Min: f′=0, f″&gt;0</text>
+    </svg>
+    <div class="caption">An Extrema ist die Tangente waagerecht (\(f'=0\)); der Wendepunkt trennt Links- und Rechtskrümmung (\(f''=0\)).</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📐 Tangente &amp; Normale</div>
+    <div class="formula">
+      <div class="flabel">Tangente in \(x_0\) (Steigung \(f'(x_0)\))</div>
+      \[ t(x) = f(x_0) + f'(x_0)\,(x-x_0) \]
+    </div>
+    <div class="formula">
+      <div class="flabel">Normale (steht senkrecht, Steigung \(-1/f'(x_0)\))</div>
+      \[ n(x) = f(x_0) - \frac{1}{f'(x_0)}\,(x-x_0) \]
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 5</div>
+    <div class="ex-intro">\(f'\) für Extrema, \(f''\) zur Art-Entscheidung.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.1 ⭐</div>
+      <div class="ex-text">Bestimme die lokalen Extrema und den Wendepunkt von \(f(x)=x^{3}-3x\).</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step"><b>Ableitungen:</b> \(f'(x)=3x^2-3\), \(f''(x)=6x\).</span>
+        <span class="step"><b>Kandidaten:</b> \(f'(x)=0 \Rightarrow x^2=1 \Rightarrow x=\pm1\).</span>
+        <span class="step"><b>Art:</b> \(f''(-1)=-6&lt;0 \Rightarrow\) Maximum bei \((-1,\,2)\); \(f''(1)=6&gt;0 \Rightarrow\) Minimum bei \((1,\,-2)\).</span>
+        <span class="step"><b>Wendepunkt:</b> \(f''(x)=0 \Rightarrow x=0\), Vorzeichenwechsel ✓ ⇒ WP bei \((0,\,0)\).</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.2</div>
+      <div class="ex-text">Stelle die Tangente an \(f(x)=x^{2}\) im Punkt \(x_0=1\) auf.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        \(f(1)=1\), \(f'(x)=2x \Rightarrow f'(1)=2\).<br>
+        \(t(x)=1+2(x-1)=\mathbf{2x-1}\).
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 5.3</div>
+      <div class="ex-text">In welchen Bereichen ist \(f(x)=x^{2}-4x\) monoton fallend?</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        \(f'(x)=2x-4\). Fallend, wo \(f'(x)&lt;0\): \(2x-4&lt;0 \Rightarrow x&lt;2\).<br>
+        ⇒ monoton fallend auf \((-\infty,\,2)\), steigend auf \((2,\,\infty)\); bei \(x=2\) ein Minimum.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 6 ===================== -->
+<div class="module" id="m6">
+  <span class="badge">Modul 6</span>
+  <h2>Regel von l'Hospital</h2>
+  <p class="subtitle">Grenzwerte bei unbestimmten Ausdrücken \(\tfrac00\) oder \(\tfrac{\infty}{\infty}\)</p>
+
+  <div class="card">
+    <div class="card-title">📌 Die Regel</div>
+    <div class="formula">
+      <div class="flabel">Nur bei \(\tfrac00\) oder \(\tfrac{\infty}{\infty}\)</div>
+      \[ \lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)} \]
+      <div class="fnote">Zähler und Nenner werden <b>getrennt</b> abgeleitet (nicht die Quotientenregel!). Ggf. mehrfach anwenden.</div>
+    </div>
+    <div class="warn">⚠️ Zuerst prüfen, ob wirklich \(\tfrac00\) oder \(\tfrac{\infty}{\infty}\) vorliegt — sonst ist l'Hospital <b>nicht</b> erlaubt.</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel</div>
+      \(\displaystyle\lim_{x\to 0}\frac{\sin x}{x}\) ist \(\tfrac00\) ⇒ \(\displaystyle\lim_{x\to 0}\frac{\cos x}{1}=\cos 0 = 1\).
+    </div>
+  </div>
+
+  <div class="exercises">
+    <div class="ex-header">✏️ Übungen zu Modul 6</div>
+    <div class="ex-intro">Erst Typ prüfen (\(\tfrac00\)/\(\tfrac{\infty}{\infty}\)?), dann ableiten.</div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.1</div>
+      <div class="ex-text">\(\displaystyle\lim_{x\to\infty}\frac{\ln x}{x}\)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Typ \(\tfrac{\infty}{\infty}\) ⇒ l'Hospital:
+        \[ \lim_{x\to\infty}\frac{\ln x}{x} = \lim_{x\to\infty}\frac{1/x}{1} = \lim_{x\to\infty}\frac1x = \mathbf{0}. \]
+        (Bestätigt: \(x\) wächst schneller als \(\ln x\).)
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.2 ⭐</div>
+      <div class="ex-text">\(\displaystyle\lim_{x\to 0}\frac{1-\cos x}{x^{2}}\)</div>
+      <div class="hint">Tipp: \(\tfrac00\) – eventuell zweimal anwenden.</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        <span class="step">Typ \(\tfrac00\). 1. Mal: \(\dfrac{\sin x}{2x}\) — wieder \(\tfrac00\).</span>
+        <span class="step">2. Mal: \(\dfrac{\cos x}{2} \to \dfrac{\cos 0}{2} = \mathbf{\tfrac12}\).</span>
+      </div>
+    </div>
+
+    <div class="ex-item">
+      <div class="ex-num">Aufgabe 6.3</div>
+      <div class="ex-text">\(\displaystyle\lim_{x\to 0}\frac{e^{x}-1}{x}\)</div>
+      <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+      <div class="sol">
+        Typ \(\tfrac00\) ⇒ \(\displaystyle\lim_{x\to 0}\frac{e^{x}}{1}=e^{0}=\mathbf{1}\).
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MODUL 7 ===================== -->
+<div class="module" id="m7">
+  <span class="badge">Modul 7 ⭐</span>
+  <h2>Strategie &amp; Klausuraufgaben</h2>
+  <p class="subtitle">Welche Regel? + typische Klausuraufgaben mit Lösung</p>
+
+  <div class="card">
+    <div class="card-title">🧭 Welche Ableitungsregel?</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Du siehst…</th><th>Regel</th></tr>
+        <tr><td>Summe/Differenz von Termen</td><td>Summenregel (gliedweise)</td></tr>
+        <tr><td>Konstante \(\cdot\) Funktion</td><td>Faktorregel</td></tr>
+        <tr><td>Funktion <b>in</b> Funktion, z.&nbsp;B. \(\sin(x^2)\), \((\dots)^n\), \(e^{\dots}\)</td><td>Kettenregel (nachdifferenzieren!)</td></tr>
+        <tr><td>Produkt \(u\cdot v\)</td><td>Produktregel</td></tr>
+        <tr><td>Bruch \(u/v\)</td><td>Quotientenregel</td></tr>
+        <tr><td>Grenzwert \(\tfrac00\) / \(\tfrac{\infty}{\infty}\)</td><td>l'Hospital</td></tr>
+        <tr><td>Extrema / Monotonie / Wende</td><td>\(f'=0\), Vorzeichen von \(f'\), \(f''\)</td></tr>
+      </table>
+    </div>
+    <div class="tip">💡 Bei verschachtelten Ausdrücken mehrere Regeln kombinieren – immer von <b>außen nach innen</b> arbeiten.</div>
+  </div>
+
+  <div class="klausur">
+    <span class="pts">8 P</span>
+    <div class="klausur-tag">Klausuraufgabe K.1 – Ableitungsregeln kombiniert</div>
+    <div class="ex-text">Bilde \(f'(x)\) für \(f(x)=\dfrac{2}{(1+3x)^{2}}\).</div>
+    <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+    <div class="sol">
+      Umschreiben als Potenz und Kettenregel (statt Quotientenregel – einfacher):<br>
+      \(f(x)=2(1+3x)^{-2} \Rightarrow f'(x)=2\cdot(-2)(1+3x)^{-3}\cdot 3 = \dfrac{-12}{(1+3x)^{3}}\).
+    </div>
+  </div>
+
+  <div class="klausur">
+    <span class="pts">10 P</span>
+    <div class="klausur-tag">Klausuraufgabe K.2 – Kurvendiskussion</div>
+    <div class="ex-text">Untersuche \(f(x)=x\,e^{-x}\) auf lokale Extrema (mit Art).</div>
+    <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+    <div class="sol">
+      <span class="step"><b>1. Ableitung</b> (Produktregel): \(f'(x)=1\cdot e^{-x} + x\cdot(-e^{-x}) = (1-x)e^{-x}\).</span>
+      <span class="step"><b>Kandidat:</b> \(f'(x)=0\). Da \(e^{-x}&gt;0\) immer, folgt \(1-x=0 \Rightarrow x=1\).</span>
+      <span class="step"><b>2. Ableitung:</b> \(f''(x)=(x-2)e^{-x}\); \(f''(1)=(-1)e^{-1}&lt;0 \Rightarrow\) <b class="red">Maximum</b>.</span>
+      <span class="step">Wert: \(f(1)=1\cdot e^{-1}=\tfrac1e \approx 0{,}37\). ⇒ Hochpunkt \(\left(1,\ \tfrac1e\right)\).</span>
+    </div>
+  </div>
+
+  <div class="klausur">
+    <span class="pts">6 P</span>
+    <div class="klausur-tag">Klausuraufgabe K.3 – l'Hospital</div>
+    <div class="ex-text">Berechne \(\displaystyle\lim_{x\to 0}\frac{e^{2x}-1}{\sin x}\).</div>
+    <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+    <div class="sol">
+      Typ \(\tfrac00\) ⇒ l'Hospital (Zähler/Nenner getrennt ableiten):
+      \[ \lim_{x\to 0}\frac{2e^{2x}}{\cos x} = \frac{2\cdot 1}{1} = \mathbf{2}. \]
+    </div>
+  </div>
+
+  <div class="klausur">
+    <span class="pts">8 P</span>
+    <div class="klausur-tag">Klausuraufgabe K.4 – Tangente &amp; Normale</div>
+    <div class="ex-text">Bestimme Tangente und Normale an \(f(x)=\ln x\) im Punkt \(x_0=1\).</div>
+    <button class="sol-btn" onclick="tog(this)">👁 Lösung</button>
+    <div class="sol">
+      <span class="step">\(f(1)=\ln 1 = 0\); \(f'(x)=\frac1x \Rightarrow f'(1)=1\).</span>
+      <span class="step"><b>Tangente:</b> \(t(x)=0+1\cdot(x-1)=x-1\).</span>
+      <span class="step"><b>Normale</b> (Steigung \(-1/1=-1\)): \(n(x)=0-1\cdot(x-1)=-x+1\).</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+function show(id){
+  var mod = document.getElementById(id);
+  if(mod) mod.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function tog(btn){
+  var s=btn.nextElementSibling;
+  if(s.classList.contains('open')){s.classList.remove('open');btn.textContent='👁 Lösung';}
+  else{s.classList.add('open');btn.textContent='🙈 Ausblenden';}
+}
+// All modules stay visible & scrollable; the sticky tab bar is a quick-jump
+// nav and the active tab follows the module currently in view.
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var mods=[].slice.call(document.querySelectorAll('.module'));
+  if(!('IntersectionObserver' in window)||!mods.length) return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) return;
+      tabs.forEach(function(t){ t.classList.toggle('active', t.getAttribute('data-m')===e.target.id); });
+    });
+  },{rootMargin:'-58px 0px -65% 0px',threshold:0});
+  mods.forEach(function(m){io.observe(m);});
+})();
+</script>
+</body>
+</html>
