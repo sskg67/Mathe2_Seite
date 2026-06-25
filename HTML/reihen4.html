@@ -150,6 +150,17 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       <div class="flabel">Spezialfall – Gauß'sche Summe</div>
       \[ 1+2+\cdots+n = \frac{n(n+1)}{2} \]
     </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 1 – Gauß'sche Summe</div>
+      <span class="step">Was ist \(1+2+3+\cdots+100\)?</span>
+      <span class="step">Formel mit \(n=100\): \(\dfrac{n(n+1)}{2} = \dfrac{100\cdot 101}{2} = \dfrac{10100}{2} = \mathbf{5050}\).</span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 2 – mit Abstand \(d\)</div>
+      <span class="step">Summiere \(3+7+11+15+\cdots\) bis zum Glied \(a_{10}\). Start \(a_0=3\), Abstand \(d=4\).</span>
+      <span class="step">\(s_{10} = (10+1)\cdot 3 + \dfrac{10\cdot 11}{2}\cdot 4 = 33 + 55\cdot 4 = 33+220 = \mathbf{253}\).</span>
+      <span class="step">Schnellprobe (Mittelwert × Anzahl): letztes Glied \(a_{10}=3+10\cdot4=43\), also \(\dfrac{3+43}{2}\cdot 11 = 23\cdot 11 = 253\) ✓.</span>
+    </div>
   </div>
 
   <div class="card">
@@ -162,6 +173,12 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
     <div class="formula">
       <div class="flabel">Spezialfall – Summe der Potenzen</div>
       \[ 1 + q + q^2 + \cdots + q^{n} = \frac{1-q^{\,n+1}}{1-q} \]
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – endliche geometrische Summe</div>
+      <span class="step">Berechne \(1+2+4+8+\cdots+2^{10}\) (jeder Summand verdoppelt sich, also \(q=2\), bis \(n=10\)).</span>
+      <span class="step">\(\dfrac{1-q^{\,n+1}}{1-q} = \dfrac{1-2^{11}}{1-2} = \dfrac{1-2048}{-1} = \dfrac{-2047}{-1} = \mathbf{2047}\).</span>
+      <span class="step">Merke: \(2^{11}=2048\), und \(1+2+4+\cdots+2^{n} = 2^{\,n+1}-1\) (immer „eins weniger als die nächste Zweierpotenz").</span>
     </div>
     <div class="tip">💡 Diese <b>endliche</b> geometrische Summe ist der Schlüssel: Lässt man \(n\to\infty\) laufen, entsteht daraus die <b>geometrische Reihe</b> (Modul 3).</div>
   </div>
@@ -190,8 +207,19 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       </table>
     </div>
     <div class="ex-block">
-      <div class="ex-lbl">Beispiel</div>
-      \(16+8+4+2+1+\tfrac12+\tfrac14+\cdots\) hat \(q=\tfrac12\). Mit Start \(a_0=16\): \(\dfrac{16}{1-\frac12}=32\).
+      <div class="ex-lbl">Beispiel 1 – Standardfall</div>
+      <span class="step">\(16+8+4+2+1+\tfrac12+\tfrac14+\cdots\): jeder Summand ist die Hälfte, also \(q=\tfrac12\), Start \(a_0=16\).</span>
+      <span class="step">\(\dfrac{a_0}{1-q} = \dfrac{16}{1-\frac12} = \dfrac{16}{\frac12} = \mathbf{32}\).</span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel 2 – mit Vorfaktor &amp; Bruch</div>
+      <span class="step">\(\displaystyle\sum_{k=0}^{\infty} 5\cdot\left(\tfrac13\right)^{k}\): hier \(a_0=5\), \(q=\tfrac13\) (\(|q|&lt;1\) ✓).</span>
+      <span class="step">\(\dfrac{a_0}{1-q} = \dfrac{5}{1-\frac13} = \dfrac{5}{\frac23} = 5\cdot\dfrac32 = \mathbf{\dfrac{15}{2}=7{,}5}\).</span>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Gegenbeispiel – divergent</div>
+      <span class="step">\(\displaystyle\sum_{k=0}^{\infty}\left(\tfrac32\right)^{k}\): hier \(q=\tfrac32\ge 1\).</span>
+      <span class="step">Die Summanden werden immer <b>größer</b> (\(1, 1{,}5,\ 2{,}25,\dots\)) ⇒ die Summe wächst unbegrenzt ⇒ <b class="red">divergent</b> (\(\to\infty\)). Die Formel \(\frac{1}{1-q}\) darf man hier <b>nicht</b> verwenden!</span>
     </div>
   </div>
 
@@ -215,6 +243,12 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
     </div>
     <div class="formula">
       \[ \sum_{k=1}^{\infty}\frac{1}{k^{\alpha}}\ \begin{cases}\text{konvergiert} & \alpha>1\\[2pt]\text{divergiert} & \alpha\le 1\end{cases} \]
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – \(p\)-Reihe entscheiden (nur Exponent ablesen!)</div>
+      <span class="step">\(\displaystyle\sum \frac{1}{k^{2}}\): Exponent \(\alpha=2&gt;1\) ⇒ <b class="green">konvergent</b>.</span>
+      <span class="step">\(\displaystyle\sum \frac{1}{\sqrt{k}} = \sum \frac{1}{k^{1/2}}\): Exponent \(\alpha=\tfrac12\le 1\) ⇒ <b class="red">divergent</b>.</span>
+      <span class="step">\(\displaystyle\sum \frac{1}{k}\) (harmonisch): \(\alpha=1\le 1\) ⇒ <b class="red">divergent</b> – die berühmte Ausnahme, obwohl \(\frac1k\to 0\).</span>
     </div>
     <div class="tip">💡 Die harmonische Reihe ist die <b>Schwelle</b>: Sie ist eine Nullfolge, geht aber „zu langsam" gegen 0. Erst ab \(\alpha>1\) konvergiert es. Diese Reihen sind die wichtigsten <b>Vergleichsreihen</b> für Modul 4.</div>
   </div>
@@ -289,6 +323,13 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       \[ a_k\ge b_k\ge 0,\ \textstyle\sum b_k \text{ div.} \;\Rightarrow\; \sum a_k \text{ divergiert} \]
     </div>
     <div class="fnote">Merksatz: „Kleiner als konvergent = konvergent. Größer als divergent = divergent."</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Majorantenkriterium</div>
+      <span class="step">Konvergiert \(\displaystyle\sum_{k=1}^{\infty}\frac{1}{k^{2}+1}\)?</span>
+      <span class="step">Nach oben abschätzen: ein größerer Nenner macht den Bruch kleiner, also \(\dfrac{1}{k^{2}+1} &lt; \dfrac{1}{k^{2}}\).</span>
+      <span class="step">Die Obergrenze \(\displaystyle\sum \frac{1}{k^{2}}\) konvergiert (\(p\)-Reihe, \(\alpha=2\)).</span>
+      <span class="step">Konvergente Majorante ⇒ unsere Reihe ist <b class="green">konvergent</b>.</span>
+    </div>
   </div>
 
   <div class="card">
@@ -299,6 +340,14 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       \[ L = \lim_{k\to\infty}\left|\frac{a_{k+1}}{a_k}\right| \]
       <div class="fnote">\(L<1\Rightarrow\) <b class="green">konvergent</b> &nbsp;·&nbsp; \(L>1\Rightarrow\) <b class="red">divergent</b> &nbsp;·&nbsp; \(L=1\Rightarrow\) keine Aussage</div>
     </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Quotientenkriterium</div>
+      <span class="step">Konvergiert \(\displaystyle\sum_{k=1}^{\infty}\frac{k}{2^{k}}\)? &nbsp;Also \(a_k=\dfrac{k}{2^{k}}\).</span>
+      <span class="step">Den Quotienten bilden und vereinfachen (durch einen Bruch teilen = mit Kehrwert mal):
+        \[ \frac{a_{k+1}}{a_k} = \frac{k+1}{2^{\,k+1}}\cdot\frac{2^{k}}{k} = \frac{k+1}{2k}. \]</span>
+      <span class="step">Grenzwert: \(L=\displaystyle\lim_{k\to\infty}\frac{k+1}{2k} = \frac12\) (höchste Potenzen \(k/2k\)).</span>
+      <span class="step">\(L=\tfrac12 &lt; 1\) ⇒ <b class="green">konvergent</b>.</span>
+    </div>
   </div>
 
   <div class="card">
@@ -308,6 +357,13 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       \[ \lim_{k\to\infty}\frac{a_k}{b_k} = c,\quad 0&lt;c&lt;\infty \;\Rightarrow\; \sum a_k \text{ und } \sum b_k \text{ verhalten sich gleich} \]
     </div>
     <div class="fnote">Praktisch bei Brüchen aus Polynomen: nur die höchsten Potenzen zählen, z.&nbsp;B. \(\frac{k^2+1}{k^3-1}\sim\frac1k\Rightarrow\) divergent.</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Grenzwertkriterium</div>
+      <span class="step">Konvergiert \(\displaystyle\sum_{k=1}^{\infty}\frac{3k+1}{k^{3}+k}\)?</span>
+      <span class="step"><b>Vergleichsreihe finden:</b> nur höchste Potenzen – oben \(k\), unten \(k^{3}\), also wie \(\dfrac{k}{k^{3}}=\dfrac{1}{k^{2}}\). Nimm \(b_k=\dfrac{1}{k^{2}}\).</span>
+      <span class="step"><b>Quotient bilden:</b> \(\dfrac{a_k}{b_k} = \dfrac{3k+1}{k^{3}+k}\cdot k^{2} = \dfrac{3k^{3}+k^{2}}{k^{3}+k} \xrightarrow{k\to\infty} 3\) (endlich und \(&gt;0\) ✓).</span>
+      <span class="step">\(\sum\frac{1}{k^{2}}\) konvergiert ⇒ unsere Reihe verhält sich gleich ⇒ <b class="green">konvergent</b>.</span>
+    </div>
   </div>
 
   <div class="card">
@@ -318,6 +374,14 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       \[ a_k\ge 0,\quad a_k \text{ monoton fallend},\quad a_k\to 0 \;\Rightarrow\; \text{konvergent} \]
     </div>
     <div class="warn">⚠️ Erst prüfen, ob überhaupt eine <b>Nullfolge</b> vorliegt! Bei \(\sum(-1)^n\frac{2^n}{n^4}\) gilt \(\frac{2^n}{n^4}\to\infty\) → trotz Alternation <b class="red">divergent</b>.</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – alternierende harmonische Reihe</div>
+      <span class="step">Konvergiert \(\displaystyle\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k} = 1-\tfrac12+\tfrac13-\tfrac14+\cdots\)?</span>
+      <span class="step">Betrag \(a_k=\dfrac1k\). Die 3 Bedingungen prüfen:
+        <br>(1) \(a_k=\frac1k\ge 0\) ✓ &nbsp; (2) fällt monoton (\(1, \tfrac12, \tfrac13,\dots\)) ✓ &nbsp; (3) \(\frac1k\to 0\) ✓.</span>
+      <span class="step">Alle drei erfüllt ⇒ <b class="green">konvergent</b>.</span>
+      <span class="step">Spannend: <b>ohne</b> Vorzeichen wäre es die harmonische Reihe \(\sum\frac1k\) – und die <b class="red">divergiert</b>! Das Minuszeichen rettet die Konvergenz.</span>
+    </div>
   </div>
 
   <div class="card">
