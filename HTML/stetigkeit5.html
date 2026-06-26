@@ -307,6 +307,13 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       <div class="flabel">„Der" Grenzwert existiert nur, wenn beide gleich sind</div>
       \[ \lim_{x\to x_0} f(x) \text{ existiert} \iff \lim_{x\to x_0^{-}}f(x)=\lim_{x\to x_0^{+}}f(x). \]
     </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – beide Seiten getrennt berechnen</div>
+      Betrachte \( f(x)=\begin{cases} x^2 &amp; x\le 1\\ 2x &amp; x&gt;1\end{cases} \) an der Stelle \(x_0=1\):
+      <span class="step"><b>von links</b> (\(x\le 1\), gilt \(x^2\)): \(\displaystyle\lim_{x\to 1^{-}} x^2 = 1\).</span>
+      <span class="step"><b>von rechts</b> (\(x&gt;1\), gilt \(2x\)): \(\displaystyle\lim_{x\to 1^{+}} 2x = 2\).</span>
+      <span class="step">\(1 \neq 2\) ⇒ „der" Grenzwert existiert <b class="red">nicht</b> – es ist eine <b>Sprungstelle</b> bei \(x_0=1\).</span>
+    </div>
   </div>
 
   <div class="card">
@@ -395,6 +402,14 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       \[ \underbrace{\lim_{x\to x_0^{-}}f(x)}_{\text{links}} = \underbrace{\lim_{x\to x_0^{+}}f(x)}_{\text{rechts}} = \underbrace{f(x_0)}_{\text{Funktionswert}} \]
       <div class="fnote">Anschaulich: keine Lücke, kein Sprung, kein Pol. Der GW existiert <b>und</b> trifft den Funktionswert.</div>
     </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Stetigkeit in 3 Schritten prüfen</div>
+      Ist \( f(x)=\begin{cases} x+3 &amp; x&lt;2\\ 5 &amp; x=2\\ 7-x &amp; x&gt;2\end{cases} \) bei \(x_0=2\) stetig?
+      <span class="step"><b>① links:</b> \(\displaystyle\lim_{x\to 2^{-}}(x+3)=5\).</span>
+      <span class="step"><b>② rechts:</b> \(\displaystyle\lim_{x\to 2^{+}}(7-x)=5\).</span>
+      <span class="step"><b>③ Funktionswert:</b> \(f(2)=5\).</span>
+      <span class="step">Alle drei stimmen überein (\(=5\)) ⇒ \(f\) ist bei \(x_0=2\) <b class="green">stetig</b>.</span>
+    </div>
   </div>
 
   <div class="card">
@@ -438,6 +453,12 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       <text x="462" y="196" fill="#5b6b85" font-size="9.5" text-anchor="middle">GW = ±∞</text>
     </svg>
     <div class="caption">Links: <b>hebbare</b> Lücke (GW existiert, Funktionswert fehlt/passt nicht). Mitte: <b>Sprung</b> (endliche, verschiedene GWe). Rechts: <b>Polstelle</b> (GW \(=\pm\infty\)).</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – je eine Funktion pro Art</div>
+      <span class="step"><b>Hebbar:</b> \(\frac{x^2-1}{x-1}=x+1\) (für \(x\neq1\)) → GW \(=2\) existiert, nur \(f(1)\) fehlt. „Loch" zustopfbar.</span>
+      <span class="step"><b>Sprung:</b> \(\operatorname{sgn}(x)\) bei \(0\): links \(-1\), rechts \(+1\) – endlich, aber verschieden.</span>
+      <span class="step"><b>Pol:</b> \(\frac1x\) bei \(0\): einseitige GWe sind \(\pm\infty\) (senkrechte Asymptote).</span>
+    </div>
   </div>
 
   <div class="exercises">
@@ -534,6 +555,14 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       \[ f \text{ stetig auf } [a,b],\ \ f(a)\cdot f(b) &lt; 0 \ \Rightarrow\ \exists\,\xi\in(a,b):\ f(\xi)=0. \]
     </div>
     <div class="tip">💡 So beweist man „Diese Gleichung hat eine Lösung", ohne sie auszurechnen: Gleichung auf \(f(x)=0\) bringen, zwei Stellen mit verschiedenem Vorzeichen finden.</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Lösung nachweisen ohne sie auszurechnen</div>
+      Hat \(x^{3}+x-1=0\) eine Lösung in \([0,1]\)?
+      <span class="step">Setze \(f(x)=x^{3}+x-1\). Als Polynom ist \(f\) <b>stetig</b> – Voraussetzung erfüllt.</span>
+      <span class="step"><b>Ränder einsetzen:</b> \(f(0)=-1&lt;0\) &nbsp;und&nbsp; \(f(1)=1+1-1=1&gt;0\).</span>
+      <span class="step">Vorzeichenwechsel, also \(f(0)\cdot f(1)&lt;0\) ⇒ nach Bolzano gibt es ein \(\xi\in(0,1)\) mit \(f(\xi)=0\).</span>
+      <span class="step">⇒ <b class="green">Ja, eine Lösung existiert</b> (wir wissen nur <i>dass</i>, nicht <i>wo</i> genau).</span>
+    </div>
   </div>
 
   <div class="exercises">

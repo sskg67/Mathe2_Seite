@@ -151,6 +151,12 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       <text x="160" y="285" font-size="12" fill="#5b6b85">Geometrische Folge \(a_n=(½)^n\): Punkte fallen gegen 0 (Nullfolge)</text>
     </svg>
     <div class="tip">💡 Eine Folge zeichnet man als <b>einzelne Punkte</b> (nicht als durchgezogene Linie!), denn sie ist nur für ganzzahlige \(n\) definiert.</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Glieder berechnen &amp; Verhalten ablesen</div>
+      <span class="step">\(a_n = 3\cdot 2^{n}\) (Start \(a_0=3\), Faktor \(q=2\)): \(3,\,6,\,12,\,24,\,48,\dots\) – wächst unbegrenzt ⇒ divergent.</span>
+      <span class="step">\(a_n = 80\cdot\left(\tfrac12\right)^{n}\) (Faktor \(q=\tfrac12\)): \(80,\,40,\,20,\,10,\,5,\dots \to 0\) – Nullfolge (Zerfall).</span>
+      <span class="step">Faustregel am Faktor ablesen: \(|q|&gt;1\) → wächst, \(|q|&lt;1\) → Nullfolge.</span>
+    </div>
   </div>
 
   <div class="card">
@@ -255,6 +261,12 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       <circle cx="482" cy="88"  r="4.5" fill="#0d9488"/>
       <text x="120" y="285" font-size="12" fill="#5b6b85">\(a_n=\tfrac{n}{n+1}\): streng monoton steigend &amp; durch 1 nach oben beschränkt</text>
     </svg>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Schranken finden für \(a_n=\frac{n}{n+1}\)</div>
+      <span class="step"><b>Untere Schranke:</b> alle Glieder sind positiv, das kleinste ist \(a_1=\tfrac12\). Also \(a_n\ge \tfrac12\) (oder einfacher \(a_n\ge 0\)).</span>
+      <span class="step"><b>Obere Schranke:</b> umschreiben \(\tfrac{n}{n+1} = 1-\tfrac{1}{n+1} &lt; 1\). Also ist \(1\) eine obere Schranke (wird nie ganz erreicht).</span>
+      <span class="step">⇒ \(\tfrac12\le a_n &lt; 1\): die Folge ist <b>beschränkt</b>. Zusammen mit „monoton steigend" (Beispiel oben) folgt nach dem Satz unten: <b class="green">konvergent</b> (gegen 1).</span>
+    </div>
     <div class="tip">💡 <b>Wichtiger Satz:</b> Jede Folge, die <b>monoton</b> UND <b>beschränkt</b> ist, ist automatisch <b>konvergent</b> (Monotonie-Kriterium).</div>
   </div>
 
@@ -333,6 +345,12 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
           <tr><td><b class="red">Unbestimmte Divergenz</b></td><td>\(\lim\) existiert nicht</td><td>Kein Grenzwert, auch nicht \(\pm\infty\). Z.B. springende Folge \((-1)^n\).</td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – je eine Folge pro Verhalten</div>
+      <span class="step"><b class="green">Konvergent:</b> \(a_n=\tfrac1n \to 0\) (Nullfolge) &nbsp;·&nbsp; \(a_n=\tfrac{2n}{n+1} \to 2\).</span>
+      <span class="step"><b class="blue">Bestimmt divergent:</b> \(a_n=n^{2} \to +\infty\) &nbsp;·&nbsp; \(a_n=-n \to -\infty\).</span>
+      <span class="step"><b class="red">Unbestimmt divergent:</b> \(a_n=(-1)^{n}\) springt \(1,-1,1,-1,\dots\) – kein Grenzwert, auch nicht \(\pm\infty\).</span>
     </div>
   </div>
 
@@ -467,6 +485,13 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       <text x="500" y="28" font-size="11" fill="#dc2626">n!</text>
     </svg>
     <div class="caption">Log-Skala: je höher die Kurve, desto schneller das Wachstum. \(n!\) schießt davon.</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – Hierarchie anwenden (wer dominiert?)</div>
+      <span class="step">\(\dfrac{n^{2}}{2^{n}}\): unten \(2^{n}\) (Exponential), oben \(n^{2}\) (Potenz). Exponential gewinnt ⇒ Nenner viel größer ⇒ \(\to 0\).</span>
+      <span class="step">\(\dfrac{n!}{e^{n}}\): \(n!\) schlägt jedes Exponential ⇒ Zähler gewinnt ⇒ \(\to +\infty\).</span>
+      <span class="step">\(\dfrac{\ln n}{n}\): \(n\) schlägt \(\ln n\) ⇒ \(\to 0\).</span>
+      <span class="step">Faustregel: Der Term, der in der Hierarchie <b>weiter rechts</b> steht, dominiert den Bruch.</span>
+    </div>
   </div>
 
   <div class="card">
@@ -498,6 +523,12 @@ b.green{color:#0f766e}b.red{color:#dc2626}b.blue{color:#1d4ed8}
       <div class="fnote">Typ \(1^\infty\): Hier hilft KEIN „1 hoch unendlich = 1"! Immer auf diese Formel zurückführen.</div>
     </div>
     <div class="tip">💡 Erkennungsmerkmal: \(\left(1+\tfrac{\text{const}}{n}\right)^n\) → das Ergebnis ist \(e^{\text{const}}\). Beispiel: \(\left(1+\tfrac{3}{n}\right)^n \to e^3\).</div>
+    <div class="ex-block">
+      <div class="ex-lbl">Beispiel – \(e\)-Grenzwerte erkennen</div>
+      <span class="step">\(\left(1+\tfrac2n\right)^{n}\): Form \(\left(1+\tfrac{x}{n}\right)^{n}\) mit \(x=2\) ⇒ \(= e^{2}\approx 7{,}39\).</span>
+      <span class="step">\(\left(1-\tfrac1n\right)^{n}\): hier \(x=-1\) ⇒ \(= e^{-1}=\tfrac1e\approx 0{,}37\).</span>
+      <span class="step">Falle: „\(1^{\infty}=1\)" zu sagen ist <b class="red">falsch</b> – immer auf die \(e\)-Formel zurückführen.</span>
+    </div>
   </div>
 
   <div class="exercises">
